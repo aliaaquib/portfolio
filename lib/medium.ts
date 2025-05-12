@@ -3,7 +3,8 @@ import fs from "fs";
 import path from "path";
 import type { Blog } from "@/types";
 
-const MEDIUM_RSS_FEED = "https://medium.com/feed/@theweeklyroundup";
+// Use environment variable for RSS feed URL
+const MEDIUM_RSS_FEED = process.env.NEXT_PUBLIC_MEDIUM_RSS_URL || "https://medium.com/feed/@theweeklyroundup";
 const parser = new Parser();
 
 // Read blogs.json
