@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Relax",
+    "description": "Customize your break with calming sounds and meditation.",
+    "url": "https://relaxnow.vercel.app"
+  },
+  {
+    "id": 2,
+    "name": "Notes",
+    "description": "My digital garden",
+    "url": ""
+  },
+  {
+    "id": 3,
+    "name": "Soci Ai",
+    "description": "Effortlessly create engaging social media content with soci ai",
+    "url": "https://sociai-five.vercel.app"
+  },
+   {
+    "id": 4,
+    "name": "Digibazaar",
+    "description": "Premier marketplace for templates, UI kits, Icons, and many more",
+    "url": ""
+  },
+  {
+    "id": 5,
+    "name": "Simplifi",
+    "description": "summarizer your lemgthy articles into clear and concise summaries.",
+    "url": "https://simplifi-ai.vercel.app"
+  },
+   {
+    "id": 6,
+    "name": "Lokon Theme",
+    "description": "Give your browser a cool, cosmic look. Enjoy the web in style!",
+    "url": "https://chromewebstore.google.com/detail/mponcfchmngiohbbgjfbkafbedgobiaj?utm_source=item-share-cb"
+  }
+]
