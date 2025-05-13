@@ -47,8 +47,8 @@ export default async function Home() {
         I offer consulting and digital{" "}
         <Link
           className="font-semibold underline underline-offset-2 transition hover:text-primary"
-          href="#"
-          target="_blank"
+          href="/services"
+          target="_self"
         >
           service
         </Link>{" "}
