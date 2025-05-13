@@ -1,17 +1,18 @@
 import Link from "next/link";
 import { Blog, Project } from "@/types";
-
 import { fetchMediumBlogs } from "@/lib/medium";
 import { getProjects } from "@/lib/utils";
+import { getPoetries } from "@/lib/poetry";  // Ensure this is imported
 
 export default async function Home() {
   const projects = await getProjects();
   const blogs = await fetchMediumBlogs();
+  const poetries = await getPoetries();  // Make sure this fetches poetry data
 
   return (
     <div className="mt-3">
       <p className="text-pretty text-lg font-medium text-muted-foreground">
-        Hi there! I&apos;m aaquib &ndash; a teacher, freelancer, and open-source
+        Hi there! I&apos;m Aaquib &ndash; a teacher, freelancer, and open-source
         dreamer. A curious soul who loves to{" "}
         <Link
           className="font-semibold underline underline-offset-2 transition hover:text-primary"
@@ -32,8 +33,8 @@ export default async function Home() {
         in the worlds of{" "}
         <Link
           className="font-semibold underline underline-offset-2 transition hover:text-primary"
-          href="#"
-          target="_blank"
+          href="/poetries"
+          target="_self"
         >
           poetry
         </Link>{" "}
@@ -87,7 +88,7 @@ export default async function Home() {
       {/* Blog Section */}
       <h2 className="mb-3 mt-10 text-2xl font-bold md:mt-14">Blog</h2>
       <p className="text-balance text-lg font-medium text-muted-foreground">
-         Wondering what’s been on my mind lately? Here are a few blog posts where I unpack ideas, experiments, and challenges.
+        Wondering what’s been on my mind lately? Here are a few blog posts where I unpack ideas, experiments, and challenges.
       </p>
       <ul className="-mx-4 mt-8 flex flex-col gap-5 px-1 sm:px-0">
         {blogs.map((blog: Blog) => (

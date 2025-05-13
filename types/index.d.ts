@@ -35,3 +35,10 @@ export type Blog = {
   description: string
   url: string
 }
+
+export interface Poetry {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+}

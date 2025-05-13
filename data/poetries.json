@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "title": "Bechaini",
+    "description": "Yaadon ki bechaini, dil ki pukaar, aur ek khumaar jo raat bhar saath ho.",
+    "content": "Kisi ki yaad mein beqarar raha main,\nHar ek raat jaise khumar raha main.\nWoh aaya bhi toh nazar pher ke guzar gaya,\nMain dil hi dil mein pukarta raha main."
+  },
+  {
+    "id": "2",
+    "title": "Shaam Ka Naam",
+    "description": "Ek shaam ek naam likhunga, khwabon mein baat likhunga.",
+    "content": "Ek shaam ek naam likhunga,\nKhud ko khaak tujhe chaand likhunga;\nJo kehna tha kabhi keh na saka,\nAb khwabon mein woh baat likhunga."
+  },
+  {
+    "id": "3",
+    "title": "Woh Ek Pal",
+    "description": "Ek pal ki chahat, ek bekarar nazar ki kahani.",
+    "content": "Woh ek pal ko aaya, nazar mila kar chala gaya,\nJaise meri chahat ka mazak bana kar chala gaya.\nTumhari nazar mein bas ek Bebas si kahani thi,\nAur main apni duniya luta kar chala gaya."
+  },
+  {
+    "id": "4",
+    "title": "Kabhi Kabhi",
+    "description": "Kabhi chaha, kabhi bhool diya, kabhi roshni, kabhi andhera.",
+    "content": "Kabhi shiddat se chaha mujhe\nKabhi be-rukhi sa bhula diya\nKabhi roshni ka sabab banaya\nKabhi andheron mein dubaa diya\nKabhi chaand keh ke sajaya mujhe\nKabhi be-kadar sa mita diya"
+  }
+]
