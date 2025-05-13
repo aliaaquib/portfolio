@@ -1,8 +1,12 @@
 'use client';
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ContactPage() {
+  const router = useRouter();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -11,7 +15,7 @@ export default function ContactPage() {
     description: "",
   });
 
-  const [formStatus, setFormStatus] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -21,33 +25,41 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    setFormStatus(null);  // Reset previous status
+    setIsLoading(true);
 
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-    const result = await res.json();
+      const result = await res.json();
 
-    if (res.status === 200) {
-      setFormStatus("Form submitted successfully!");
-    } else {
-      setFormStatus(result.error || "There was an issue. Please try again.");
+      if (res.status === 200) {
+        toast.success("Form submitted successfully!");
+        setForm({ name: "", email: "", phone: "", service: "", description: "" });
+        setTimeout(() => router.push("/"), 2000);
+      } else {
+        toast.error(result.error || "There was an issue. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Submission failed. Please try again later.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="mt-12 flex flex-col items-center px-4">
+      <ToastContainer />
       <h2 className="mb-6 text-3xl font-bold">Get in Touch</h2>
       <p className="mb-8 max-w-2xl text-center text-lg text-muted-foreground">
         We would love to hear from you! Please fill out the form below.
       </p>
 
       <form onSubmit={handleSubmit} className="w-full max-w-2xl space-y-6">
-        {/* Name and Email Side-by-Side */}
+        {/* Name and Email */}
         <div className="flex flex-col gap-4 md:flex-row">
           <div className="w-full">
             <label htmlFor="name" className="block text-sm font-medium text-muted-foreground">
@@ -79,7 +91,7 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Phone and Service Side-by-Side */}
+        {/* Phone and Service */}
         <div className="flex flex-col gap-4 md:flex-row">
           <div className="w-full">
             <label htmlFor="phone" className="block text-sm font-medium text-muted-foreground">
@@ -132,20 +144,17 @@ export default function ContactPage() {
           />
         </div>
 
-        {/* Submit Button */}
+        {/* Submit Button with Spinner */}
         <button
           type="submit"
-          className="w-full rounded-xl bg-primary px-6 py-3 text-lg font-semibold text-background transition duration-300 hover:bg-primary/90"
+          disabled={isLoading}
+          className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-lg font-semibold text-background transition duration-300 hover:bg-primary/90 disabled:opacity-60"
         >
-          Submit
+          {isLoading && (
+            <span className="size-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+          )}
+          {isLoading ? "Submitting..." : "Submit"}
         </button>
-
-        {/* Status Message */}
-        {formStatus && (
-          <div className="mt-4 text-center text-base font-medium text-green-600">
-            {formStatus}
-          </div>
-        )}
       </form>
     </div>
   );
