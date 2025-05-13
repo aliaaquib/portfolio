@@ -55,8 +55,8 @@ export default async function Home() {
         for small businesses and startups. Got an idea worth building?{" "}
         <Link
           className="font-semibold underline underline-offset-2 transition hover:text-primary"
-          href="#"
-          target="_blank"
+          href="/contact"
+          target="_self"
         >
           get in touch!
         </Link>
