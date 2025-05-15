@@ -28,7 +28,7 @@ function FooterLink({ href, label }: FooterLinkProps) {
 
   return (
     <Link
-      className="font-medium text-muted-foreground transition-colors duration-200 hover:text-primary max-sm:last:hidden"
+      className="font-medium text-muted-foreground transition-colors duration-200 hover:text-primary"
       href={href}
       aria-label={label}
       target={isLocal ? undefined : "_blank"}
