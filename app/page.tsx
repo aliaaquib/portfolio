@@ -27,12 +27,12 @@ export default async function Home() {
           href="https://theweeklyroundup.medium.com/"
           target="_blank"
         >
-          write
+          write 
         </Link>{" "}
-        about what I learn, 
+         about what I learn, 
         <Link
           className="font-semibold underline underline-offset-2 transition hover:text-primary"
-          href="/poetries"
+          href="/projects"
           target="_self"
         >
           create,
