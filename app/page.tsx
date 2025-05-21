@@ -29,7 +29,15 @@ export default async function Home() {
         >
           write
         </Link>{" "}
-        about what I learn, create, and discover. You&apos;ll often find me lost
+        about what I learn, 
+        <Link
+          className="font-semibold underline underline-offset-2 transition hover:text-primary"
+          href="/poetries"
+          target="_self"
+        >
+          create,
+        </Link>{" "}
+        and discover. You&apos;ll often find me lost
         in the worlds of{" "}
         <Link
           className="font-semibold underline underline-offset-2 transition hover:text-primary"
