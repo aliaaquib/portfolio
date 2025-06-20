@@ -1,5 +1,5 @@
 import Link from "next/link";
-import avatar from "@/public/avatar1.png";
+import avatar from "@/public/avatar.png";
 
 import BlurImage from "@/components/blur-image";
 
