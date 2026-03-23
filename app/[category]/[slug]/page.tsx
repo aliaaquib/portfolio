@@ -50,9 +50,9 @@ export default function EntryPage({ params }: PageProps) {
               stream
             </Link>
             <span className="text-muted/40">/</span>
-            <Link href={`/${post.category}`} className="transition-colors duration-200 hover:text-accent">
+            <span className="text-accent">
               {post.category}
-            </Link>
+            </span>
           </div>
 
           <header className="space-y-4 border-b border-muted/20 pb-10">

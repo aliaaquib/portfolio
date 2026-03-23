@@ -30,7 +30,7 @@ export default function Home() {
 
           <div className="space-y-10">
             <header className="space-y-4">
-              <p className="text-[11px] text-muted sm:text-xs">~/home</p>
+              <p className="text-[11px] text-accent sm:text-xs">~/home</p>
               <h1 className="max-w-3xl text-[28px] font-medium leading-tight text-accent sm:text-[44px]">
                 <span className="inline-flex items-end gap-2">
                   <span>Aaquib Ali</span>
