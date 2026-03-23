@@ -3,15 +3,17 @@ import { categories, getRecentPosts } from "@/lib/posts";
 import { SiteFooter } from "@/components/site-footer";
 
 const links = [
-  { label: "x/twitter", href: "https://twitter.com/" },
-  { label: "github", href: "https://github.com/" },
-  { label: "email", href: "mailto:hello@example.com" },
+  { label: "linkedin", href: "https://www.linkedin.com/in/aliaaquib" },
+  { label: "x/twitter", href: "https://twitter.com/imaaquibali" },
+  { label: "github", href: "https://github.com/aliaaquib" },
+  { label: "email", href: "mailto:imaaquibali@gmail.com" },
 ];
 
 const nowItems = [
+  "teaching and experimenting with better ways to explain complex ideas",
   "building small systems around ai workflows and automation",
-  "learning in public through experiments, notes, and prototypes",
-  "exploring tools that make creative work feel lighter and faster",
+  "writing poetry and slowly working on book",
+  "exploring tools, learning in public through experiments, notes, and prototypes",
 ];
 
 const recentPosts = getRecentPosts(3);
@@ -36,7 +38,7 @@ export default function Home() {
                 </span>
               </h1>
               <p className="max-w-2xl text-xs leading-6 text-text/90 sm:text-sm">
-                building, learning, and exploring at the ai × automation intersection
+                teaching, building, writing, exploring intersection of ai × automation
               </p>
             </header>
 
@@ -56,14 +58,17 @@ export default function Home() {
 
             <section className="space-y-4">
               <p className="max-w-2xl text-xs leading-7 text-muted sm:text-sm">
-                i like quiet interfaces, useful systems, and internet corners that feel intentional.
-                this space is a small index of what i am making, what i am thinking about, and what
-                keeps pulling me deeper into ai and automation.
+                teacher by day, builder the rest of the time.
+                like quiet interfaces, useful systems, and internet corners that feel intentional.
+                loves to write — mostly poetry, sometimes longer things — currently working on a book called "pata hai aaj kya hua".
               </p>
+              {/* <p className="max-w-2xl text-xs leading-7 text-muted sm:text-sm">
+                this space is a small index of what i am making, what i am learning, and how i’m exploring ai and automation in real contexts.
+              </p> */}
             </section>
 
             <section className="space-y-4 pt-2">
-              <h2 className="text-sm text-accent">now</h2>
+              <h2 className="text-sm text-accent">NOW</h2>
               <div className="border-l border-accent/40 pl-5">
                 <div className="space-y-3 text-xs leading-7 text-text/90 sm:text-sm">
                   {nowItems.map((item) => (
@@ -104,12 +109,12 @@ export default function Home() {
                         {post.category}
                       </Link>
                     </div>
-                      <Link
-                        href={`/${post.category}/${post.slug}`}
+                    <Link
+                      href={`/${post.category}/${post.slug}`}
                       className="inline-block text-xs text-strong transition-colors duration-200 hover:text-accent sm:text-sm"
-                      >
-                        {post.title}
-                      </Link>
+                    >
+                      {post.title}
+                    </Link>
                     <p className="max-w-2xl text-xs leading-7 text-muted sm:text-sm">{post.summary}</p>
                   </article>
                 ))}

@@ -4,7 +4,7 @@ import { categories } from "@/lib/posts";
 export function SiteFooter() {
   return (
     <footer className="mt-10 space-y-4 text-[11px] text-muted sm:text-xs">
-      <p>aaqib — if it touches ai × automation, it ends up here</p>
+      <p>aaquib — where teaching, systems, and words quietly meet</p>
       <nav className="flex flex-wrap gap-3">
         {categories.map((item) => (
           <Link
