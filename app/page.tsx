@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 const links = [
   { label: "linkedin", href: "https://www.linkedin.com/in/aliaaquib" },
   { label: "x/twitter", href: "https://twitter.com/imaaquibali" },
+  { label: "instagram", href: "https://instagram.com/alispeaksss" },
   { label: "github", href: "https://github.com/aliaaquib" },
   { label: "email", href: "mailto:imaaquibali@gmail.com" },
 ];
