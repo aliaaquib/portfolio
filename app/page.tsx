@@ -30,8 +30,10 @@ export default function Home() {
             <header className="space-y-4">
               <p className="text-[11px] text-muted sm:text-xs">~/home</p>
               <h1 className="max-w-3xl text-[28px] font-medium leading-tight text-accent sm:text-[44px]">
-                Aaquib Ali
-                <span className="ml-2 inline-block h-[0.85em] w-px translate-y-[0.12em] bg-strong align-baseline animate-blink" />
+                <span className="inline-flex items-end gap-2">
+                  <span>Aaquib Ali</span>
+                  <span className="mb-[0.08em] inline-block h-px w-3 bg-strong animate-blink" />
+                </span>
               </h1>
               <p className="max-w-2xl text-xs leading-6 text-text/90 sm:text-sm">
                 building, learning, and exploring at the ai × automation intersection
