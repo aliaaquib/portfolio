@@ -31,7 +31,7 @@ export default function Home() {
               <p className="text-[11px] text-muted sm:text-xs">~/home</p>
               <h1 className="max-w-3xl text-[28px] font-medium leading-tight text-accent sm:text-[44px]">
                 Aaquib Ali
-                <span className="ml-2 inline-block h-[1em] w-2 translate-y-1 bg-accent align-baseline animate-blink" />
+                <span className="ml-2 inline-block h-[0.85em] w-px translate-y-[0.12em] bg-strong align-baseline animate-blink" />
               </h1>
               <p className="max-w-2xl text-xs leading-6 text-text/90 sm:text-sm">
                 building, learning, and exploring at the ai × automation intersection
