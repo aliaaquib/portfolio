@@ -16,7 +16,7 @@ export function ContentList({ title, category, description }: ContentListProps) 
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.08),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.05),transparent_28%)]" />
       <div className="pointer-events-none fixed inset-0 bg-grid bg-[size:32px_32px] opacity-20" />
 
-      <section className="relative mx-auto w-full max-w-4xl px-6 py-20 sm:px-10 lg:px-14">
+      <section className="relative mx-auto w-full max-w-4xl px-6 py-20 sm:px-10 lg:pl-20 lg:pr-14">
         <div className="space-y-10">
           <header className="space-y-4">
             <div className="flex flex-wrap items-center gap-2 text-[11px] text-muted sm:text-xs">

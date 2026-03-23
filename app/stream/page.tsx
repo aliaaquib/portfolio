@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { categories, posts } from "@/lib/posts";
+import { categories, getSortedPosts } from "@/lib/posts";
 import { SiteFooter } from "@/components/site-footer";
+
+const streamPosts = getSortedPosts();
 
 export default function StreamPage() {
   return (
@@ -8,7 +10,7 @@ export default function StreamPage() {
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.08),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.05),transparent_28%)]" />
       <div className="pointer-events-none fixed inset-0 bg-grid bg-[size:32px_32px] opacity-20" />
 
-      <section className="relative mx-auto w-full max-w-4xl px-6 py-20 sm:px-10 lg:px-14">
+      <section className="relative mx-auto w-full max-w-4xl px-6 py-20 sm:px-10 lg:pl-20 lg:pr-14">
         <div className="space-y-10">
           <header className="space-y-4">
             <div className="flex flex-wrap items-center gap-2 text-[11px] text-muted sm:text-xs">
@@ -38,7 +40,7 @@ export default function StreamPage() {
           </nav>
 
           <div className="space-y-8 border-b border-muted/20 pb-10">
-            {posts.map((post) => (
+            {streamPosts.map((post) => (
               <article key={post.slug} className="group space-y-2">
                 <div className="flex flex-wrap items-center gap-3">
                   <p className="text-[11px] uppercase tracking-[0.18em] text-muted sm:text-xs">

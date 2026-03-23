@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { categories, posts } from "@/lib/posts";
+import { categories, getRecentPosts } from "@/lib/posts";
 import { SiteFooter } from "@/components/site-footer";
 
 const links = [
@@ -14,13 +14,15 @@ const nowItems = [
   "exploring tools that make creative work feel lighter and faster",
 ];
 
+const recentPosts = getRecentPosts(3);
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-bg text-text">
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.08),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.05),transparent_28%)]" />
       <div className="pointer-events-none fixed inset-0 bg-grid bg-[size:32px_32px] opacity-20" />
 
-      <section className="relative mx-auto flex min-h-screen w-full max-w-4xl animate-fade-in items-center px-6 py-20 sm:px-10 lg:px-14">
+      <section className="relative mx-auto flex min-h-screen w-full max-w-4xl animate-fade-in items-center px-6 py-20 sm:px-10 lg:pl-20 lg:pr-14">
         <div className="w-full">
           {/* [ PERSONAL TERMINAL ] */}
 
@@ -87,7 +89,7 @@ export default function Home() {
               </p>
               <div className="border-b border-muted/20" />
               <div className="space-y-5">
-                {posts.slice(0, 3).map((post) => (
+                {recentPosts.map((post) => (
                   <article key={post.slug} className="space-y-2">
                     <div className="flex flex-wrap items-center gap-3">
                       <p className="text-[11px] uppercase tracking-[0.18em] text-muted sm:text-xs">

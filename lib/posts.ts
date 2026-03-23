@@ -4,6 +4,7 @@ export type Post = {
   slug: string;
   title: string;
   date: string;
+  publishedAt: string;
   summary: string;
   content: string[];
   category: Category;
@@ -22,6 +23,7 @@ export const posts: Post[] = [
     slug: "small-systems-over-big-promises",
     title: "small systems over big promises",
     date: "march 2026",
+    publishedAt: "2026-03-22",
     summary: "why i keep choosing compact ai workflows that stay understandable after the first week.",
     category: "blog",
     content: [
@@ -34,6 +36,7 @@ export const posts: Post[] = [
     slug: "automation-desk-setup",
     title: "automation desk setup",
     date: "march 2026",
+    publishedAt: "2026-03-21",
     summary: "a compact build around notes, prompts, scripts, and the tiny tools that keep the loop moving.",
     category: "builds",
     content: [
@@ -46,6 +49,7 @@ export const posts: Post[] = [
     slug: "what-broke-in-a-weekend-agent-test",
     title: "what broke in a weekend agent test",
     date: "march 2026",
+    publishedAt: "2026-03-20",
     summary: "a teardown of a promising workflow that failed once the edge cases and cleanup steps showed up.",
     category: "teardowns",
     content: [
@@ -58,6 +62,7 @@ export const posts: Post[] = [
     slug: "notes-from-building-with-ai",
     title: "notes from building with ai",
     date: "march 2026",
+    publishedAt: "2026-03-19",
     summary: "a few patterns i keep returning to while prototyping with language models and automation tools.",
     category: "writings",
     content: [
@@ -70,6 +75,7 @@ export const posts: Post[] = [
     slug: "three-signals-i-keep-watching",
     title: "three signals i keep watching",
     date: "march 2026",
+    publishedAt: "2026-03-18",
     summary: "small movements across tools, interfaces, and workflows that feel worth paying attention to.",
     category: "signals",
     content: [
@@ -85,5 +91,15 @@ export function getPostBySlug(slug: string) {
 }
 
 export function getPostsByCategory(category: Category) {
-  return posts.filter((post) => post.category === category);
+  return getSortedPosts().filter((post) => post.category === category);
+}
+
+export function getSortedPosts() {
+  return [...posts].sort((a, b) => {
+    return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+  });
+}
+
+export function getRecentPosts(limit = 3) {
+  return getSortedPosts().slice(0, limit);
 }
