@@ -107,7 +107,8 @@ export default function Home() {
               <p className="max-w-2xl text-xs leading-7 text-muted sm:text-sm">
                 teacher by day, builder the rest of the time.
                 like quiet interfaces, useful systems, and internet corners that feel intentional.
-                loves to write — mostly poetry, sometimes longer things — currently working on a book called "pata hai aaj kya hua".
+                loves to write — poetry, raw thoughts. 
+                working on a book - <span className="">"pata hai aaj kya hua"</span>.
               </p>
               {/* <p className="max-w-2xl text-xs leading-7 text-muted sm:text-sm">
                 this space is a small index of what i am making, what i am learning, and how i’m exploring ai and automation in real contexts.
