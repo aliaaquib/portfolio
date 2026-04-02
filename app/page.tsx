@@ -30,9 +30,9 @@ const nowItems = [
       rel="noreferrer"
       className="underline decoration-accent/40 hover:decoration-accent underline-offset-4 transition"
     >
-      the weekly roundup -
+      the weekly roundup
     </a>{" "}
-    ai powered newsletter
+    -  ai powered newsletter
   </>,
   "writing poetry and slowly working on book - Pata Hai Aaj Kya Hua - Coming Soon...",
   // "building small systems around ai workflows and automation",
