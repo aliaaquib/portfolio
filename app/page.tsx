@@ -11,7 +11,14 @@ const links = [
 ];
 
 const nowItems = [
-  "teaching and experimenting with better ways to explain complex ideas",
+  <>
+  <span
+      className="underline decoration-accent/40 hover:decoration-accent underline-offset-4 transition"
+    >
+      teaching
+    </span>{" "}
+    and experimenting with better ways to explain complex ideas
+  </>,
   // "building clario - ai research agent x the weekly roundup - ai powdered newsletter",
   <>
     building{" "}
@@ -34,8 +41,23 @@ const nowItems = [
     </a>{" "}
     -  ai powered newsletter
   </>,
-  "writing poetry and slowly working on book - Pata Hai Aaj Kya Hua - Coming Soon...",
   // "building small systems around ai workflows and automation",
+  <>
+    writing{" "}
+    <span
+      className="underline decoration-accent/40 hover:decoration-accent underline-offset-4 transition"
+    >
+      poetry
+    </span>{" "}
+    and slowly working on{" "}
+    <span
+      className="underline decoration-accent/40 hover:decoration-accent underline-offset-4 transition"
+    >
+      book
+    </span>{" "}
+    - Pata Hai Aaj Kya Hua
+  </>,
+
   // "exploring tools, learning in public through experiments, notes, and prototypes",
 ];
 
