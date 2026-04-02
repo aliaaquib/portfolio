@@ -19,7 +19,7 @@ const nowItems = [
       href="https://clarioagent.vercel.app"
       target="_blank"
       rel="noreferrer"
-      className="underline decoration-muted/40 hover:decoration-accent underline-offset-4 transition"
+      className="underline decoration-accent/40 hover:decoration-accent underline-offset-4 transition"
     >
       clario
     </a>{" "}
@@ -28,7 +28,7 @@ const nowItems = [
       href="https://theweeklyroundup.vercel.app"
       target="_blank"
       rel="noreferrer"
-      className="underline decoration-muted/40 hover:decoration-accent underline-offset-4 transition"
+      className="underline decoration-accent/40 hover:decoration-accent underline-offset-4 transition"
     >
       the weekly roundup -
     </a>{" "}
