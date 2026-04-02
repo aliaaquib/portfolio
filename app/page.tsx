@@ -12,10 +12,33 @@ const links = [
 
 const nowItems = [
   "teaching and experimenting with better ways to explain complex ideas",
-  "building small systems around ai workflows and automation",
-  "writing poetry and slowly working on book",
-  "exploring tools, learning in public through experiments, notes, and prototypes",
+  // "building clario - ai research agent x the weekly roundup - ai powdered newsletter",
+  <>
+    building{" "}
+    <a
+      href="https://clarioagent.vercel.app"
+      target="_blank"
+      rel="noreferrer"
+      className="underline decoration-muted/40 hover:decoration-accent underline-offset-4 transition"
+    >
+      clario
+    </a>{" "}
+    - ai research agent x{" "}
+    <a
+      href="https://theweeklyroundup.vercel.app"
+      target="_blank"
+      rel="noreferrer"
+      className="underline decoration-muted/40 hover:decoration-accent underline-offset-4 transition"
+    >
+      the weekly roundup -
+    </a>{" "}
+    ai powered newsletter
+  </>,
+  "writing poetry and slowly working on book - Pata Hai Aaj Kya Hua - Coming Soon...",
+  // "building small systems around ai workflows and automation",
+  // "exploring tools, learning in public through experiments, notes, and prototypes",
 ];
+
 
 const recentPosts = getRecentPosts(3);
 
@@ -39,7 +62,8 @@ export default function Home() {
                 </span>
               </h1>
               <p className="max-w-2xl text-xs leading-6 text-text/90 sm:text-sm">
-                teaching, building, writing, exploring intersection of ai × automation
+                {/* teaching, building, writing, exploring intersection of ai × automation */}
+                somewhere between teaching, and how work is shifting to agents
               </p>
             </header>
 
@@ -72,8 +96,8 @@ export default function Home() {
               <h2 className="text-sm text-accent">NOW</h2>
               <div className="border-l border-accent/40 pl-5">
                 <div className="space-y-3 text-xs leading-7 text-text/90 sm:text-sm">
-                  {nowItems.map((item) => (
-                    <p key={item}>
+                  {nowItems.map((item, index) => (
+                    <p key={index}>
                       <span className="mr-3 text-accent">&gt;</span>
                       {item}
                     </p>
