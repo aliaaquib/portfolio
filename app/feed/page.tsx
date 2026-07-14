@@ -1,16 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { categories, Category, getPostsByCategory } from "@/lib/posts";
+import { categories, getSortedPosts } from "@/lib/posts";
 import { SiteFooter } from "@/components/site-footer";
 
-type ContentListProps = {
-  title: string;
-  category: Category;
-  description: string;
+export const metadata: Metadata = {
+  title: "Feed",
+  description: "The latest blogs, writings, and research notes from Aaquib Ali.",
+  alternates: {
+    canonical: "/feed",
+  },
 };
 
-export function ContentList({ title, category, description }: ContentListProps) {
-  const items = getPostsByCategory(category);
+const feedPosts = getSortedPosts();
 
+export default function FeedPage() {
   return (
     <main className="min-h-screen bg-bg text-text">
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(17,17,17,0.035),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(17,17,17,0.025),transparent_28%)]" />
@@ -20,22 +23,17 @@ export function ContentList({ title, category, description }: ContentListProps) 
         <div className="space-y-10">
           <header className="space-y-4">
             <div className="flex flex-wrap items-center gap-2 text-sm text-muted sm:text-base">
-              <Link href="/feed" className="transition-colors duration-200 hover:text-accent">
-                feed
-              </Link>
-              <span className="text-muted/40">/</span>
-              <span className="text-accent">{category}</span>
+              <span className="text-accent">feed</span>
             </div>
-            <h1 className="text-xl font-medium leading-tight text-strong sm:text-3xl">{title}</h1>
-            <p className="max-w-content text-sm leading-7 text-muted sm:text-base sm:leading-8">{description}</p>
+            <h1 className="text-xl font-medium leading-tight text-strong sm:text-3xl">feed</h1>
           </header>
 
-          <nav className="flex flex-wrap gap-3 border-b border-muted/20 pb-6 text-sm text-muted sm:text-base">
+          <nav className="flex flex-wrap gap-3 text-sm text-muted sm:text-base">
             {categories.map((item) => (
               <Link
                 key={item.key}
                 href={item.href}
-                className={item.key === category ? "text-accent" : "transition-colors duration-200 hover:text-accent"}
+                className="transition-colors duration-200 hover:text-accent"
               >
                 [{item.label}]
               </Link>
@@ -43,14 +41,19 @@ export function ContentList({ title, category, description }: ContentListProps) 
           </nav>
 
           <div className="space-y-8 border-b border-muted/20 pb-10">
-            {items.map((post) => (
-              <article
-                key={post.slug}
-                className="group space-y-2 border-b border-muted/20 pb-8 last:border-b-0 last:pb-0"
-              >
-                <p className="text-sm uppercase tracking-[0.18em] text-muted sm:text-base">
-                  {post.date}
-                </p>
+            {feedPosts.map((post) => (
+              <article key={post.slug} className="group space-y-2">
+                <div className="flex flex-wrap items-center gap-3">
+                  <p className="text-sm uppercase tracking-[0.18em] text-muted sm:text-base">
+                    {post.date}
+                  </p>
+                  <Link
+                    href={`/${post.category}`}
+                    className="text-sm uppercase tracking-[0.18em] text-accent transition-colors duration-200 hover:text-text sm:text-base"
+                  >
+                    {post.category}
+                  </Link>
+                </div>
                 <Link
                   href={`/${post.category}/${post.slug}`}
                   className="inline-block text-sm text-strong transition-colors duration-200 group-hover:text-accent sm:text-base"

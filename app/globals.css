@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 * {
@@ -17,10 +17,9 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: #0d0d0d;
-  color: #888888;
-  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", monospace;
+  background: #f7f0e6;
+  color: #3f3a34;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 a {
@@ -29,6 +28,6 @@ a {
 }
 
 ::selection {
-  background: rgba(249, 115, 22, 0.35);
-  color: #888888;
+  background: rgba(17, 17, 17, 0.18);
+  color: #111111;
 }

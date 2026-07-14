@@ -1,4 +1,4 @@
-export type Category = "blog" | "builds" | "teardowns" | "writings" | "signals";
+export type Category = "blogs" | "writings" | "research";
 
 export type Post = {
   slug: string;
@@ -11,11 +11,9 @@ export type Post = {
 };
 
 export const categories: Array<{ key: Category; label: string; href: string }> = [
-  { key: "blog", label: "blog", href: "/blog" },
-  { key: "builds", label: "builds", href: "/builds" },
-  { key: "teardowns", label: "teardowns", href: "/teardowns" },
+  { key: "blogs", label: "blogs", href: "/blogs" },
   { key: "writings", label: "writings", href: "/writings" },
-  { key: "signals", label: "signals", href: "/signals" },
+  { key: "research", label: "research", href: "/research" },
 ];
 
 export const posts: Post[] = [
@@ -25,7 +23,7 @@ export const posts: Post[] = [
     date: "march 2026",
     publishedAt: "2026-01-21",
     summary: "why i keep choosing compact ai workflows that stay understandable after the first week.",
-    category: "blog",
+    category: "blogs",
     content: [
       "i’ve started noticing something — the most useful automation work is rarely dramatic. it’s not big, shiny systems or complex setups, but a series of small decisions that quietly remove friction.",
 
@@ -56,15 +54,15 @@ export const posts: Post[] = [
   },
   {
     slug: "automation-desk-setup",
-    title: "automation desk setup",
+    title: "automation desk notes",
     date: "march 2026",
     publishedAt: "2026-02-21",
-    summary: "a compact build around notes, prompts, scripts, and the tiny tools that keep the loop moving.",
-    category: "builds",
+    summary: "a compact research note around prompts, scripts, and tiny tools that keep the loop moving.",
+    category: "research",
     content: [
-      "this build started with a very ordinary problem: too many tabs, too many partial ideas, and too much context switching.",
+      "this note started with a very ordinary problem: too many tabs, too many partial ideas, and too much context switching.",
       "the solution was not more software. it was a tighter desk of reusable parts: one notes surface, one capture flow, one place for prompts, and a small set of scripts for repetitive steps.",
-      "the result feels lighter because the build is narrow. every part has a reason to stay.",
+      "the result feels lighter because the setup is narrow. every part has a reason to stay.",
     ],
   },
   {
@@ -72,12 +70,12 @@ export const posts: Post[] = [
     title: "what broke in a weekend agent test",
     date: "march 2026",
     publishedAt: "2026-03-20",
-    summary: "a teardown of a promising workflow that failed once the edge cases and cleanup steps showed up.",
-    category: "teardowns",
+    summary: "a breakdown of a promising workflow that failed once the edge cases and cleanup steps showed up.",
+    category: "research",
     content: [
       "the first version looked great in demos and fell apart in real usage.",
       "the weak point was not the model output. it was all the surrounding state: filenames, retries, partial failures, and unclear ownership between steps.",
-      "teardowns are useful because they show where confidence was borrowed instead of earned.",
+      "breakdowns are useful because they show where confidence was borrowed instead of earned.",
     ],
   },
   {
@@ -94,39 +92,39 @@ export const posts: Post[] = [
     ],
   },
   {
-    slug: "three-signals-i-keep-watching",
-    title: "three signals i keep watching",
+    slug: "three-patterns-i-keep-watching",
+    title: "three patterns i keep watching",
     date: "march 2026",
     publishedAt: "2026-03-21",
     summary: "small movements across tools, interfaces, and workflows that feel worth paying attention to.",
-    category: "signals",
-   content: [
-  "i’ve started paying more attention to small movements — across tools, interfaces, and workflows. not trends in the loud sense, just quiet shifts that feel like they might matter later.",
-  
-  "the strongest signals are usually easy to miss at first. a slightly better default, a cleaner interface, a tool that removes one step instead of adding a new layer.",
-  
-  "nothing dramatic — but those small changes tend to stick.",
-  
-  "the tools that last don’t try to impress. they simplify. they reduce decisions, remove friction, and stay out of the way.",
-  
-  "one thing i keep watching is how automation is changing. it’s becoming more local, more inspectable, and easier to adjust without breaking everything.",
-  
-  "systems are getting smaller, more focused, and more honest about what they do. and that changes how you use them — you’re not dependent on them, you can shape them.",
-  
-  "another signal is how interfaces are becoming quieter. less noise, less decoration, more intention.",
-  
-  "the best interfaces don’t try to guide everything. they leave space, and that makes them easier to return to.",
-  
-  "the third signal is about handoff. a good system isn’t just usable — it’s explainable.",
-  
-  "if a workflow only works in your head, it doesn’t scale. but if it can be explained simply, it can be shared and reused.",
-  
-  "when enough of these signals align — simpler tools, clearer interfaces, more understandable systems — a new pattern starts to feel stable instead of experimental.",
-  
-  "i don’t try to predict what comes next. i just watch what keeps getting simpler, quieter, and easier to use.",
-  
-  "those are usually the things that stay."
-],
+    category: "research",
+    content: [
+      "i’ve started paying more attention to small movements — across tools, interfaces, and workflows. not trends in the loud sense, just quiet shifts that feel like they might matter later.",
+
+      "the strongest patterns are usually easy to miss at first. a slightly better default, a cleaner interface, a tool that removes one step instead of adding a new layer.",
+
+      "nothing dramatic — but those small changes tend to stick.",
+
+      "the tools that last don’t try to impress. they simplify. they reduce decisions, remove friction, and stay out of the way.",
+
+      "one thing i keep watching is how automation is changing. it’s becoming more local, more inspectable, and easier to adjust without breaking everything.",
+
+      "systems are getting smaller, more focused, and more honest about what they do. and that changes how you use them — you’re not dependent on them, you can shape them.",
+
+      "another pattern is how interfaces are becoming quieter. less noise, less decoration, more intention.",
+
+      "the best interfaces don’t try to guide everything. they leave space, and that makes them easier to return to.",
+
+      "the third pattern is about handoff. a good system isn’t just usable — it’s explainable.",
+
+      "if a workflow only works in your head, it doesn’t scale. but if it can be explained simply, it can be shared and reused.",
+
+      "when enough of these patterns align — simpler tools, clearer interfaces, more understandable systems — a new direction starts to feel stable instead of experimental.",
+
+      "i don’t try to predict what comes next. i just watch what keeps getting simpler, quieter, and easier to use.",
+
+      "those are usually the things that stay."
+    ],
   },
 ];
 

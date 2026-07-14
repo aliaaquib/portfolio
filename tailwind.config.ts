@@ -8,18 +8,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#0d0d0d",
-        text: "#888888",
-        strong: "#e5e5e5",
-        accent: "#f97316",
-        muted: "#888888",
+        bg: "#f7f0e6",
+        text: "#3f3a34",
+        strong: "#111111",
+        accent: "#111111",
+        muted: "#6f675f",
       },
       fontFamily: {
-        mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "monospace"],
+        mono: ["Georgia", "\"Times New Roman\"", "Times", "serif"],
+      },
+      maxWidth: {
+        content: "34rem",
       },
       animation: {
         "fade-in": "fade-in 900ms ease-out both",
         blink: "blink 1s step-end infinite",
+        "contact-pop": "contact-pop 180ms ease-out both",
       },
       keyframes: {
         "fade-in": {
@@ -30,12 +34,16 @@ const config: Config = {
           "0%, 49%": { opacity: "1" },
           "50%, 100%": { opacity: "0" },
         },
+        "contact-pop": {
+          "0%": { opacity: "0", transform: "scale(0.78) translateY(-2px)" },
+          "100%": { opacity: "1", transform: "scale(1) translateY(0)" },
+        },
       },
       boxShadow: {
-        glow: "0 0 0 1px rgba(249, 115, 22, 0.2), 0 0 30px rgba(249, 115, 22, 0.08)",
+        glow: "0 0 0 1px rgba(17, 17, 17, 0.14), 0 0 30px rgba(17, 17, 17, 0.06)",
       },
       backgroundImage: {
-        grid: "linear-gradient(rgba(136,136,136,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(136,136,136,0.08) 1px, transparent 1px)",
+        grid: "linear-gradient(rgba(17,17,17,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(17,17,17,0.06) 1px, transparent 1px)",
       },
     },
   },
