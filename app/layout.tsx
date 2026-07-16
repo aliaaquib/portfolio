@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FloatingAskAIControl } from "@/components/ask-ai";
 import "./globals.css";
 
 const siteUrl = "https://aaquibali.com";
@@ -82,6 +83,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         {children}
+        <FloatingAskAIControl />
       </body>
     </html>
   );

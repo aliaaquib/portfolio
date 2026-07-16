@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
+import { SiteNav } from "@/components/site-nav";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -17,6 +18,7 @@ export default function ContactPage() {
 
       <section className="relative mx-auto w-full max-w-5xl px-6 py-20 sm:px-10 lg:pl-20 lg:pr-14">
         <div className="space-y-10">
+          <SiteNav />
           <header className="space-y-4">
             <div className="flex flex-wrap items-center gap-2 text-sm text-muted sm:text-base">
               <span className="text-accent">contact</span>
