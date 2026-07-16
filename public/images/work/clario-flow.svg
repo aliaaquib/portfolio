@@ -1,0 +1,26 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="675" rx="44" fill="#F7F0E6"/>
+  <path d="M161 338H1039" stroke="#111111" stroke-width="3" stroke-linecap="round" opacity=".18"/>
+  <g fill="#111111">
+    <rect x="146" y="238" width="212" height="200" rx="34"/>
+    <rect x="494" y="238" width="212" height="200" rx="34"/>
+    <rect x="842" y="238" width="212" height="200" rx="34"/>
+  </g>
+  <g fill="#F7F0E6">
+    <rect x="188" y="292" width="128" height="12" rx="6"/>
+    <rect x="188" y="330" width="84" height="10" rx="5" opacity=".72"/>
+    <rect x="536" y="292" width="128" height="12" rx="6"/>
+    <rect x="536" y="330" width="84" height="10" rx="5" opacity=".72"/>
+    <rect x="884" y="292" width="128" height="12" rx="6"/>
+    <rect x="884" y="330" width="84" height="10" rx="5" opacity=".72"/>
+  </g>
+  <g stroke="#B7372F" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M402 338H446"/>
+    <path d="M430 322L446 338L430 354"/>
+    <path d="M750 338H794"/>
+    <path d="M778 322L794 338L778 354"/>
+  </g>
+  <text x="252" y="482" text-anchor="middle" fill="#111111" font-family="Arial, sans-serif" font-size="24">question</text>
+  <text x="600" y="482" text-anchor="middle" fill="#111111" font-family="Arial, sans-serif" font-size="24">sources</text>
+  <text x="948" y="482" text-anchor="middle" fill="#111111" font-family="Arial, sans-serif" font-size="24">brief</text>
+</svg>

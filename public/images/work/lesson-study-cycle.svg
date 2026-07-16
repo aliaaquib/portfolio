@@ -1,0 +1,22 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="675" rx="44" fill="#F7F0E6"/>
+  <circle cx="600" cy="338" r="190" stroke="#111111" stroke-width="4" opacity=".16"/>
+  <g fill="#111111">
+    <rect x="515" y="92" width="170" height="82" rx="28"/>
+    <rect x="826" y="246" width="170" height="82" rx="28"/>
+    <rect x="710" y="500" width="170" height="82" rx="28"/>
+    <rect x="320" y="500" width="170" height="82" rx="28"/>
+    <rect x="204" y="246" width="170" height="82" rx="28"/>
+  </g>
+  <g fill="#F7F0E6" font-family="Arial, sans-serif" font-size="24" font-weight="700">
+    <text x="600" y="143" text-anchor="middle">plan</text>
+    <text x="911" y="297" text-anchor="middle">teach</text>
+    <text x="795" y="551" text-anchor="middle">observe</text>
+    <text x="405" y="551" text-anchor="middle">reflect</text>
+    <text x="289" y="297" text-anchor="middle">revise</text>
+  </g>
+  <path d="M742 154C814 186 866 244 888 315" stroke="#B7372F" stroke-width="7" stroke-linecap="round"/>
+  <path d="M878 382C852 454 798 511 728 540" stroke="#B7372F" stroke-width="7" stroke-linecap="round"/>
+  <path d="M472 540C402 511 348 454 322 382" stroke="#B7372F" stroke-width="7" stroke-linecap="round"/>
+  <path d="M312 315C334 244 386 186 458 154" stroke="#B7372F" stroke-width="7" stroke-linecap="round"/>
+</svg>

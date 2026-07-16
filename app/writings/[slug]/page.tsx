@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getPostBySlug, posts } from "@/lib/posts";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleActions } from "@/components/article-actions";
+import { SectionNav } from "@/components/section-nav";
 
 type PageProps = {
   params: {
@@ -86,30 +87,12 @@ export default function EntryPage({ params }: PageProps) {
         </header>
 
         <div className="relative mx-auto grid max-w-5xl gap-10 py-16 lg:grid-cols-[minmax(0,38rem)] lg:justify-center">
-          <aside className="hidden lg:block">
-            <nav className="fixed left-8 top-1/2 z-20 -translate-y-1/2 space-y-4 font-sans text-sm xl:left-12">
-              {articleSections.map((section, index) => (
-                <a
-                  key={section.title}
-                  href={`#section-${index}`}
-                  className={
-                    index === 0
-                      ? "group flex items-center gap-4 text-strong transition-all duration-300 hover:translate-x-2"
-                      : "group flex items-center gap-4 text-muted transition-all duration-300 hover:translate-x-2 hover:text-strong"
-                  }
-                >
-                  <span
-                    className={
-                      index === 0
-                        ? "h-px w-8 bg-strong transition-all duration-300 group-hover:w-10"
-                        : "h-px w-5 bg-muted/40 transition-all duration-300 group-hover:w-8 group-hover:bg-strong"
-                    }
-                  />
-                  <span>{section.title}</span>
-                </a>
-              ))}
-            </nav>
-          </aside>
+          <SectionNav
+            items={articleSections.map((section, index) => ({
+              id: `section-${index}`,
+              title: section.title,
+            }))}
+          />
 
           <div className="space-y-12 border-b border-muted/20 pb-12">
             {articleSections.map((section, index) => (

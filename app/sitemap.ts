@@ -4,7 +4,7 @@ import { posts } from "@/lib/posts";
 const siteUrl = "https://aaquibali.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/contact", "/writings"].map((route) => ({
+  const staticRoutes = ["", "/contact", "/writings", "/work/clario", "/work/lesson-study"].map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: new Date(),
   }));
