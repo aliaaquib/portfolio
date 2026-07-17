@@ -206,7 +206,7 @@ function ClarioWorkCard() {
           className="inline-flex items-center gap-1 text-muted transition-colors duration-200 hover:text-strong"
         >
           <span>View site</span>
-          <span aria-hidden="true">↗</span>
+          {/* <span aria-hidden="true">↗</span> */}
         </a>
       </div>
     </article>
@@ -290,7 +290,7 @@ function ResearchWorkCard() {
           className="inline-flex items-center gap-1 text-muted transition-colors duration-200 hover:text-strong"
         >
           <span>View research</span>
-          <span aria-hidden="true">↗</span>
+          {/* <span aria-hidden="true">↗</span> */}
         </Link>
       </div>
     </article>
