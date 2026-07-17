@@ -47,7 +47,7 @@ export function SectionNav({ items }: { items: SectionNavItem[] }) {
           const isActive = item.id === activeId;
 
           return (
-            <div key={item.id}>
+            <div key={item.id} className="group/section">
               <a
                 href={`#${item.id}`}
                 className={`group flex items-center gap-4 transition-all duration-300 hover:translate-x-2 hover:text-strong ${
@@ -55,16 +55,24 @@ export function SectionNav({ items }: { items: SectionNavItem[] }) {
                 }`}
               >
                 <span
-                  className={`h-px rounded-full transition-all duration-500 group-hover:w-16 group-hover:bg-strong ${
-                    isActive ? "w-16 bg-strong" : "w-10 bg-muted/40"
+                  className={`h-px rounded-full transition-all duration-500 group-hover:w-10 group-hover:bg-strong ${
+                    isActive ? "w-10 bg-strong" : "w-7 bg-muted/40"
                   }`}
                 />
                 <span>{item.title}</span>
               </a>
               {item.id !== items[items.length - 1]?.id ? (
                 <div className="my-2 flex flex-col gap-2" aria-hidden="true">
-                  <span className="h-px w-7 rounded-full bg-muted/30" />
-                  <span className="h-px w-5 rounded-full bg-muted/25" />
+                  <span
+                    className={`h-px rounded-full transition-all duration-500 group-hover/section:w-7 group-hover/section:bg-muted/40 ${
+                      isActive ? "w-7 bg-muted/40" : "w-5 bg-muted/30"
+                    }`}
+                  />
+                  <span
+                    className={`h-px rounded-full transition-all duration-500 group-hover/section:w-5 group-hover/section:bg-muted/35 ${
+                      isActive ? "w-5 bg-muted/35" : "w-3 bg-muted/25"
+                    }`}
+                  />
                 </div>
               ) : null}
             </div>

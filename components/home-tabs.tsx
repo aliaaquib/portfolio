@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { AskAIControl } from "@/components/ask-ai";
 import { ContactMiniWindow } from "@/components/contact-mini-window";
+import { SendIcon } from "@/components/icons";
 import type { Post } from "@/lib/posts";
 
 type Tab = "Work" | "About";
@@ -87,7 +88,9 @@ function WorkContent({ recentPosts }: HomeTabsProps) {
           {isContactOpen ? <ContactMiniWindow onClose={() => setIsContactOpen(false)} /> : null}
         </div>
         <Link
-          href="#resume"
+          href="https://drive.google.com/file/d/1OCadGX_mn3dTkS7x58cs27twIOzd92cD/view?usp=sharing"
+          target="_blank"
+          rel="noreferrer"
           className="inline-flex items-center rounded-full bg-black/[0.05] px-4 py-2 text-strong transition-colors duration-200 hover:bg-black/[0.08]"
         >
           Resume
@@ -96,9 +99,7 @@ function WorkContent({ recentPosts }: HomeTabsProps) {
 
       <section className="space-y-4">
         <h2 className="text-sm uppercase text-accent">NOW</h2>
-        <div className="border-l border-accent/40 pl-5">
-          <NowContent />
-        </div>
+        <NowContent />
       </section>
 
       <section className="space-y-10">
@@ -109,9 +110,12 @@ function WorkContent({ recentPosts }: HomeTabsProps) {
       <section className="space-y-5">
         <div className="flex max-w-content items-center justify-between gap-4">
           <h2 className="text-sm uppercase text-accent">WRITINGS</h2>
-          <span className="inline-block text-sm text-muted sm:text-base">
-            latest notes
-          </span>
+          <Link
+            href="/writings"
+            className="inline-block text-sm text-muted transition-colors duration-200 hover:text-strong sm:text-base"
+          >
+            Read All
+          </Link>
         </div>
         <PostList recentPosts={recentPosts} />
       </section>
@@ -296,9 +300,12 @@ function ResearchWorkCard() {
 function NowContent() {
   return (
     <div className="max-w-content space-y-3 text-sm leading-7 text-text/90 sm:text-base sm:leading-8">
-      <p>teaching and experimenting with better ways to explain complex ideas.</p>
       <p>
-        building{" "}
+        <span className="text-xl leading-none text-strong sm:text-2xl">⤔</span> teaching and experimenting with better ways to
+        explain complex ideas.
+      </p>
+      <p>
+        <span className="text-xl leading-none text-strong sm:text-2xl">⤔</span> building{" "}
         <a
           href="https://clarioagent.vercel.app"
           target="_blank"
@@ -318,7 +325,6 @@ function NowContent() {
         </a>{" "}
         - ai powered newsletter.
       </p>
-      <p>writing poetry and slowly working on a book - "pata hai aaj kya hua".</p>
     </div>
   );
 }
@@ -339,36 +345,16 @@ function PostList({ recentPosts }: HomeTabsProps) {
   return (
     <>
       {recentPosts.map((post) => (
-        <article key={post.slug} className="space-y-2">
-          <div className="flex flex-wrap items-center gap-3">
-            <p className="text-sm uppercase tracking-[0.18em] text-muted sm:text-base">
-              {post.date}
-            </p>
-          </div>
+        <article key={post.slug} className="group">
           <Link
             href={`/writings/${post.slug}`}
-            className="inline-block text-sm text-strong transition-colors duration-200 hover:text-accent sm:text-base"
+            className="flex max-w-content items-baseline justify-between gap-4 text-sm text-strong transition-colors duration-200 hover:text-accent sm:text-base"
           >
-            {post.title}
+            <span>{post.title}.</span>
+            <span className="shrink-0 text-muted">{post.date}</span>
           </Link>
-          <p className="max-w-content text-sm leading-7 text-muted sm:text-base sm:leading-8">
-            {post.summary}
-          </p>
         </article>
       ))}
     </>
-  );
-}
-
-function SendIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className={className}
-    >
-      <path d="M20.8 3.7c.7-.3 1.4.4 1.1 1.1l-7 16c-.3.8-1.5.7-1.8-.1l-2.2-6.3-6.3-2.2c-.8-.3-.9-1.4-.1-1.8l16.3-6.7Z" />
-    </svg>
   );
 }

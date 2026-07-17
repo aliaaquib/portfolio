@@ -15,6 +15,7 @@ const config: Config = {
         muted: "#6f675f",
       },
       fontFamily: {
+        sans: ["Georgia", "\"Times New Roman\"", "Times", "serif"],
         mono: ["Georgia", "\"Times New Roman\"", "Times", "serif"],
       },
       maxWidth: {

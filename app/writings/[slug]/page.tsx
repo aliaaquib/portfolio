@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPostBySlug, posts } from "@/lib/posts";
 import { SiteFooter } from "@/components/site-footer";
-import { ArticleActions } from "@/components/article-actions";
+import { PageActions } from "@/components/page-actions";
 import { SectionNav } from "@/components/section-nav";
 
 type PageProps = {
@@ -61,7 +61,7 @@ export default function EntryPage({ params }: PageProps) {
       <div className="pointer-events-none fixed inset-0 bg-grid bg-[size:32px_32px] opacity-20" />
 
       <article className="relative mx-auto w-full max-w-6xl px-6 py-10 sm:px-10 lg:px-14">
-        <ArticleActions />
+        <PageActions />
 
         <header className="mx-auto max-w-3xl space-y-6 pb-10 pt-24 text-center sm:pt-28">
           <p className="font-sans text-xs text-muted sm:text-sm">Writing</p>
@@ -86,7 +86,7 @@ export default function EntryPage({ params }: PageProps) {
           </figure>
         </header>
 
-        <div className="relative mx-auto grid max-w-5xl gap-10 py-16 lg:grid-cols-[minmax(0,38rem)] lg:justify-center">
+        <div className="relative mx-auto grid max-w-5xl gap-10 pb-8 pt-16 lg:grid-cols-[minmax(0,38rem)] lg:justify-center">
           <SectionNav
             items={articleSections.map((section, index) => ({
               id: `section-${index}`,
@@ -94,7 +94,7 @@ export default function EntryPage({ params }: PageProps) {
             }))}
           />
 
-          <div className="space-y-12 border-b border-muted/20 pb-12">
+          <div className="space-y-12 border-b border-muted/20 pb-6">
             {articleSections.map((section, index) => (
               <section key={section.title} id={`section-${index}`} className="scroll-mt-10 space-y-5">
                 <h2 className="text-xl leading-tight text-strong sm:text-2xl">{section.title}</h2>

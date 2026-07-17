@@ -5,21 +5,14 @@ export function WritingList({ posts }: { posts: Post[] }) {
   return (
     <div className="space-y-8 border-b border-muted/20 pb-10">
       {posts.map((post) => (
-        <article key={post.slug} className="group space-y-2">
-          <div className="flex flex-wrap items-center gap-3">
-            <p className="text-sm uppercase tracking-[0.18em] text-muted sm:text-base">
-              {post.date}
-            </p>
-          </div>
+        <article key={post.slug} className="group">
           <Link
             href={`/writings/${post.slug}`}
-            className="inline-block text-sm text-strong transition-colors duration-200 group-hover:text-accent sm:text-base"
+            className="flex max-w-content items-baseline justify-between gap-4 text-sm text-strong transition-colors duration-200 group-hover:text-accent sm:text-base"
           >
-            {post.title}
+            <span>{post.title}.</span>
+            <span className="shrink-0 text-muted">{post.date}</span>
           </Link>
-          <p className="max-w-content text-sm leading-7 text-muted sm:text-base sm:leading-8">
-            {post.summary}
-          </p>
         </article>
       ))}
     </div>
