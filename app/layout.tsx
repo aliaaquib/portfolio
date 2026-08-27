@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity/visual-editing";
 import { FloatingAskAIControl } from "@/components/ask-ai";
+import { SanityLive } from "@/sanity/lib/live";
 import "./globals.css";
 
 const siteUrl = "https://aaquibali.com";
@@ -70,13 +73,15 @@ const structuredData = {
   description: siteDescription,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
         <script
           type="application/ld+json"
@@ -84,6 +89,8 @@ export default function RootLayout({
         />
         {children}
         <FloatingAskAIControl />
+        <SanityLive includeDrafts={isDraftMode} />
+        {isDraftMode ? <VisualEditing /> : null}
       </body>
     </html>
   );

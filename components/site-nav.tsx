@@ -4,7 +4,7 @@ import { AskAIControl } from "@/components/ask-ai";
 const navItems = [
   { label: "Work", href: "/" },
   { label: "About", href: "/" },
-  { label: "Writing", href: "/writings" },
+  { label: "Writing", href: "/articles" },
 ];
 
 export function SiteNav() {

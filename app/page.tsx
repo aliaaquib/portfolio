@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getRecentPosts } from "@/lib/posts";
+import { getFeaturedProjects } from "@/lib/projects";
 import { HomeTabs } from "@/components/home-tabs";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -9,9 +10,11 @@ export const metadata: Metadata = {
   },
 };
 
-const recentPosts = getRecentPosts(3);
+export const revalidate = 60;
 
-export default function Home() {
+export default async function Home() {
+  const [recentPosts, projects] = await Promise.all([getRecentPosts(3), getFeaturedProjects(3)]);
+
   return (
     <main className="min-h-screen bg-bg text-text">
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(17,17,17,0.035),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(17,17,17,0.025),transparent_28%)]" />
@@ -21,7 +24,7 @@ export default function Home() {
         <div className="w-full">
           {/* [ PERSONAL TERMINAL ] */}
 
-          <HomeTabs recentPosts={recentPosts}>
+          <HomeTabs recentPosts={recentPosts} projects={projects}>
             <header className="space-y-4">
               <h1 className="max-w-4xl text-[40px] leading-tight tracking-tight text-strong sm:text-[60px]">
                 aaquib ali<span className="text-red-700">.</span>

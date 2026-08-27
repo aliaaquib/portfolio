@@ -1,5 +1,8 @@
 .next/
 node_modules/
+.npm-cache/
+.sanity/
+.sanity-config/
 out/
 
 .env

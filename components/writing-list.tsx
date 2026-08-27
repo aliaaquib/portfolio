@@ -7,7 +7,7 @@ export function WritingList({ posts }: { posts: Post[] }) {
       {posts.map((post) => (
         <article key={post.slug} className="group">
           <Link
-            href={`/writings/${post.slug}`}
+            href={`/articles/${post.slug}`}
             className="flex max-w-content items-baseline justify-between gap-4 text-sm text-strong transition-colors duration-200 group-hover:text-accent sm:text-base"
           >
             <span>{post.title}.</span>

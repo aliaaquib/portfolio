@@ -7,11 +7,13 @@ import { AskAIControl } from "@/components/ask-ai";
 import { ContactMiniWindow } from "@/components/contact-mini-window";
 import { SendIcon } from "@/components/icons";
 import type { Post } from "@/lib/posts";
+import type { Project } from "@/lib/projects";
 
 type Tab = "Work" | "About";
 
 type HomeTabsProps = {
   recentPosts: Post[];
+  projects: Project[];
   children?: ReactNode;
 };
 
@@ -23,7 +25,7 @@ const tabButtonClass =
 const activeTabButtonClass =
   "rounded-full bg-bg px-3 py-1 shadow-sm transition-colors duration-200 sm:px-4";
 
-export function HomeTabs({ recentPosts, children }: HomeTabsProps) {
+export function HomeTabs({ recentPosts, projects, children }: HomeTabsProps) {
   const [activeTab, setActiveTab] = useState<Tab>("Work");
 
   return (
@@ -36,7 +38,7 @@ export function HomeTabs({ recentPosts, children }: HomeTabsProps) {
         {children}
 
         <section className="border-b border-muted/20 pb-10">
-          {activeTab === "Work" ? <WorkContent recentPosts={recentPosts} /> : null}
+          {activeTab === "Work" ? <WorkContent recentPosts={recentPosts} projects={projects} /> : null}
           {activeTab === "About" ? <AboutContent /> : null}
         </section>
       </div>
@@ -63,14 +65,14 @@ function HomeTabNav({
           {tab}
         </button>
       ))}
-      <Link href="/writings" className={tabButtonClass}>
+      <Link href="/articles" className={tabButtonClass}>
         Writing
       </Link>
     </nav>
   );
 }
 
-function WorkContent({ recentPosts }: HomeTabsProps) {
+function WorkContent({ recentPosts, projects }: HomeTabsProps) {
   const [isContactOpen, setIsContactOpen] = useState(false);
 
   return (
@@ -103,15 +105,17 @@ function WorkContent({ recentPosts }: HomeTabsProps) {
       </section>
 
       <section className="space-y-10">
-        <ClarioWorkCard />
-        <ResearchWorkCard />
+        <h2 className="text-sm uppercase text-accent">FEATURED WORK</h2>
+        {projects.map((project) => (
+          <ProjectWorkCard key={project.slug} project={project} />
+        ))}
       </section>
 
       <section className="space-y-5">
         <div className="flex max-w-content items-center justify-between gap-4">
-          <h2 className="text-sm uppercase text-accent">WRITINGS</h2>
+          <h2 className="text-sm uppercase text-accent">LATEST ARTICLES</h2>
           <Link
-            href="/writings"
+            href="/articles"
             className="inline-block text-sm text-muted transition-colors duration-200 hover:text-strong sm:text-base"
           >
             Read All
@@ -123,177 +127,146 @@ function WorkContent({ recentPosts }: HomeTabsProps) {
   );
 }
 
-function ClarioWorkCard() {
+function ProjectWorkCard({ project }: { project: Project }) {
+  const isResearchCard = project.cardKind === "research";
+  const cardHref = `/work/${project.slug}`;
+  const pillItems = isResearchCard ? ["ict", "math", "research"] : ["research", "sources", "notes"];
+  const leftItems = isResearchCard
+    ? ["plan", "teach", "reflect"]
+    : ["question", "sources", "summary"];
+  const rightItems = isResearchCard
+    ? ["ICT tools", "math concepts", "teacher reflection"]
+    : ["source cards", "brief draft", "review"];
+
   return (
     <article className="group w-full max-w-3xl space-y-4">
       <Link
-        href="/work/clario"
+        href={cardHref}
         className="block overflow-hidden rounded-[2rem] bg-black/[0.05] p-6 transition duration-300 hover:bg-black/[0.07] sm:p-10"
       >
         <div className="relative mx-auto aspect-[16/10] overflow-hidden rounded-3xl border border-black/10 bg-bg shadow-sm">
           <div className="flex items-center justify-between border-b border-black/10 px-4 py-3 font-sans text-[10px] text-muted sm:text-xs">
             <div className="flex items-center gap-2 text-strong">
               <span className="grid h-6 w-6 place-items-center rounded-lg bg-strong text-[10px] text-bg">
-                C
+                {project.title.charAt(0)}
               </span>
-              <span>clario</span>
+              <span>{project.eyebrow.toLowerCase()}</span>
             </div>
             <div className="hidden items-center gap-2 sm:flex">
-              <span className="rounded-full bg-black/[0.05] px-3 py-1">research</span>
-              <span className="rounded-full bg-black/[0.05] px-3 py-1">sources</span>
-              <span className="rounded-full bg-black/[0.05] px-3 py-1">notes</span>
+              {pillItems.map((item) => (
+                <span key={item} className="rounded-full bg-black/[0.05] px-3 py-1">
+                  {item}
+                </span>
+              ))}
             </div>
           </div>
 
-          <div className="grid h-full gap-4 p-4 sm:grid-cols-[0.8fr_1.2fr] sm:p-5">
-            <div className="space-y-3">
-              {["question", "sources", "summary"].map((item, index) => (
-                <div key={item} className="rounded-2xl border border-black/10 bg-white/45 p-3">
-                  <div className="mb-3 flex items-center justify-between">
-                    <span className="font-sans text-[10px] uppercase tracking-[0.16em] text-muted">
-                      {item}
-                    </span>
-                    <span className="h-2 w-2 rounded-full bg-red-700/80" />
+          <div className={`grid h-full gap-4 p-4 sm:p-5 ${isResearchCard ? "sm:grid-cols-[1.1fr_0.9fr]" : "sm:grid-cols-[0.8fr_1.2fr]"}`}>
+            <div className={isResearchCard ? "relative overflow-hidden rounded-2xl border border-black/10 bg-white/45 p-4" : "space-y-3"}>
+              {isResearchCard ? (
+                <>
+                  <div className="mb-4 flex items-center justify-between font-sans text-[10px] text-muted sm:text-xs">
+                    <span>{project.type.toLowerCase()}</span>
+                    <span>{project.status.toLowerCase()}</span>
                   </div>
-                  <div className="space-y-2">
-                    <span className="block h-2 rounded-full bg-black/15" />
-                    <span
-                      className={`block h-2 rounded-full bg-black/10 ${
-                        index === 1 ? "w-2/3" : "w-5/6"
-                      }`}
-                    />
+                  <div className="space-y-3">
+                    <span className="block h-3 w-5/6 rounded-full bg-strong/80" />
+                    <span className="block h-2 rounded-full bg-black/12" />
+                    <span className="block h-2 w-11/12 rounded-full bg-black/12" />
+                    <span className="block h-2 w-4/5 rounded-full bg-black/12" />
                   </div>
+                </>
+              ) : (
+                leftItems.map((item, index) => (
+                  <MiniCard key={item} label={item} short={index === 1} />
+                ))
+              )}
+              {isResearchCard ? (
+                <div className="mt-6 grid grid-cols-3 gap-3">
+                  {leftItems.map((item) => (
+                    <div key={item} className="rounded-2xl bg-black/[0.04] p-3">
+                      <span className="mb-4 block h-2 rounded-full bg-black/18" />
+                      <span className="font-sans text-[10px] text-muted">{item}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              ) : null}
+              {isResearchCard ? (
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg to-transparent" />
+              ) : null}
             </div>
 
-            <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-white/45 p-4">
-              <div className="mb-4 flex items-center justify-between font-sans text-[10px] text-muted sm:text-xs">
-                <span>ai research brief</span>
-                <span>draft ready</span>
-              </div>
-              <div className="space-y-3">
-                <span className="block h-3 w-3/4 rounded-full bg-strong/80" />
-                <span className="block h-2 rounded-full bg-black/12" />
-                <span className="block h-2 w-11/12 rounded-full bg-black/12" />
-                <span className="block h-2 w-4/5 rounded-full bg-black/12" />
-              </div>
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl bg-black/[0.04] p-3">
-                  <span className="mb-3 block h-2 w-1/2 rounded-full bg-black/20" />
-                  <span className="block h-16 rounded-xl bg-black/[0.06]" />
-                </div>
-                <div className="rounded-2xl bg-black/[0.04] p-3">
-                  <span className="mb-3 block h-2 w-1/2 rounded-full bg-black/20" />
-                  <span className="block h-16 rounded-xl bg-black/[0.06]" />
-                </div>
-              </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg to-transparent" />
+            <div className={isResearchCard ? "space-y-3" : "relative overflow-hidden rounded-2xl border border-black/10 bg-white/45 p-4"}>
+              {isResearchCard ? (
+                rightItems.map((item, index) => <MiniCard key={item} label={item} short={index === 2} />)
+              ) : (
+                <>
+                  <div className="mb-4 flex items-center justify-between font-sans text-[10px] text-muted sm:text-xs">
+                    <span>ai research brief</span>
+                    <span>draft ready</span>
+                  </div>
+                  <div className="space-y-3">
+                    <span className="block h-3 w-3/4 rounded-full bg-strong/80" />
+                    <span className="block h-2 rounded-full bg-black/12" />
+                    <span className="block h-2 w-11/12 rounded-full bg-black/12" />
+                    <span className="block h-2 w-4/5 rounded-full bg-black/12" />
+                  </div>
+                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                    <div className="rounded-2xl bg-black/[0.04] p-3">
+                      <span className="mb-3 block h-2 w-1/2 rounded-full bg-black/20" />
+                      <span className="block h-16 rounded-xl bg-black/[0.06]" />
+                    </div>
+                    <div className="rounded-2xl bg-black/[0.04] p-3">
+                      <span className="mb-3 block h-2 w-1/2 rounded-full bg-black/20" />
+                      <span className="block h-16 rounded-xl bg-black/[0.06]" />
+                    </div>
+                  </div>
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg to-transparent" />
+                </>
+              )}
             </div>
           </div>
         </div>
       </Link>
 
-      <div className="flex flex-wrap items-center justify-between gap-3 font-sans text-sm sm:text-base">
-        <Link href="/work/clario" className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <h3 className="text-strong">Clario</h3>
-          <p className="text-muted">an ai research agent</p>
+      <div className="grid gap-1 font-sans text-sm sm:grid-cols-[1fr_auto] sm:items-start sm:gap-3 sm:text-base">
+        <Link href={cardHref} className="min-w-0">
+          <h3 className="text-strong">{project.title}</h3>
+          <p className="text-muted">{project.summary}</p>
         </Link>
-        <a
-          href="https://clarioagent.vercel.app"
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-1 text-muted transition-colors duration-200 hover:text-strong"
-        >
-          <span>View site</span>
-          {/* <span aria-hidden="true">↗</span> */}
-        </a>
+        {project.projectUrl ? (
+          <a
+            href={project.projectUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-muted transition-colors duration-200 hover:text-strong"
+          >
+            {project.projectUrlLabel || "View site"}
+          </a>
+        ) : (
+          <Link href={cardHref} className="text-muted transition-colors duration-200 hover:text-strong">
+            View research
+          </Link>
+        )}
       </div>
     </article>
   );
 }
 
-function ResearchWorkCard() {
+function MiniCard({ label, short = false }: { label: string; short?: boolean }) {
   return (
-    <article className="group w-full max-w-3xl space-y-4">
-      <Link
-        href="/work/lesson-study"
-        className="block overflow-hidden rounded-[2rem] bg-black/[0.05] p-6 transition duration-300 hover:bg-black/[0.07] sm:p-10"
-      >
-        <div className="relative mx-auto aspect-[16/10] overflow-hidden rounded-3xl border border-black/10 bg-bg shadow-sm">
-          <div className="flex items-center justify-between border-b border-black/10 px-4 py-3 font-sans text-[10px] text-muted sm:text-xs">
-            <div className="flex items-center gap-2 text-strong">
-              <span className="grid h-6 w-6 place-items-center rounded-lg bg-strong text-[10px] text-bg">
-                R
-              </span>
-              <span>lesson study</span>
-            </div>
-            <div className="hidden items-center gap-2 sm:flex">
-              <span className="rounded-full bg-black/[0.05] px-3 py-1">ict</span>
-              <span className="rounded-full bg-black/[0.05] px-3 py-1">math</span>
-              <span className="rounded-full bg-black/[0.05] px-3 py-1">research</span>
-            </div>
-          </div>
-
-          <div className="grid h-full gap-4 p-4 sm:grid-cols-[1.1fr_0.9fr] sm:p-5">
-            <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-white/45 p-4">
-              <div className="mb-4 flex items-center justify-between font-sans text-[10px] text-muted sm:text-xs">
-                <span>qualitative case study</span>
-                <span>kyrgyzstan</span>
-              </div>
-              <div className="space-y-3">
-                <span className="block h-3 w-5/6 rounded-full bg-strong/80" />
-                <span className="block h-2 rounded-full bg-black/12" />
-                <span className="block h-2 w-11/12 rounded-full bg-black/12" />
-                <span className="block h-2 w-4/5 rounded-full bg-black/12" />
-              </div>
-              <div className="mt-6 grid grid-cols-3 gap-3">
-                {["plan", "teach", "reflect"].map((item) => (
-                  <div key={item} className="rounded-2xl bg-black/[0.04] p-3">
-                    <span className="mb-4 block h-2 rounded-full bg-black/18" />
-                    <span className="font-sans text-[10px] text-muted">{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg to-transparent" />
-            </div>
-
-            <div className="space-y-3">
-              {["ICT tools", "math concepts", "teacher reflection"].map((item, index) => (
-                <div key={item} className="rounded-2xl border border-black/10 bg-white/45 p-3">
-                  <div className="mb-3 flex items-center justify-between">
-                    <span className="font-sans text-[10px] uppercase tracking-[0.16em] text-muted">
-                      {item}
-                    </span>
-                    <span className="h-2 w-2 rounded-full bg-red-700/80" />
-                  </div>
-                  <span className="block h-2 rounded-full bg-black/15" />
-                  <span
-                    className={`mt-2 block h-2 rounded-full bg-black/10 ${
-                      index === 2 ? "w-3/5" : "w-5/6"
-                    }`}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </Link>
-
-      <div className="flex flex-wrap items-center justify-between gap-3 font-sans text-sm sm:text-base">
-        <Link href="/work/lesson-study" className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <h3 className="text-strong">Lesson Study Research</h3>
-          <p className="text-muted">digital technology in ICT and mathematics instruction</p>
-        </Link>
-        <Link
-          href="/work/lesson-study"
-          className="inline-flex items-center gap-1 text-muted transition-colors duration-200 hover:text-strong"
-        >
-          <span>View research</span>
-          {/* <span aria-hidden="true">↗</span> */}
-        </Link>
+    <div className="rounded-2xl border border-black/10 bg-white/45 p-3">
+      <div className="mb-3 flex items-center justify-between">
+        <span className="font-sans text-[10px] uppercase tracking-[0.16em] text-muted">
+          {label}
+        </span>
+        <span className="h-2 w-2 rounded-full bg-red-700/80" />
       </div>
-    </article>
+      <div className="space-y-2">
+        <span className="block h-2 rounded-full bg-black/15" />
+        <span className={`block h-2 rounded-full bg-black/10 ${short ? "w-2/3" : "w-5/6"}`} />
+      </div>
+    </div>
   );
 }
 
@@ -341,13 +314,13 @@ function AboutContent() {
   );
 }
 
-function PostList({ recentPosts }: HomeTabsProps) {
+function PostList({ recentPosts }: { recentPosts: Post[] }) {
   return (
     <>
       {recentPosts.map((post) => (
         <article key={post.slug} className="group">
           <Link
-            href={`/writings/${post.slug}`}
+            href={`/articles/${post.slug}`}
             className="flex max-w-content items-baseline justify-between gap-4 text-sm text-strong transition-colors duration-200 hover:text-accent sm:text-base"
           >
             <span>{post.title}.</span>

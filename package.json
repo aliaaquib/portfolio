@@ -12,17 +12,25 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "14.2.35",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "@portabletext/react": "^8.0.1",
+    "@sanity/client": "^7.26.2",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^6.11.0",
+    "next": "16.3.3",
+    "next-sanity": "^13.3.3",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-is": "^19.2.8",
+    "sanity": "^6.11.0",
+    "styled-components": "^6.5.3"
   },
   "devDependencies": {
+    "@types/node": "^25.0.0",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
     "autoprefixer": "10.4.20",
     "postcss": "8.4.49",
     "tailwindcss": "3.4.17",
-    "typescript": "5.6.3",
-    "@types/node": "22.10.2",
-    "@types/react": "18.3.12",
-    "@types/react-dom": "18.3.1"
+    "typescript": "^5.9.3"
   }
 }
