@@ -16,6 +16,7 @@ export type Work = {
   shortDescription: string;
   fullDescription?: PortableTextBlock[];
   thumbnail?: SanityImage;
+  thumbnailUrl?: string;
   gallery?: SanityImage[];
   technologies?: string[];
   github?: string;
@@ -103,7 +104,7 @@ export function normalizeWork(work: Work, index = 0): Project {
     order: index,
     cardKind,
     image: {
-      src: work.thumbnail?.asset?.url || "/images/work/clario-hero.svg",
+      src: work.thumbnailUrl || work.thumbnail?.asset?.url || "/images/work/clario-hero.svg",
       alt: work.thumbnail?.alt || work.title,
     },
     thumbnail: work.thumbnail,
@@ -152,13 +153,7 @@ export async function getSortedProjects() {
 }
 
 export async function getFeaturedProjects(limit = 3) {
-  const featured = await fetchWork(FEATURED_WORK_QUERY, { limit });
-
-  if (featured.length > 0) {
-    return featured;
-  }
-
-  return getSortedProjects();
+  return fetchWork(FEATURED_WORK_QUERY, { limit });
 }
 
 export async function getProjectBySlug(slug: string) {

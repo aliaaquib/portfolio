@@ -106,6 +106,7 @@ export const WORK_LIST_QUERY = defineQuery(`
     "slug": slug.current,
     shortDescription,
     fullDescription,
+    thumbnailUrl,
     thumbnail{
       ...,
       asset->{
@@ -149,6 +150,7 @@ export const FEATURED_WORK_QUERY = defineQuery(`
     "slug": slug.current,
     shortDescription,
     fullDescription,
+    thumbnailUrl,
     thumbnail{
       ...,
       asset->{
@@ -191,6 +193,7 @@ export const WORK_BY_SLUG_QUERY = defineQuery(`
     "slug": slug.current,
     shortDescription,
     fullDescription,
+    thumbnailUrl,
     thumbnail{
       ...,
       asset->{

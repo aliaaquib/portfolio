@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useState } from "react";
@@ -9,7 +10,7 @@ import { SendIcon } from "@/components/icons";
 import type { Post } from "@/lib/posts";
 import type { Project } from "@/lib/projects";
 
-type Tab = "Work" | "About";
+type Tab = "Home" | "About";
 
 type HomeTabsProps = {
   recentPosts: Post[];
@@ -17,7 +18,7 @@ type HomeTabsProps = {
   children?: ReactNode;
 };
 
-const tabs: Tab[] = ["Work", "About"];
+const tabs: Tab[] = ["Home", "About"];
 
 const tabButtonClass =
   "rounded-full px-3 py-1 transition-colors duration-200 hover:bg-bg/70 sm:px-4";
@@ -26,7 +27,7 @@ const activeTabButtonClass =
   "rounded-full bg-bg px-3 py-1 shadow-sm transition-colors duration-200 sm:px-4";
 
 export function HomeTabs({ recentPosts, projects, children }: HomeTabsProps) {
-  const [activeTab, setActiveTab] = useState<Tab>("Work");
+  const [activeTab, setActiveTab] = useState<Tab>("Home");
 
   return (
     <div className="space-y-10">
@@ -38,7 +39,7 @@ export function HomeTabs({ recentPosts, projects, children }: HomeTabsProps) {
         {children}
 
         <section className="border-b border-muted/20 pb-10">
-          {activeTab === "Work" ? <WorkContent recentPosts={recentPosts} projects={projects} /> : null}
+          {activeTab === "Home" ? <WorkContent recentPosts={recentPosts} projects={projects} /> : null}
           {activeTab === "About" ? <AboutContent /> : null}
         </section>
       </div>
@@ -105,7 +106,15 @@ function WorkContent({ recentPosts, projects }: HomeTabsProps) {
       </section>
 
       <section className="space-y-10">
-        <h2 className="text-sm uppercase text-accent">FEATURED WORK</h2>
+        <div className="flex max-w-content items-center justify-between gap-4">
+          <h2 className="text-sm uppercase text-accent">FEATURED WORK</h2>
+          <Link
+            href="/work"
+            className="inline-block text-sm text-muted transition-colors duration-200 hover:text-strong sm:text-base"
+          >
+            View All
+          </Link>
+        </div>
         {projects.map((project) => (
           <ProjectWorkCard key={project.slug} project={project} />
         ))}
@@ -128,108 +137,27 @@ function WorkContent({ recentPosts, projects }: HomeTabsProps) {
 }
 
 function ProjectWorkCard({ project }: { project: Project }) {
-  const isResearchCard = project.cardKind === "research";
   const cardHref = `/work/${project.slug}`;
-  const pillItems = isResearchCard ? ["ict", "math", "research"] : ["research", "sources", "notes"];
-  const leftItems = isResearchCard
-    ? ["plan", "teach", "reflect"]
-    : ["question", "sources", "summary"];
-  const rightItems = isResearchCard
-    ? ["ICT tools", "math concepts", "teacher reflection"]
-    : ["source cards", "brief draft", "review"];
 
   return (
-    <article className="group w-full max-w-3xl space-y-4">
+    <article className="group w-full max-w-2xl space-y-3">
       <Link
         href={cardHref}
-        className="block overflow-hidden rounded-[2rem] bg-black/[0.05] p-6 transition duration-300 hover:bg-black/[0.07] sm:p-10"
+        className="block overflow-hidden rounded-[1.5rem] border border-black/10 bg-black/[0.05] transition duration-300 hover:bg-black/[0.07]"
       >
-        <div className="relative mx-auto aspect-[16/10] overflow-hidden rounded-3xl border border-black/10 bg-bg shadow-sm">
-          <div className="flex items-center justify-between border-b border-black/10 px-4 py-3 font-sans text-[10px] text-muted sm:text-xs">
-            <div className="flex items-center gap-2 text-strong">
-              <span className="grid h-6 w-6 place-items-center rounded-lg bg-strong text-[10px] text-bg">
-                {project.title.charAt(0)}
-              </span>
-              <span>{project.eyebrow.toLowerCase()}</span>
-            </div>
-            <div className="hidden items-center gap-2 sm:flex">
-              {pillItems.map((item) => (
-                <span key={item} className="rounded-full bg-black/[0.05] px-3 py-1">
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className={`grid h-full gap-4 p-4 sm:p-5 ${isResearchCard ? "sm:grid-cols-[1.1fr_0.9fr]" : "sm:grid-cols-[0.8fr_1.2fr]"}`}>
-            <div className={isResearchCard ? "relative overflow-hidden rounded-2xl border border-black/10 bg-white/45 p-4" : "space-y-3"}>
-              {isResearchCard ? (
-                <>
-                  <div className="mb-4 flex items-center justify-between font-sans text-[10px] text-muted sm:text-xs">
-                    <span>{project.type.toLowerCase()}</span>
-                    <span>{project.status.toLowerCase()}</span>
-                  </div>
-                  <div className="space-y-3">
-                    <span className="block h-3 w-5/6 rounded-full bg-strong/80" />
-                    <span className="block h-2 rounded-full bg-black/12" />
-                    <span className="block h-2 w-11/12 rounded-full bg-black/12" />
-                    <span className="block h-2 w-4/5 rounded-full bg-black/12" />
-                  </div>
-                </>
-              ) : (
-                leftItems.map((item, index) => (
-                  <MiniCard key={item} label={item} short={index === 1} />
-                ))
-              )}
-              {isResearchCard ? (
-                <div className="mt-6 grid grid-cols-3 gap-3">
-                  {leftItems.map((item) => (
-                    <div key={item} className="rounded-2xl bg-black/[0.04] p-3">
-                      <span className="mb-4 block h-2 rounded-full bg-black/18" />
-                      <span className="font-sans text-[10px] text-muted">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-              {isResearchCard ? (
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg to-transparent" />
-              ) : null}
-            </div>
-
-            <div className={isResearchCard ? "space-y-3" : "relative overflow-hidden rounded-2xl border border-black/10 bg-white/45 p-4"}>
-              {isResearchCard ? (
-                rightItems.map((item, index) => <MiniCard key={item} label={item} short={index === 2} />)
-              ) : (
-                <>
-                  <div className="mb-4 flex items-center justify-between font-sans text-[10px] text-muted sm:text-xs">
-                    <span>ai research brief</span>
-                    <span>draft ready</span>
-                  </div>
-                  <div className="space-y-3">
-                    <span className="block h-3 w-3/4 rounded-full bg-strong/80" />
-                    <span className="block h-2 rounded-full bg-black/12" />
-                    <span className="block h-2 w-11/12 rounded-full bg-black/12" />
-                    <span className="block h-2 w-4/5 rounded-full bg-black/12" />
-                  </div>
-                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-2xl bg-black/[0.04] p-3">
-                      <span className="mb-3 block h-2 w-1/2 rounded-full bg-black/20" />
-                      <span className="block h-16 rounded-xl bg-black/[0.06]" />
-                    </div>
-                    <div className="rounded-2xl bg-black/[0.04] p-3">
-                      <span className="mb-3 block h-2 w-1/2 rounded-full bg-black/20" />
-                      <span className="block h-16 rounded-xl bg-black/[0.06]" />
-                    </div>
-                  </div>
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg to-transparent" />
-                </>
-              )}
-            </div>
-          </div>
+        <div className="relative aspect-[16/9] overflow-hidden bg-bg shadow-sm">
+          <Image
+            src={project.image.src}
+            alt={project.image.alt}
+            fill
+            className="object-cover transition duration-500 group-hover:scale-[1.02]"
+            sizes="(min-width: 1024px) 576px, calc(100vw - 56px)"
+            unoptimized={!project.image.src.includes("cdn.sanity.io")}
+          />
         </div>
       </Link>
 
-      <div className="grid gap-1 font-sans text-sm sm:grid-cols-[1fr_auto] sm:items-start sm:gap-3 sm:text-base">
+      <div className="grid gap-1 font-sans text-xs sm:grid-cols-[1fr_auto] sm:items-start sm:gap-3 sm:text-sm">
         <Link href={cardHref} className="min-w-0">
           <h3 className="text-strong">{project.title}</h3>
           <p className="text-muted">{project.summary}</p>
@@ -250,23 +178,6 @@ function ProjectWorkCard({ project }: { project: Project }) {
         )}
       </div>
     </article>
-  );
-}
-
-function MiniCard({ label, short = false }: { label: string; short?: boolean }) {
-  return (
-    <div className="rounded-2xl border border-black/10 bg-white/45 p-3">
-      <div className="mb-3 flex items-center justify-between">
-        <span className="font-sans text-[10px] uppercase tracking-[0.16em] text-muted">
-          {label}
-        </span>
-        <span className="h-2 w-2 rounded-full bg-red-700/80" />
-      </div>
-      <div className="space-y-2">
-        <span className="block h-2 rounded-full bg-black/15" />
-        <span className={`block h-2 rounded-full bg-black/10 ${short ? "w-2/3" : "w-5/6"}`} />
-      </div>
-    </div>
   );
 }
 

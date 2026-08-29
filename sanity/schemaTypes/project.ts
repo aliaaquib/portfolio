@@ -45,6 +45,12 @@ export const work = defineType({
       ],
     }),
     defineField({
+      name: "thumbnailUrl",
+      title: "Thumbnail URL",
+      type: "url",
+      description: "Use this when the work image is uploaded outside Sanity, for example Supabase Storage.",
+    }),
+    defineField({
       name: "gallery",
       title: "Gallery",
       type: "array",

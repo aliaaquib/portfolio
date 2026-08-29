@@ -6,7 +6,7 @@ const siteUrl = "https://aaquibali.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [articleSlugs, projectSlugs] = await Promise.all([getPostSlugs(), getProjectSlugs()]);
-  const staticRoutes = ["", "/contact", "/articles"].map((route) => ({
+  const staticRoutes = ["", "/contact", "/articles", "/work"].map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: new Date(),
   }));
