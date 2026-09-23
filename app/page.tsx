@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getRecentPosts } from "@/lib/posts";
 import { getFeaturedProjects } from "@/lib/projects";
 import { HomeTabs } from "@/components/home-tabs";
+import { Mascot } from "@/components/mascot";
 import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
@@ -26,9 +27,17 @@ export default async function Home() {
 
           <HomeTabs recentPosts={recentPosts} projects={projects}>
             <header className="space-y-4">
-              <h1 className="max-w-4xl text-[40px] leading-tight tracking-tight text-strong sm:text-[60px]">
-                aaquib ali<span className="text-red-700">.</span>
-              </h1>
+              <div className="flex items-center gap-5 sm:gap-7">
+                <Mascot
+                  directions="/mascots/aaquib-directions.webp"
+                  reactions="/mascots/aaquib-reactions.webp"
+                  size={132}
+                  label="Mini Aaquib, following your cursor"
+                />
+                <h1 className="max-w-4xl text-[40px] leading-tight tracking-tight text-strong sm:text-[60px]">
+                  aaquib ali<span className="text-red-700">.</span>
+                </h1>
+              </div>
               <p className="max-w-content text-justify text-sm leading-7 text-muted sm:text-base sm:leading-8">
                 teacher by day, builder the rest of the time. like quiet interfaces, useful systems,
                 and internet corners that feel intentional. loves to write — poetry, raw thoughts.
