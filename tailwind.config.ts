@@ -23,12 +23,17 @@ const config: Config = {
       },
       animation: {
         "fade-in": "fade-in 900ms ease-out both",
+        "fade-swap": "fade-swap 320ms ease-out both",
         blink: "blink 1s step-end infinite",
         "contact-pop": "contact-pop 180ms ease-out both",
       },
       keyframes: {
         "fade-in": {
           "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-swap": {
+          "0%": { opacity: "0", transform: "translateY(6px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         blink: {
