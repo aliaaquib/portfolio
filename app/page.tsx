@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { Pill } from "@/components/pill";
 import { LinkedInCarousel } from "@/components/linkedin-carousel";
 import { WritingList } from "@/components/writing-list";
+import { FindMeGrid } from "@/components/find-me-grid";
 import { getSortedPosts } from "@/lib/posts";
 import { Reveal } from "@/components/reveal";
 import { ContactButton } from "@/components/contact-modal";
@@ -333,6 +334,17 @@ export default async function Home() {
           <Reveal delay={120} className="mt-5">
             <WritingList posts={articles} />
           </Reveal>
+        </section>
+
+        {/* ── find me ────────────────────────────────────── */}
+        <section className="pb-24">
+          <Reveal>
+            <SectionHeading>You can usually find me</SectionHeading>
+            <p className="mt-4 text-[15px] text-text/80">
+              teaching, building, or writing — usually all three.
+            </p>
+          </Reveal>
+          <FindMeGrid />
         </section>
 
         <SiteFooter />
