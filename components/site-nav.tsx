@@ -55,10 +55,10 @@ export function SiteNav() {
       <div className="mx-auto flex w-full max-w-2xl items-center justify-between gap-5 px-5 py-2.5 sm:px-6">
         <Link
           href="/"
-          className="shrink-0 font-signature text-[34px] leading-none text-strong transition-colors hover:text-brandred"
+          className="shrink-0 font-namelogo text-[34px] leading-none text-strong transition-colors hover:text-brandred"
           aria-label="Aaquib Ali — home"
         >
-          Aaquib Ali
+          aaquib ali
         </Link>
         <div className="flex min-w-0 items-center gap-3 overflow-x-auto whitespace-nowrap text-sm text-strong sm:gap-6 sm:text-[15px]">
           <button

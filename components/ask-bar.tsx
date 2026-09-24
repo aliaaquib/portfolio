@@ -3,27 +3,37 @@
 import { useEffect, useState } from "react";
 
 export function AskBar() {
-  const [hidden, setHidden] = useState(false);
+  const [footerVisible, setFooterVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const footer = document.getElementById("site-footer");
     if (!footer || !("IntersectionObserver" in window)) return;
     const observer = new IntersectionObserver(
-      ([entry]) => setHidden(entry.isIntersecting),
+      ([entry]) => setFooterVisible(entry.isIntersecting),
       { threshold: 0.05 }
     );
     observer.observe(footer);
     return () => observer.disconnect();
   }, []);
 
+  const visible = scrolled && !footerVisible;
+
   return (
     <button
       type="button"
       onClick={() => window.dispatchEvent(new CustomEvent("open-ask-ai"))}
-      aria-hidden={hidden}
-      tabIndex={hidden ? -1 : 0}
+      aria-hidden={!visible}
+      tabIndex={visible ? 0 : -1}
       className={`fixed bottom-5 left-1/2 z-40 -translate-x-1/2 transition-all duration-300 ${
-        hidden ? "pointer-events-none translate-y-24 opacity-0" : "translate-y-0 opacity-100"
+        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-24 opacity-0"
       }`}
     >
       <span className="group flex items-center gap-2.5 rounded-full border border-strong/15 bg-white py-3 pl-4 pr-4 text-left shadow-[0_8px_28px_rgba(17,17,17,0.14)] transition hover:border-strong/30">

@@ -20,6 +20,7 @@ const config: Config = {
         display: ["\"Instrument Serif\"", "Georgia", "\"Times New Roman\"", "serif"],
         serif: ["Georgia", "\"Times New Roman\"", "Times", "serif"],
         signature: ["\"Ms Madi\"", "\"Segoe Script\"", "cursive"],
+        namelogo: ["\"Stalemate\"", "\"Segoe Script\"", "cursive"],
         mono: ["ui-monospace", "\"SF Mono\"", "SFMono-Regular", "Menlo", "Consolas", "\"Liberation Mono\"", "monospace"],
       },
       maxWidth: {

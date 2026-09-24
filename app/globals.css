@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Self-hosted typefaces: Instrument Serif (display) + DM Sans (body) + Ms Madi (signature) */
+/* Self-hosted typefaces: Instrument Serif (display) + DM Sans (body) + Ms Madi (signature) + Stalemate (name logo) */
 @font-face {
   font-family: "Instrument Serif";
   font-style: normal;
@@ -41,6 +41,14 @@
   font-weight: 400;
   font-display: swap;
   src: url("/fonts/msmadi-normal-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Stalemate";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/stalemate-normal-400.woff2") format("woff2");
 }
 
 :root {
