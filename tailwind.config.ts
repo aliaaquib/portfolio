@@ -8,15 +8,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#f7f0e6",
+        bg: "#ffffff",
         text: "#3f3a34",
         strong: "#111111",
         accent: "#111111",
         muted: "#6f675f",
+        brandred: "#8f1d1d",
       },
       fontFamily: {
-        sans: ["Georgia", "\"Times New Roman\"", "Times", "serif"],
-        mono: ["Georgia", "\"Times New Roman\"", "Times", "serif"],
+        sans: ["\"DM Sans\"", "system-ui", "-apple-system", "\"Segoe UI\"", "sans-serif"],
+        display: ["\"Instrument Serif\"", "Georgia", "\"Times New Roman\"", "serif"],
+        serif: ["Georgia", "\"Times New Roman\"", "Times", "serif"],
+        signature: ["\"Ms Madi\"", "\"Segoe Script\"", "cursive"],
+        mono: ["ui-monospace", "\"SF Mono\"", "SFMono-Regular", "Menlo", "Consolas", "\"Liberation Mono\"", "monospace"],
       },
       maxWidth: {
         content: "34rem",

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
-import { FloatingAskAIControl } from "@/components/ask-ai";
+import { AskAIModalHost } from "@/components/ask-ai";
+import { AskBar } from "@/components/ask-bar";
+import { AgentTerminalHost } from "@/components/agent-terminal";
+import { ContactModalHost } from "@/components/contact-modal";
 import { SanityLive } from "@/sanity/lib/live";
 import "./globals.css";
 
@@ -88,7 +91,10 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         {children}
-        <FloatingAskAIControl />
+        <AskBar />
+        <AskAIModalHost />
+        <AgentTerminalHost />
+        <ContactModalHost />
         <SanityLive includeDrafts={isDraftMode} />
         {isDraftMode ? <VisualEditing /> : null}
       </body>
