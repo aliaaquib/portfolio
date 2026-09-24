@@ -61,22 +61,6 @@ export default function LabsPage() {
         <div className="divide-y divide-strong/10 border-y border-strong/10">
           <Reveal as="section" className="py-10">
             <div className="flex items-baseline gap-3">
-              <h2 className="text-lg font-semibold text-strong">Agent mode</h2>
-              <StatusPill status="Live" />
-            </div>
-            <p className="mt-3 font-display text-[26px] leading-snug text-strong">
-              The whole portfolio, <mark className="highlight">inside your terminal</mark>.
-            </p>
-            <p className="mt-3 max-w-xl text-[15px] leading-7 text-text/90">
-              Hit <span className="font-medium text-strong">··· Agent mode</span> in the nav and
-              interrogate everything I&apos;ve made, command-line style. Four agents,
-              one honest knowledge base.
-            </p>
-            <LabsActions action="agent" />
-          </Reveal>
-
-          <Reveal as="section" className="py-10">
-            <div className="flex items-baseline gap-3">
               <h2 className="text-lg font-semibold text-strong">Ask AI</h2>
               <StatusPill status="Live" />
             </div>
@@ -87,7 +71,7 @@ export default function LabsPage() {
               Every page carries a small assistant that answers from this site&apos;s
               context. No account, no chat history — just answers.
             </p>
-            <LabsActions action="ask" />
+            <LabsActions />
           </Reveal>
 
           <Reveal as="section" className="py-10">

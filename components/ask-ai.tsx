@@ -55,7 +55,7 @@ const RULES: AnswerRule[] = [
   {
     match: /\blab\b/i,
     answer:
-      "His labs page has three experiments: Agent mode (this whole portfolio in a terminal), Ask AI (this chat), and a tiny mascot that follows your cursor. Check /labs.",
+      "His labs page has two experiments: Ask AI (this chat) and a tiny mascot that follows your cursor. Check /labs.",
   },
 ];
 

@@ -1,0 +1,47 @@
+<svg width="1400" height="875" viewBox="0 0 1400 875" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="875" fill="#F5F2EA"/>
+  <!-- soft backdrop blob -->
+  <ellipse cx="700" cy="430" rx="620" ry="380" fill="#EDE8DB"/>
+  <!-- card shadow -->
+  <rect x="212" y="102" width="1000" height="700" rx="30" fill="#111111" opacity="0.08"/>
+  <!-- card -->
+  <rect x="200" y="88" width="1000" height="700" rx="30" fill="#FFFFFF" stroke="#111111" stroke-opacity="0.12" stroke-width="1.5"/>
+  <!-- header -->
+  <circle cx="262" cy="152" r="11" fill="#B7372F"/>
+  <text x="284" y="163" font-family="Georgia, 'Times New Roman', serif" font-size="36" fill="#111111">Clario</text>
+  <text x="1138" y="160" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="19" fill="#111111" opacity="0.5">Briefing · 2 min read</text>
+  <line x1="200" y1="200" x2="1200" y2="200" stroke="#111111" stroke-opacity="0.1" stroke-width="1.5"/>
+  <!-- question -->
+  <text x="262" y="252" font-family="system-ui, -apple-system, sans-serif" font-size="15" letter-spacing="3" fill="#111111" opacity="0.45">YOU ASKED</text>
+  <text x="262" y="300" font-family="Georgia, 'Times New Roman', serif" font-size="42" fill="#111111">How do solar panels actually work?</text>
+  <!-- briefing -->
+  <text x="262" y="368" font-family="system-ui, -apple-system, sans-serif" font-size="15" letter-spacing="3" fill="#B7372F">CLARIO'S BRIEFING</text>
+  <text x="262" y="410" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#333333">
+    <tspan x="262" dy="0">Sunlight strikes photovoltaic cells — usually silicon. Each photon knocks</tspan>
+    <tspan x="262" dy="34">electrons loose, and the cell's built-in electric field pushes them into</tspan>
+    <tspan x="262" dy="34">a steady current.</tspan>
+  </text>
+  <text x="262" y="548" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#333333">
+    <tspan x="262" dy="0">An inverter converts that direct current into the alternating current</tspan>
+    <tspan x="262" dy="34">your home runs on.</tspan>
+  </text>
+  <!-- key points -->
+  <g font-family="system-ui, -apple-system, sans-serif" font-size="20" fill="#111111">
+    <circle cx="272" cy="632" r="11" fill="#B7372F"/>
+    <path d="M267 632l4 4 7-8" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="296" y="640">Photons knock electrons loose in silicon cells</text>
+    <circle cx="272" cy="672" r="11" fill="#B7372F"/>
+    <path d="M267 672l4 4 7-8" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="296" y="680">Inverters turn DC into usable AC power</text>
+  </g>
+  <!-- sources -->
+  <text x="262" y="722" font-family="system-ui, -apple-system, sans-serif" font-size="15" letter-spacing="3" fill="#111111" opacity="0.45">SOURCES</text>
+  <g font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#111111">
+    <rect x="380" y="700" width="128" height="40" rx="20" fill="#F5F2EA" stroke="#111111" stroke-opacity="0.12"/>
+    <text x="444" y="726" text-anchor="middle">energy.gov</text>
+    <rect x="520" y="700" width="108" height="40" rx="20" fill="#F5F2EA" stroke="#111111" stroke-opacity="0.12"/>
+    <text x="574" y="726" text-anchor="middle">seia.org</text>
+    <rect x="640" y="700" width="148" height="40" rx="20" fill="#F5F2EA" stroke="#111111" stroke-opacity="0.12"/>
+    <text x="714" y="726" text-anchor="middle">wikipedia.org</text>
+  </g>
+</svg>

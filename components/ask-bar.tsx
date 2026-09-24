@@ -22,11 +22,11 @@ export function AskBar() {
       onClick={() => window.dispatchEvent(new CustomEvent("open-ask-ai"))}
       aria-hidden={hidden}
       tabIndex={hidden ? -1 : 0}
-      className={`fixed bottom-5 left-1/2 z-40 w-[min(680px,calc(100%-2.5rem))] -translate-x-1/2 transition-all duration-300 ${
+      className={`fixed bottom-5 left-1/2 z-40 -translate-x-1/2 transition-all duration-300 ${
         hidden ? "pointer-events-none translate-y-24 opacity-0" : "translate-y-0 opacity-100"
       }`}
     >
-      <span className="group flex w-full items-center gap-3 rounded-full border border-strong/15 bg-white py-3.5 pl-5 pr-4 text-left shadow-[0_8px_28px_rgba(17,17,17,0.14)] transition hover:border-strong/30">
+      <span className="group flex items-center gap-2.5 rounded-full border border-strong/15 bg-white py-3 pl-4 pr-4 text-left shadow-[0_8px_28px_rgba(17,17,17,0.14)] transition hover:border-strong/30">
         <svg
           width="17"
           height="17"
@@ -38,9 +38,8 @@ export function AskBar() {
           <circle cx="7" cy="7" r="5.2" stroke="currentColor" strokeWidth="1.6" />
           <line x1="11.2" y1="11.2" x2="14.5" y2="14.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
-        <span className="truncate text-[15px]">
-          <span className="font-medium text-strong">Ask me anything.</span>{" "}
-          <span className="text-muted">Clario, teaching, Thread Academy, or poetry</span>
+        <span className="truncate text-[15px] font-medium text-strong">
+          Ask me anything
         </span>
         <span
           aria-hidden="true"
