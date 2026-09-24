@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { getSortedPosts } from "@/lib/posts";
+import Link from "next/link";
+import { getSortedPosts, getReadingTime } from "@/lib/posts";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
-import { WritingList } from "@/components/writing-list";
+import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
-  title: "Articles",
-  description: "Latest articles, essays, and research notes from Aaquib Ali.",
+  title: "Writing",
+  description: "Essays and explainers on computer science and AI by Aaquib Ali.",
   alternates: {
     canonical: "/articles",
   },
@@ -19,23 +20,55 @@ export default async function ArticlesPage() {
 
   return (
     <main className="min-h-screen bg-bg text-text">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(17,17,17,0.035),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(17,17,17,0.025),transparent_28%)]" />
-      <div className="pointer-events-none fixed inset-0 bg-grid bg-[size:32px_32px] opacity-20" />
+      <SiteNav />
 
-      <section className="relative mx-auto w-full max-w-5xl px-6 py-20 sm:px-10 lg:pl-20 lg:pr-14">
-        <div className="space-y-10">
-          <SiteNav />
-          <header className="space-y-4">
-            <h1 className="text-xl font-medium leading-tight text-strong sm:text-3xl">articles</h1>
-            <p className="max-w-content text-sm leading-7 text-muted sm:text-base sm:leading-8">
-              latest articles, essays, and research notes.
+      <div className="mx-auto w-full max-w-3xl px-5 sm:px-6">
+        <header className="pb-10 pt-14 sm:pt-20">
+          <Reveal>
+            <h1 className="font-display text-6xl tracking-tight text-strong sm:text-7xl">
+              Writing
+            </h1>
+            <p className="mt-5 text-[17px] leading-relaxed text-muted">
+              CS and AI, explained simply.
             </p>
-          </header>
+          </Reveal>
+        </header>
 
-          <WritingList posts={articles} />
-          <SiteFooter />
+        <div className="border-t border-muted/20" />
+
+        <div className="pb-8">
+          {articles.map((article, index) => (
+            <Reveal key={article.slug} delay={Math.min(index, 6) * 60}>
+              <Link
+                href={`/articles/${article.slug}`}
+                className="group block border-b border-muted/20 py-8 transition-colors duration-200"
+              >
+                <h2 className="font-display text-[28px] leading-snug tracking-tight text-strong transition-colors duration-200 group-hover:text-brandred sm:text-[32px]">
+                  {article.title}
+                </h2>
+                {article.excerpt ? (
+                  <p className="mt-3 max-w-content text-[15px] leading-relaxed text-muted">
+                    {article.excerpt}
+                  </p>
+                ) : null}
+                <p className="mt-4 font-sans text-[13px] tracking-wide text-muted">
+                  {article.date}
+                  <span className="mx-2 text-muted/40">&middot;</span>
+                  {getReadingTime(article)}
+                  {article.category ? (
+                    <>
+                      <span className="mx-2 text-muted/40">&middot;</span>
+                      {article.category}
+                    </>
+                  ) : null}
+                </p>
+              </Link>
+            </Reveal>
+          ))}
         </div>
-      </section>
+
+        <SiteFooter />
+      </div>
     </main>
   );
 }

@@ -85,7 +85,7 @@ export function SiteNav() {
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent("open-ask-ai"))}
-            className="nav-link inline-flex items-center gap-1.5 transition-colors hover:text-brandred"
+            className="nav-link hidden items-center gap-1.5 transition-colors hover:text-brandred sm:inline-flex"
           >
             <ChatIcon className="h-4 w-4" />
             Ask me anything

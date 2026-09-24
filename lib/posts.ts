@@ -1,11 +1,11 @@
 import type { PortableTextBlock } from "@portabletext/types";
 import { sanityFetch } from "@/sanity/lib/live";
 import { hasSanityProject } from "@/sanity/lib/env";
+import { readLocalArticles } from "./local-articles";
 import {
   ARTICLE_BY_SLUG_QUERY,
   ARTICLE_LIST_QUERY,
   ARTICLE_SLUGS_QUERY,
-  LATEST_ARTICLES_QUERY,
 } from "@/sanity/lib/queries";
 
 export type SanityImage = {
@@ -151,9 +151,9 @@ export function normalizeArticle(article: Article): Post {
   };
 }
 
-async function fetchArticles(query: string, params?: Record<string, string | number>) {
+async function fetchRawArticles(query: string, params?: Record<string, string | number>) {
   if (!hasSanityProject) {
-    return [];
+    return [] as Article[];
   }
 
   try {
@@ -164,22 +164,36 @@ async function fetchArticles(query: string, params?: Record<string, string | num
       stega: false,
     });
 
-    return Array.isArray(data) ? (data as Article[]).map(normalizeArticle) : [];
+    return Array.isArray(data) ? (data as Article[]) : [];
   } catch (error) {
     console.warn("Sanity article fetch failed:", error);
-    return [];
+    return [] as Article[];
   }
 }
 
+/** All articles: local markdown files are always included, plus Sanity ones
+ *  when configured (local wins on slug conflicts). Newest first. */
+async function getAllArticles(): Promise<Article[]> {
+  const local = readLocalArticles();
+  const remote = await fetchRawArticles(ARTICLE_LIST_QUERY);
+  const localSlugs = new Set(local.map((a) => a.slug));
+  return [...local, ...remote.filter((a) => !localSlugs.has(a.slug))].sort((a, b) =>
+    (b.publishedDate || "").localeCompare(a.publishedDate || "")
+  );
+}
+
 export async function getSortedPosts() {
-  return fetchArticles(ARTICLE_LIST_QUERY);
+  return (await getAllArticles()).map(normalizeArticle);
 }
 
 export async function getRecentPosts(limit = 3) {
-  return fetchArticles(LATEST_ARTICLES_QUERY, { limit });
+  return (await getAllArticles()).slice(0, limit).map(normalizeArticle);
 }
 
 export async function getPostBySlug(slug: string) {
+  const local = readLocalArticles().find((a) => a.slug === slug);
+  if (local) return normalizeArticle(local);
+
   if (!hasSanityProject) {
     return null;
   }
@@ -199,8 +213,10 @@ export async function getPostBySlug(slug: string) {
 }
 
 export async function getPostSlugs() {
+  const slugs = (await getAllArticles()).map((a) => ({ slug: a.slug }));
+
   if (!hasSanityProject) {
-    return [];
+    return slugs;
   }
 
   try {
@@ -211,9 +227,17 @@ export async function getPostSlugs() {
       tags: ["article"],
     });
 
-    return Array.isArray(data) ? (data as Array<{ slug: string }>) : [];
+    const remoteSlugs = Array.isArray(data) ? (data as Array<{ slug: string }>) : [];
+    const seen = new Set(slugs.map((s) => s.slug));
+    for (const s of remoteSlugs) {
+      if (!seen.has(s.slug)) {
+        slugs.push(s);
+        seen.add(s.slug);
+      }
+    }
+    return slugs;
   } catch (error) {
     console.warn("Sanity article slug fetch failed:", error);
-    return [];
+    return slugs;
   }
 }

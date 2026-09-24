@@ -3,6 +3,8 @@ import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { Pill } from "@/components/pill";
 import { LinkedInCarousel } from "@/components/linkedin-carousel";
+import { WritingList } from "@/components/writing-list";
+import { getSortedPosts } from "@/lib/posts";
 import { Reveal } from "@/components/reveal";
 import { ContactButton } from "@/components/contact-modal";
 import { ProjectPreviewZone } from "@/components/project-preview";
@@ -29,10 +31,10 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 function GradCapIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5" aria-hidden="true">
-      <path d="M12 4L2 9l10 5 10-5-10-5Z" strokeLinejoin="round" />
-      <path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5" strokeLinecap="round" />
-      <path d="M22 9v5" strokeLinecap="round" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="h-5 w-5" aria-hidden="true">
+      <path d="M12 4.2 2.6 8.8 12 13.4 21.4 8.8 12 4.2Z" strokeLinejoin="round" />
+      <path d="M6.8 12.4v3.2c0 1.4 2.3 2.6 5.2 2.6s5.2-1.2 5.2-2.6v-3.2" strokeLinecap="round" />
+      <path d="M21.4 10.6v3.8" strokeLinecap="round" />
     </svg>
   );
 }
@@ -59,7 +61,7 @@ function EmployerBlock({
       <div id={id} className="grid scroll-mt-24 gap-8 border-t border-strong/10 py-10 sm:grid-cols-[220px_1fr] sm:gap-6">
         <div className="sm:sticky sm:top-20 sm:self-start">
           <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-strong text-bg">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-strong text-bg">
               {icon}
             </span>
             <h3 className="text-[17px] font-semibold leading-snug text-strong">{name}</h3>
@@ -67,8 +69,11 @@ function EmployerBlock({
           <p className="mt-3 text-sm text-muted">{sub}</p>
           <ul className="mt-5 space-y-4">
             {roles.map((role) => (
-              <li key={role.title} className="relative pl-4">
-                <span aria-hidden="true" className="absolute left-0 top-[7px] h-1.5 w-1.5 rounded-full" style={{ backgroundColor: role.dot }} />
+              <li key={role.title} className="relative pl-5">
+                <span aria-hidden="true" className="absolute bottom-0 left-[4px] top-[6px] flex flex-col items-center">
+                  <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: role.dot }} />
+                  <span className="mt-1 w-px flex-1 opacity-50" style={{ backgroundColor: role.dot }} />
+                </span>
                 <p className="text-[15px] font-medium text-strong">{role.title}</p>
                 <p className="mt-0.5 text-sm text-muted">{role.dates}</p>
               </li>
@@ -151,6 +156,8 @@ function ProjectCard({
 }
 
 export default async function Home() {
+  const articles = await getSortedPosts();
+
   return (
     <main className="min-h-screen bg-bg text-text">
       <SiteNav />
@@ -306,6 +313,25 @@ export default async function Home() {
           </Reveal>
           <Reveal delay={120} className="mt-5">
             <LinkedInCarousel />
+          </Reveal>
+        </section>
+
+        {/* ── writing ──────────────────────────────────────── */}
+        <section className="pb-24">
+          <Reveal>
+            <SectionHeading>Writing</SectionHeading>
+            <div className="mt-4 flex items-baseline justify-between gap-4">
+              <p className="text-[15px] text-text/80">CS and AI, explained simply.</p>
+              <a
+                href="/articles"
+                className="shrink-0 text-[15px] text-strong underline decoration-strong/30 underline-offset-4 transition hover:decoration-brandred hover:text-brandred"
+              >
+                View all ↗
+              </a>
+            </div>
+          </Reveal>
+          <Reveal delay={120} className="mt-5">
+            <WritingList posts={articles} />
           </Reveal>
         </section>
 

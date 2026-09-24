@@ -1,10 +1,12 @@
 import Image from "next/image";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ContentRenderer } from "@/components/content-renderer";
 import { PageActions } from "@/components/page-actions";
-import { SectionNav } from "@/components/section-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { SiteNav } from "@/components/site-nav";
+import { Reveal } from "@/components/reveal";
 import { getPostBySlug, getPostSlugs, getReadingTime } from "@/lib/posts";
 
 type PageProps = {
@@ -47,6 +49,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+const PLACEHOLDER_COVER = "three-patterns.svg";
+
 export default async function ArticlePage({ params }: PageProps) {
   const { slug } = await params;
   const article = await getPostBySlug(slug);
@@ -55,67 +59,89 @@ export default async function ArticlePage({ params }: PageProps) {
     notFound();
   }
 
+  const hasRealCover = Boolean(
+    article.image.src && !article.image.src.endsWith(PLACEHOLDER_COVER)
+  );
+
   return (
     <main className="min-h-screen bg-bg text-text">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(17,17,17,0.035),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(17,17,17,0.025),transparent_28%)]" />
-      <div className="pointer-events-none fixed inset-0 bg-grid bg-[size:32px_32px] opacity-20" />
+      <SiteNav />
+      <PageActions returnHref="/articles" />
 
-      <article className="relative mx-auto w-full max-w-6xl px-6 py-10 sm:px-10 lg:px-14">
-        <PageActions />
+      <div className="mx-auto w-full max-w-3xl px-5 sm:px-6">
+        <article className="pb-10 pt-12 sm:pt-16">
+          <Reveal>
+            {article.category ? (
+              <p className="font-sans text-[13px] uppercase tracking-[0.14em] text-muted">
+                {article.category}
+              </p>
+            ) : null}
+            <h1 className="mt-4 font-display text-[42px] leading-[1.1] tracking-tight text-strong sm:text-[54px]">
+              {article.title}
+            </h1>
+            {article.excerpt ? (
+              <p className="mt-5 max-w-content text-[17px] leading-relaxed text-muted">
+                {article.excerpt}
+              </p>
+            ) : null}
+            {article.tags?.length ? (
+              <div className="mt-6 flex flex-wrap gap-2">
+                {article.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-muted/25 px-3 py-1 font-sans text-xs text-muted"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            ) : null}
+            <p className="mt-6 font-sans text-sm tracking-wide text-muted">
+              {article.date}
+              <span className="mx-2 text-muted/40">&middot;</span>
+              {getReadingTime(article)}
+            </p>
+          </Reveal>
 
-        <header className="mx-auto max-w-3xl space-y-6 pb-10 pt-24 text-center sm:pt-28">
-          <p className="font-sans text-xs text-muted sm:text-sm">{article.category || "Article"}</p>
-          <h1 className="mx-auto max-w-2xl text-3xl leading-tight tracking-tight text-strong sm:text-4xl">
-            {article.title}
-          </h1>
-          <p className="mx-auto max-w-xl text-sm leading-7 text-muted sm:text-base sm:leading-8">
-            {article.excerpt}
-          </p>
-          <div className="mx-auto max-w-2xl border-t border-muted/20" />
-          <div className="flex justify-center gap-3 pt-4 font-sans text-xs text-muted sm:text-sm">
-            <span>{article.date}</span>
-            <span className="text-muted/40">·</span>
-            <span>{getReadingTime(article)}</span>
-          </div>
-          {article.image.src ? (
-            <figure className="mx-auto max-w-2xl overflow-hidden rounded-[2rem] border border-muted/15 bg-black/[0.03]">
-              <Image
-                src={article.image.src}
-                alt={article.image.alt}
-                width={1200}
-                height={675}
-                className="aspect-[16/9] w-full object-cover"
-                priority
-                sizes="(min-width: 1024px) 672px, calc(100vw - 48px)"
-              />
-            </figure>
+          {hasRealCover ? (
+            <Reveal delay={100}>
+              <figure className="mt-10 overflow-hidden rounded-3xl border border-muted/15 bg-black/[0.03]">
+                <Image
+                  src={article.image.src}
+                  alt={article.image.alt}
+                  width={1200}
+                  height={675}
+                  className="aspect-[16/9] w-full object-cover"
+                  sizes="(min-width: 768px) 768px, calc(100vw - 40px)"
+                />
+              </figure>
+            </Reveal>
           ) : null}
-        </header>
 
-        <div className="relative mx-auto grid max-w-5xl gap-10 pb-8 pt-16 lg:grid-cols-[minmax(0,38rem)] lg:justify-center">
-          <SectionNav
-            items={article.sections.map((section, index) => ({
-              id: `section-${index}`,
-              title: section.title,
-            }))}
-          />
+          <div className="mt-10 border-t border-muted/20" />
 
-          <div className="space-y-12 border-b border-muted/20 pb-6">
-            {article.sections.map((section, index) => (
-              <section key={`${section.title}-${index}`} id={`section-${index}`} className="scroll-mt-10 space-y-5">
-                <h2 className="text-xl leading-tight text-strong sm:text-2xl">{section.title}</h2>
-                <div className="space-y-6 text-sm leading-7 text-text/90 sm:text-base sm:leading-8">
-                  <ContentRenderer body={section.body} paragraphs={section.paragraphs} />
-                </div>
-              </section>
-            ))}
+          <Reveal delay={120}>
+            <div className="space-y-6 pt-10 text-[17px] leading-[1.8] text-text/90">
+              <ContentRenderer body={article.body} />
+            </div>
+          </Reveal>
+
+          <div className="mt-14 border-t border-muted/20 pt-6">
+            <p className="text-[15px] italic leading-relaxed text-muted">
+              Aaquib Ali is a computer science and mathematics teacher. He writes
+              about CS and AI in plain language.
+            </p>
+            <Link
+              href="/articles"
+              className="mt-8 inline-block text-[15px] text-strong underline decoration-strong/30 underline-offset-4 transition hover:decoration-brandred hover:text-brandred"
+            >
+              &larr; All articles
+            </Link>
           </div>
-        </div>
+        </article>
 
-        <div className="mx-auto max-w-5xl">
-          <SiteFooter />
-        </div>
-      </article>
+        <SiteFooter />
+      </div>
     </main>
   );
 }
