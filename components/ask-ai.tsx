@@ -110,7 +110,6 @@ export function AskAIModalHost() {
 function AskAIPanel({ onClose }: { onClose: () => void }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
-  const [selectedStarter, setSelectedStarter] = useState<string | null>(null);
   const [phase, setPhase] = useState<"idle" | "reading" | "streaming">("idle");
   const [streamed, setStreamed] = useState("");
   const [quota, setQuota] = useState(QUOTA);
@@ -156,11 +155,9 @@ function AskAIPanel({ onClose }: { onClose: () => void }) {
     stop();
     setMessages([]);
     setInput("");
-    setSelectedStarter(null);
   }
 
   function chooseStarter(starter: string) {
-    setSelectedStarter(starter);
     setInput(starter);
     inputRef.current?.focus();
   }
@@ -170,7 +167,6 @@ function AskAIPanel({ onClose }: { onClose: () => void }) {
     if (!question || phase !== "idle" || quota <= 0) return;
     setMessages((m) => [...m, { role: "user", text: question }]);
     setInput("");
-    setSelectedStarter(null);
     setQuota((q) => Math.max(0, q - 1));
     setPhase("reading");
 
@@ -204,54 +200,55 @@ function AskAIPanel({ onClose }: { onClose: () => void }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-50 bg-white"
       role="dialog"
       aria-modal="true"
       aria-label="Ask Aaquib anything"
     >
       <button
         type="button"
-        aria-label="Close Ask AI"
         onClick={onClose}
-        className="absolute inset-0 cursor-default bg-strong/30 backdrop-blur-[2px]"
-      />
-      <div className="relative grid max-h-[92dvh] w-full max-w-2xl animate-contact-pop overflow-hidden rounded-3xl bg-white shadow-[0_30px_80px_rgba(63,58,52,0.3)] sm:grid-cols-[200px_1fr]">
-        <div className="relative hidden min-h-full sm:block">
+        aria-label="Close"
+        className="absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full text-2xl leading-none text-strong transition-colors hover:bg-strong/5"
+      >
+        ×
+      </button>
+
+      <div className="grid h-full w-full animate-contact-pop overflow-hidden sm:grid-cols-[5fr_7fr]">
+        <div className="hidden p-5 sm:block">
           <img
             src="/portrait.jpg"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover"
+            className="h-full w-full rounded-[28px] object-cover"
           />
         </div>
 
-        <div className="flex min-h-0 flex-col p-6 sm:p-8">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className="font-signature text-[34px] leading-none text-strong">
+        <div className="mx-auto flex h-full min-h-0 w-full max-w-2xl flex-col px-6 pb-6 pt-14 sm:px-10 sm:pt-16">
+          {messages.length === 0 && phase === "idle" ? (
+            <div className="flex min-h-0 flex-1 flex-col items-center justify-center pb-8 text-center">
+              <p className="font-signature text-[56px] leading-none text-strong">
                 Aaquib Ali
               </p>
-              <h2 className="mt-2 font-display text-[28px] tracking-tight text-strong">
+              <h2 className="mt-5 font-display text-[40px] leading-tight tracking-tight text-strong sm:text-[48px]">
                 What are you curious about?
               </h2>
+              <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
+                {STARTERS.map((starter) => (
+                  <button
+                    key={starter}
+                    type="button"
+                    onClick={() => chooseStarter(starter)}
+                    className="px-1 py-1 text-[14px] font-medium text-strong underline decoration-strong/25 underline-offset-4 transition hover:decoration-strong"
+                  >
+                    {starter}
+                  </button>
+                ))}
+              </div>
             </div>
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Close"
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xl leading-none text-muted transition-colors hover:bg-strong/5 hover:text-strong"
-            >
-              ×
-            </button>
-          </div>
-
-          <div ref={scrollRef} className="mt-5 min-h-0 flex-1 space-y-4 overflow-y-auto pr-1">
-            {messages.length === 0 && phase === "idle" && (
-              <p className="text-sm italic text-muted">
-                Ask about the teaching, the building, or the writing.
-              </p>
-            )}
-            {messages.map((m, i) =>
+          ) : (
+            <div ref={scrollRef} className="min-h-0 flex-1 space-y-4 overflow-y-auto pr-1 pt-2">
+              {messages.map((m, i) =>
               m.role === "user" ? (
                 <div key={i} className="flex justify-end">
                   <p className="max-w-[85%] rounded-2xl rounded-br-md bg-strong/[0.07] px-4 py-2.5 text-[14px] leading-6 text-strong">
@@ -291,30 +288,14 @@ function AskAIPanel({ onClose }: { onClose: () => void }) {
             {phase === "streaming" && (
               <p className="blink-cursor max-w-[95%] text-[14px] leading-7 text-text">{streamed}</p>
             )}
-          </div>
+            </div>
+          )}
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            {STARTERS.map((starter) => (
-              <button
-                key={starter}
-                type="button"
-                onClick={() => chooseStarter(starter)}
-                className={`rounded-full border px-3.5 py-1.5 text-[13px] font-medium transition ${
-                  selectedStarter === starter
-                    ? "border-[#e0632f] bg-[#e0632f]/5 text-[#c14e22]"
-                    : "border-strong/20 bg-white text-strong hover:border-[#e0632f]/60"
-                }`}
-              >
-                {starter}
-              </button>
-            ))}
-          </div>
-
-          <form onSubmit={handleSubmit} className="mt-3">
+          <form onSubmit={handleSubmit} className="mt-4 shrink-0">
             <label htmlFor="ask-ai-input" className="sr-only">
               What would you like to know?
             </label>
-            <div className="flex items-end gap-2 rounded-2xl border border-strong/15 bg-white px-4 py-2.5 transition focus-within:border-strong/40">
+            <div className="flex items-center gap-2 rounded-full border border-strong/15 bg-white py-2 pl-6 pr-2 transition focus-within:border-strong/40">
               <textarea
                 ref={inputRef}
                 id="ask-ai-input"
@@ -330,14 +311,14 @@ function AskAIPanel({ onClose }: { onClose: () => void }) {
                 }}
                 placeholder="What would you like to know?"
                 autoComplete="off"
-                className="max-h-28 w-full resize-none bg-transparent text-[14px] leading-6 text-strong outline-none placeholder:text-muted/70"
+                className="max-h-28 w-full resize-none bg-transparent text-[16px] leading-6 text-strong outline-none placeholder:text-muted/70"
               />
               {phase === "idle" ? (
                 <button
                   type="submit"
                   disabled={!canSend}
                   aria-label="Send"
-                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-lg transition ${
+                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-xl transition ${
                     canSend
                       ? "bg-strong text-bg hover:bg-brandred"
                       : "cursor-not-allowed bg-strong/10 text-muted/50"
