@@ -5,6 +5,7 @@ import { Pill } from "@/components/pill";
 import { LinkedInCarousel } from "@/components/linkedin-carousel";
 import { WritingList } from "@/components/writing-list";
 import { FindMeGrid } from "@/components/find-me-grid";
+import { RightNow } from "@/components/right-now";
 import { getSortedPosts } from "@/lib/posts";
 import { Reveal } from "@/components/reveal";
 import { ContactButton } from "@/components/contact-modal";
@@ -316,6 +317,9 @@ export default async function Home() {
             <LinkedInCarousel />
           </Reveal>
         </section>
+
+        {/* ── right now: two dots on a globe ─────────────── */}
+        <RightNow />
 
         {/* ── writing ──────────────────────────────────────── */}
         <section className="pb-24">
