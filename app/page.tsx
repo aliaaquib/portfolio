@@ -167,18 +167,20 @@ export default async function Home() {
       <div className="mx-auto w-full max-w-2xl px-5 sm:px-6">
         {/* ── hero ─────────────────────────────────────────── */}
         <header className="animate-fade-in pb-16 pt-10 sm:pt-14">
-          <img
-            src="/portrait.jpg"
-            alt="Aaquib Ali"
-            width={140}
-            height={175}
-            className="h-[175px] w-[140px] rounded-xl border border-strong/10 object-cover shadow-[0_2px_12px_rgba(17,17,17,0.08)]"
-          />
-          <h1 className="mt-7 font-display text-[44px] leading-[1.08] tracking-tight text-strong sm:text-[58px]">
-            Teacher by day,
-            <br />
-            builder the rest of the time.
-          </h1>
+          <div className="flex items-center gap-5 sm:gap-8">
+            <img
+              src="/portrait.jpg"
+              alt="Aaquib Ali"
+              width={104}
+              height={104}
+              className="h-20 w-20 shrink-0 rounded-full border border-strong/10 object-cover shadow-[0_2px_12px_rgba(17,17,17,0.08)] sm:h-[104px] sm:w-[104px]"
+            />
+            <h1 className="font-display text-[30px] leading-[1.12] tracking-tight text-strong sm:text-[44px]">
+              Teacher by day,
+              <br />
+              builder the rest of the time.
+            </h1>
+          </div>
           <div className="mt-6 max-w-xl space-y-4 text-[15px] leading-8 text-text/90 sm:text-base">
             <p>
               I&apos;m Aaquib Ali, a computer science teacher and builder in Bishkek,

@@ -101,7 +101,7 @@ export function RightNow() {
           Two dots on a globe
         </h2>
       </Reveal>
-      <div className="mt-8 grid items-center gap-12 md:grid-cols-2 md:gap-10">
+      <div className="mt-8 grid items-center gap-12 md:grid-cols-2 md:gap-12">
         <Reveal>
           <div className="max-w-md space-y-6 text-[17px] leading-relaxed text-muted">
             <p>

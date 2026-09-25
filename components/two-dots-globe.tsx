@@ -327,7 +327,7 @@ export function TwoDotsGlobe({
   }, []);
 
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[420px] select-none md:ml-auto md:mr-0">
+    <div className="relative mx-auto my-6 aspect-square w-full max-w-[420px] select-none">
       <canvas
         ref={canvasRef}
         className="h-full w-full [filter:drop-shadow(0_24px_48px_rgba(60,55,45,0.14))]"
