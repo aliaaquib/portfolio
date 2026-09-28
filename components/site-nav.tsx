@@ -110,7 +110,7 @@ export function SiteNav() {
   return (
     <>
     <nav
-      className={`sticky top-0 z-40 transition-all duration-300 ${
+      className={`sticky top-0 z-40 mt-4 transition-all duration-300 ${
         scrolled
           ? "border-b border-strong/10 bg-bg/80 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"

@@ -1,3 +1,5 @@
+import { FooterGame } from "@/components/footer-game";
+
 const LINKS = [
   { href: "mailto:imaaquibali@gmail.com", label: "imaaquibali@gmail.com" },
   { href: "https://www.linkedin.com/in/aliaaquib", label: "LinkedIn" },
@@ -8,6 +10,9 @@ const LINKS = [
 export function SiteFooter() {
   return (
     <footer id="site-footer" className="border-t border-strong/10 py-10">
+      <div className="mx-auto mb-10 w-full max-w-3xl px-5 sm:px-6">
+        <FooterGame />
+      </div>
       <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-center text-[15px] text-strong">
         {LINKS.map((link, i) => (
           <span key={link.href} className="inline-flex items-center gap-2">
