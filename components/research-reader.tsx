@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import type { ResearchNote } from "@/lib/research";
 import { AcademyPipelineDiagram } from "@/components/academy-pipeline-diagram";
 import { ClarioBriefingDiagram } from "@/components/clario-briefing-diagram";
@@ -152,6 +153,12 @@ type TabId = (typeof TABS)[number]["id"];
 export function ResearchReader({ note }: { note: ResearchNote }) {
   const [tab, setTab] = useState<TabId>("pitch");
   const [zoom, setZoom] = useState(false);
+  const [zoomedIn, setZoomedIn] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!zoom) return;
@@ -164,6 +171,10 @@ export function ResearchReader({ note }: { note: ResearchNote }) {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
+  }, [zoom ]);
+
+  useEffect(() => {
+    if (!zoom) setZoomedIn(false);
   }, [zoom]);
 
   return (
@@ -187,7 +198,7 @@ export function ResearchReader({ note }: { note: ResearchNote }) {
           aria-hidden="true"
           className="pointer-events-none absolute -left-52 top-10 hidden w-48 -rotate-6 xl:block"
         >
-          <p className="font-signature text-[30px] leading-none text-muted">
+          <p className="font-hand text-[30px] leading-none text-muted">
             Click to zoom
           </p>
           <svg
@@ -253,29 +264,81 @@ export function ResearchReader({ note }: { note: ResearchNote }) {
         {tab === "pitch" ? <Pitch note={note} /> : <DecisionLog note={note} />}
       </div>
 
-      {zoom && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${note.title} diagram, zoomed`}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 sm:p-10"
-          onClick={() => setZoom(false)}
-        >
-          <button
-            type="button"
-            aria-label="Close zoom"
-            className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-xl text-white transition hover:bg-white/20"
-          >
-            ✕
-          </button>
+      {mounted &&
+        zoom &&
+        createPortal(
           <div
-            className="max-h-full w-full max-w-6xl overflow-auto rounded-2xl bg-white p-4 sm:p-8"
-            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${note.title} diagram, zoomed`}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/45 p-4 sm:p-8"
+            onClick={() => setZoom(false)}
           >
-            <Diagram slug={note.slug} />
-          </div>
-        </div>
-      )}
+            <div className="relative w-full max-w-4xl">
+              <div
+                className="max-h-[85vh] overflow-auto rounded-[24px] bg-white p-5 shadow-2xl sm:p-10"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div
+                  className={`mx-auto transition-all ${
+                    zoomedIn ? "w-[160%] max-w-none" : "w-full"
+                  }`}
+                >
+                  <Diagram slug={note.slug} />
+                </div>
+              </div>
+              <div className="absolute right-5 top-5 z-10 flex gap-3">
+                <button
+                  type="button"
+                  aria-label={zoomedIn ? "Zoom out" : "Zoom in further"}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setZoomedIn((v) => !v);
+                  }}
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white shadow-lg transition hover:bg-black/80"
+                >
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx={11} cy={11} r={7} />
+                    <path d="M21 21l-4.3-4.3" />
+                    <path d={zoomedIn ? "M8 11h6" : "M11 8v6M8 11h6"} />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  aria-label="Close zoom"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setZoom(false);
+                  }}
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white shadow-lg transition hover:bg-black/80"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2.2}
+                    strokeLinecap="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 6l12 12M18 6L6 18" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
     </>
   );
 }

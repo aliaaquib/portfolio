@@ -5,7 +5,7 @@ const GREEN = "#2F855A";
 const PURPLE = "#6B46C1";
 const ORANGE = "#DD6B20";
 const RED = "#E53E3E";
-const HAND = "'Ms Madi', 'Segoe Script', cursive";
+const HAND = "'Caveat', cursive";
 
 function Bullets({
   x,
