@@ -6,6 +6,9 @@ import { LinkedInCarousel } from "@/components/linkedin-carousel";
 import { WritingList } from "@/components/writing-list";
 import { FindMeGrid } from "@/components/find-me-grid";
 import { RightNow } from "@/components/right-now";
+import { WhiteboardNote } from "@/components/whiteboard-note";
+import { GlassesAnnotation } from "@/components/glasses-annotation";
+import { ExperienceSection } from "@/components/experience";
 import { getSortedPosts } from "@/lib/posts";
 import { Reveal } from "@/components/reveal";
 import { ContactButton } from "@/components/contact-modal";
@@ -28,65 +31,6 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
       <span aria-hidden="true" className="section-tick" />
       {children}
     </h2>
-  );
-}
-
-function GradCapIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="h-5 w-5" aria-hidden="true">
-      <path d="M12 4.2 2.6 8.8 12 13.4 21.4 8.8 12 4.2Z" strokeLinejoin="round" />
-      <path d="M6.8 12.4v3.2c0 1.4 2.3 2.6 5.2 2.6s5.2-1.2 5.2-2.6v-3.2" strokeLinecap="round" />
-      <path d="M21.4 10.6v3.8" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-type Role = { title: string; dates: string; dot: string };
-
-function EmployerBlock({
-  id,
-  icon,
-  name,
-  sub,
-  roles,
-  children,
-}: {
-  id: string;
-  icon: React.ReactNode;
-  name: string;
-  sub: string;
-  roles: Role[];
-  children: React.ReactNode;
-}) {
-  return (
-    <Reveal>
-      <div id={id} className="grid scroll-mt-24 gap-8 border-t border-strong/10 py-10 sm:grid-cols-[220px_1fr] sm:gap-6">
-        <div className="sm:sticky sm:top-20 sm:self-start">
-          <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-strong text-bg">
-              {icon}
-            </span>
-            <h3 className="text-[17px] font-semibold leading-snug text-strong">{name}</h3>
-          </div>
-          <p className="mt-3 text-sm text-muted">{sub}</p>
-          <ul className="mt-5 space-y-4">
-            {roles.map((role) => (
-              <li key={role.title} className="relative pl-5">
-                <span aria-hidden="true" className="absolute bottom-0 left-[4px] top-[6px] flex flex-col items-center">
-                  <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: role.dot }} />
-                  <span className="mt-1 w-px flex-1 opacity-50" style={{ backgroundColor: role.dot }} />
-                </span>
-                <p className="text-[15px] font-medium text-strong">{role.title}</p>
-                <p className="mt-0.5 text-sm text-muted">{role.dates}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="divide-y divide-strong/10 border-strong/10 sm:border-l sm:pl-8">
-          {children}
-        </div>
-      </div>
-    </Reveal>
   );
 }
 
@@ -124,17 +68,17 @@ function ProjectCard({
         href={href}
         target="_blank"
         rel="noreferrer"
-        className="group block overflow-hidden rounded-2xl border border-strong/10 bg-white shadow-[0_1px_4px_rgba(17,17,17,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(17,17,17,0.10)]"
+        className="group block overflow-hidden rounded-2xl border border-strong/10 bg-surface shadow-[0_1px_4px_rgba(17,17,17,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(17,17,17,0.10)]"
       >
         {/* visual */}
-        <div className="relative aspect-[16/10] overflow-hidden border-b border-strong/10 bg-[#f4f1ea]">
+        <div className="relative aspect-[16/10] overflow-hidden border-b border-strong/10 bg-[#f4f1ea] dark:bg-[#2b241e]">
           <img
             src={image}
             alt={imageAlt}
             loading="lazy"
             className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
           />
-          <span className="absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-strong/10 bg-white/90 px-2.5 py-1 text-xs font-medium text-green-800 backdrop-blur-sm">
+          <span className="absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-strong/10 bg-surface/90 px-2.5 py-1 text-xs font-medium text-green-800 backdrop-blur-sm dark:text-green-400">
             <i className="block h-1.5 w-1.5 rounded-full bg-green-700" />
             Live
           </span>
@@ -166,7 +110,8 @@ export default async function Home() {
 
       <div className="mx-auto w-full max-w-2xl px-5 sm:px-6">
         {/* ── hero ─────────────────────────────────────────── */}
-        <header className="animate-fade-in pb-16 pt-10 sm:pt-14">
+        <header className="animate-fade-in pb-16 pt-10 sm:pt-14 lg:pt-5">
+          <GlassesAnnotation />
           <div className="flex items-center gap-5 sm:gap-8">
             <img
               src="/portrait.jpg"
@@ -181,6 +126,9 @@ export default async function Home() {
               builder the rest of the time.
             </h1>
           </div>
+          <WhiteboardNote className="mt-4 text-[26px] text-[#c82828]">
+            ↓ teacher mode: on — ask me anything
+          </WhiteboardNote>
           <div className="mt-6 max-w-xl space-y-4 text-[15px] leading-8 text-text/90 sm:text-base">
             <p>
               I&apos;m Aaquib Ali, a computer science teacher and builder in Bishkek,
@@ -241,7 +189,15 @@ export default async function Home() {
         {/* ── work ───────────────────────────────────────────── */}
         <section id="work" className="scroll-mt-20 pb-20">
           <Reveal>
-            <SectionHeading>Work</SectionHeading>
+            <p className="font-mono text-[12px] uppercase tracking-[0.22em] text-muted">
+              selected work
+            </p>
+            <div className="mt-3">
+              <SectionHeading>Proof of shipped things</SectionHeading>
+            </div>
+            <WhiteboardNote className="mt-2 text-[24px] text-[#2f6fd0]">
+              homework: click a project
+            </WhiteboardNote>
           </Reveal>
           <ProjectPreviewZone>
             <div className="mt-8 grid gap-6 sm:grid-cols-2">
@@ -269,40 +225,25 @@ export default async function Home() {
           </ProjectPreviewZone>
         </section>
 
-        {/* ── career ───────────────────────────────────────── */}
+        {/* ── career / experience ──────────────────────────────── */}
         <section id="career" className="scroll-mt-20 pb-20">
           <Reveal>
-            <SectionHeading>Career</SectionHeading>
+            <ExperienceSection />
+            <WhiteboardNote className="mt-2 text-[24px] text-[#2e7d46]">
+              this is the day job
+            </WhiteboardNote>
           </Reveal>
-
-          <div className="mt-6">
-            <EmployerBlock
-              id="career-sapat"
-              icon={<GradCapIcon />}
-              name={'"SAPAT" International Educational Institution — Kurmanbek Baatyr Branch'}
-              sub="Manas, Kyrgyzstan"
-              roles={[{ title: "Computer Science Teacher", dates: "2023 – Present", dot: "#2e7d46" }]}
-            >
-              <Reveal as="article" className="py-7 first:pt-0 last:pb-0 sm:first:pt-1">
-                <ul className="max-w-xl list-disc space-y-3 pl-5 text-[15px] leading-7 text-text/90 marker:text-muted">
-                  <li>Deliver engaging Cambridge IGCSE Computer Science and ICT lessons using inquiry-based, project-based, and student-centred learning strategies to develop computational thinking, problem-solving, and digital literacy.</li>
-                  <li>Plan and deliver schemes of work, lesson plans, assessments, and learning resources aligned with Cambridge International curriculum standards and learning objectives.</li>
-                  <li>Integrate Python programming, web development, artificial intelligence tools, and educational technology into classroom instruction to prepare students with future-ready digital skills.</li>
-                  <li>Differentiate instruction to meet diverse learning needs by implementing targeted teaching strategies, scaffolding, and individualized support that enable every learner to achieve their potential.</li>
-                  <li>Monitor student progress using Assessment for Learning (AfL), formative and summative assessments, providing timely feedback and intervention to improve academic performance.</li>
-                  <li>Foster an inclusive, positive, and well-managed classroom environment that promotes safeguarding, student wellbeing, collaboration, creativity, and responsible digital citizenship.</li>
-                  <li>Organize coding activities, STEM projects, and technology-based learning experiences that encourage innovation, teamwork, and real-world problem-solving.</li>
-                  <li>Collaborate with teachers, school leadership, and parents to support curriculum development, student achievement, and whole-school technology initiatives while contributing to continuous school improvement.</li>
-                </ul>
-              </Reveal>
-            </EmployerBlock>
-          </div>
         </section>
 
         {/* ── on linkedin ──────────────────────────────────── */}
         <section className="pb-24">
           <Reveal>
-            <SectionHeading>On LinkedIn</SectionHeading>
+            <p className="font-mono text-[12px] uppercase tracking-[0.22em] text-muted">
+              on the timeline
+            </p>
+            <div className="mt-3">
+              <SectionHeading>On LinkedIn</SectionHeading>
+            </div>
             <div className="mt-4 flex items-baseline justify-between gap-4">
               <p className="text-[15px] text-text/80">Latest original posts</p>
               <a
@@ -314,6 +255,9 @@ export default async function Home() {
                 View LinkedIn ↗
               </a>
             </div>
+            <WhiteboardNote className="mt-2 text-[24px] text-[#c14e22]">
+              field notes from the classroom
+            </WhiteboardNote>
           </Reveal>
           <Reveal delay={120} className="mt-5">
             <LinkedInCarousel />
@@ -336,6 +280,9 @@ export default async function Home() {
                 View all ↗
               </a>
             </div>
+            <WhiteboardNote className="mt-2 text-[24px] text-[#2f6fd0]">
+              required reading* (*not really)
+            </WhiteboardNote>
           </Reveal>
           <Reveal delay={120} className="mt-5">
             <WritingList posts={articles} />
@@ -349,6 +296,9 @@ export default async function Home() {
             <p className="mt-4 text-[15px] text-text/80">
               teaching, building, or writing — usually all three.
             </p>
+            <WhiteboardNote className="mt-2 text-[24px] text-[#c82828]">
+              see? told you
+            </WhiteboardNote>
           </Reveal>
           <FindMeGrid />
         </section>

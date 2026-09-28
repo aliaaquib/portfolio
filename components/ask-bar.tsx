@@ -36,7 +36,7 @@ export function AskBar() {
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-24 opacity-0"
       }`}
     >
-      <span className="group flex items-center gap-2.5 rounded-full border border-strong/15 bg-white py-3 pl-4 pr-4 text-left shadow-[0_8px_28px_rgba(17,17,17,0.14)] transition hover:border-strong/30">
+      <span className="group flex items-center gap-2.5 rounded-full border border-strong/15 bg-surface py-3 pl-4 pr-4 text-left shadow-[0_8px_28px_rgba(17,17,17,0.14)] transition hover:border-strong/30">
         <svg
           width="17"
           height="17"

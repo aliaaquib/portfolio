@@ -200,7 +200,7 @@ function AskAIPanel({ onClose }: { onClose: () => void }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-white"
+      className="fixed inset-0 z-50 bg-surface"
       role="dialog"
       aria-modal="true"
       aria-label="Ask Aaquib anything"
@@ -265,7 +265,7 @@ function AskAIPanel({ onClose }: { onClose: () => void }) {
                           key={pill}
                           type="button"
                           onClick={() => send(pill)}
-                          className="rounded-full border border-strong/20 bg-white px-3.5 py-1.5 text-[13px] font-medium text-strong transition hover:border-[#e0632f] hover:text-[#c14e22]"
+                          className="rounded-full border border-strong/20 bg-surface px-3.5 py-1.5 text-[13px] font-medium text-strong transition hover:border-[#e0632f] hover:text-[#c14e22]"
                         >
                           {pill}
                         </button>
@@ -295,7 +295,7 @@ function AskAIPanel({ onClose }: { onClose: () => void }) {
             <label htmlFor="ask-ai-input" className="sr-only">
               What would you like to know?
             </label>
-            <div className="flex items-center gap-2 rounded-full border border-strong/15 bg-white py-2 pl-6 pr-2 transition focus-within:border-strong/40">
+            <div className="flex items-center gap-2 rounded-full border border-strong/15 bg-surface py-2 pl-6 pr-2 transition focus-within:border-strong/40">
               <textarea
                 ref={inputRef}
                 id="ask-ai-input"

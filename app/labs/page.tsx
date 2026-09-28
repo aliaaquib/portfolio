@@ -15,7 +15,7 @@ function StatusPill({ status }: { status: "Live" | "WIP" | "Sunset" }) {
     status === "Live"
       ? "border-green-700/50 text-green-800"
       : status === "WIP"
-        ? "border-[#b89b5e]/60 bg-[#f5eeda] text-[#7a5f22]"
+        ? "border-[#b89b5e]/60 bg-[#f5eeda] text-[#7a5f22] dark:bg-[#38300f] dark:text-[#d9b96a]"
         : "border-strong/20 bg-strong/[0.06] text-muted";
   return (
     <span className={`inline-flex -translate-y-0.5 items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${styles}`}>

@@ -84,6 +84,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en" data-scroll-behavior="smooth">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{if(localStorage.getItem('aaquib-theme')==='dark'){document.documentElement.classList.add('dark');}}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body>
         <script
           type="application/ld+json"

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-bg">
       <SiteNav />
       <main className="mx-auto w-full max-w-5xl px-5 pb-24 sm:px-8">
         {/* Hero — portrait, greeting, bio, accordion */}

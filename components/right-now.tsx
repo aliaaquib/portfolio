@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/reveal";
 import { TwoDotsGlobe, type GlobePin } from "@/components/two-dots-globe";
+import { WhiteboardNote } from "@/components/whiteboard-note";
 
 const BISHKEK = { lat: 42.8746, lon: 74.5698 };
 
@@ -96,10 +97,16 @@ export function RightNow() {
   return (
     <section className="pb-24">
       <Reveal>
-        <h2 className="font-display text-4xl tracking-tight text-strong sm:text-[44px]">
+        <p className="font-mono text-[12px] uppercase tracking-[0.22em] text-muted">
+          right now
+        </p>
+        <h2 className="mt-3 font-display text-4xl tracking-tight text-strong sm:text-[44px]">
           <span aria-hidden="true" className="section-tick" />
           Two dots on a globe
         </h2>
+        <WhiteboardNote className="mt-1 text-[24px] text-[#2e7d46]">
+          two dots, one teacher
+        </WhiteboardNote>
       </Reveal>
       <div className="mt-8 grid items-center gap-12 md:grid-cols-2 md:gap-12">
         <Reveal>
@@ -134,7 +141,7 @@ export function RightNow() {
             </p>
           </div>
           <div className="mt-12 flex items-center gap-2">
-            <span className="font-signature text-[32px] leading-none text-[#a3611c]">
+            <span className="font-signature text-[32px] leading-none text-[#a3611c] dark:text-[#d09a52]">
               give it a spin
             </span>
             <svg
@@ -147,19 +154,19 @@ export function RightNow() {
             >
               <path
                 d="M28 4 C 32 36, 96 48, 126 80"
-                stroke="#a3611c"
+                className="stroke-[#a3611c] dark:stroke-[#d09a52]"
                 strokeWidth="4.5"
                 strokeLinecap="round"
               />
               <path
                 d="M126 80 C 114 78, 104 76, 95 72"
-                stroke="#a3611c"
+                className="stroke-[#a3611c] dark:stroke-[#d09a52]"
                 strokeWidth="4.5"
                 strokeLinecap="round"
               />
               <path
                 d="M126 80 C 124 72, 122 64, 119 56"
-                stroke="#a3611c"
+                className="stroke-[#a3611c] dark:stroke-[#d09a52]"
                 strokeWidth="4.5"
                 strokeLinecap="round"
               />

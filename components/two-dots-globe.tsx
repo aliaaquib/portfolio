@@ -6,8 +6,43 @@ import { LAND_W, LAND_H, LAND_GRID } from "@/lib/globe-land";
 export type GlobePin = { lat: number; lon: number };
 
 const BISHKEK: GlobePin = { lat: 42.8746, lon: 74.5698 };
-const BISHKEK_THEME = { body: "#211d18", accent: "#b45414" };
-const VISITOR_THEME = { body: "#8f1d1d", accent: "#c2502e" };
+
+type GlobePinTheme = { body: string; accent: string };
+type GlobePalette = {
+  sphere: [string, string, string];
+  dots: string; // "r, g, b" triplet
+  rim: string; // "r, g, b" triplet
+  labelBg: string;
+  labelBorder: string;
+  labelText: string;
+  pinHole: string;
+  bishkek: GlobePinTheme;
+  visitor: GlobePinTheme;
+};
+
+const LIGHT_PALETTE: GlobePalette = {
+  sphere: ["#ffffff", "#f6f4ee", "#e2ddd0"],
+  dots: "32, 29, 25",
+  rim: "70, 63, 50",
+  labelBg: "rgba(255,255,255,0.94)",
+  labelBorder: "rgba(60,55,45,0.14)",
+  labelText: "#2b2721",
+  pinHole: "#f5f2ec",
+  bishkek: { body: "#211d18", accent: "#b45414" },
+  visitor: { body: "#8f1d1d", accent: "#c2502e" },
+};
+
+const DARK_PALETTE: GlobePalette = {
+  sphere: ["#3a322a", "#2b241e", "#1d1814"],
+  dots: "222, 212, 196",
+  rim: "0, 0, 0",
+  labelBg: "rgba(42,35,28,0.94)",
+  labelBorder: "rgba(244,239,230,0.16)",
+  labelText: "#f4efe6",
+  pinHole: "#1d1814",
+  bishkek: { body: "#f4efe6", accent: "#e08a4e" },
+  visitor: { body: "#e0705c", accent: "#e8935a" },
+};
 
 const hexA = (hex: string, alpha: number) => {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -153,7 +188,8 @@ export function TwoDotsGlobe({
       x: number,
       y: number,
       s: number,
-      accent: string
+      accent: string,
+      pal: GlobePalette
     ) => {
       const fs = Math.max(10, 12 * s);
       ctx.font = `600 ${fs}px "DM Sans", system-ui, sans-serif`;
@@ -167,16 +203,16 @@ export function TwoDotsGlobe({
       const by = y - lh;
       ctx.beginPath();
       ctx.roundRect(bx, by, contentW + padX * 2, lh, lh / 2);
-      ctx.fillStyle = "rgba(255,255,255,0.94)";
+      ctx.fillStyle = pal.labelBg;
       ctx.fill();
-      ctx.strokeStyle = "rgba(60,55,45,0.14)";
+      ctx.strokeStyle = pal.labelBorder;
       ctx.lineWidth = 1;
       ctx.stroke();
       ctx.beginPath();
       ctx.arc(bx + padX + dotR, by + lh / 2, dotR, 0, Math.PI * 2);
       ctx.fillStyle = accent;
       ctx.fill();
-      ctx.fillStyle = "#2b2721";
+      ctx.fillStyle = pal.labelText;
       ctx.textAlign = "left";
       ctx.textBaseline = "middle";
       ctx.fillText(text, bx + padX + dotR * 2 + gap, by + lh / 2 + 1);
@@ -187,7 +223,8 @@ export function TwoDotsGlobe({
       t: number,
       label: string | null,
       phase: number,
-      theme: { body: string; accent: string }
+      pinTheme: GlobePinTheme,
+      pal: GlobePalette
     ) => {
       project(pin[0], pin[1], pin[2], p);
       // smooth fade near the limb: invisible at the edge, solid once in frame
@@ -205,7 +242,7 @@ export function TwoDotsGlobe({
         const pulse = (((t / 1900 + phase * 0.13 + k * 0.5) % 1) + 1) % 1;
         ctx.beginPath();
         ctx.arc(p.sx, p.sy, (4 + pulse * 15) * s, 0, Math.PI * 2);
-        ctx.strokeStyle = hexA(theme.accent, 0.45 * (1 - pulse));
+        ctx.strokeStyle = hexA(pinTheme.accent, 0.45 * (1 - pulse));
         ctx.lineWidth = 1.5;
         ctx.stroke();
       }
@@ -213,7 +250,7 @@ export function TwoDotsGlobe({
       // anchor dot
       ctx.beginPath();
       ctx.arc(p.sx, p.sy, 3.2 * s, 0, Math.PI * 2);
-      ctx.fillStyle = theme.accent;
+      ctx.fillStyle = pinTheme.accent;
       ctx.fill();
 
       // teardrop pin, gently bobbing above the anchor
@@ -229,17 +266,17 @@ export function TwoDotsGlobe({
       ctx.bezierCurveTo(p.sx - pw, topY + ph * 0.45, p.sx - pw * 0.72, topY, p.sx, topY);
       ctx.bezierCurveTo(p.sx + pw * 0.72, topY, p.sx + pw, topY + ph * 0.45, p.sx, p.sy);
       ctx.closePath();
-      ctx.fillStyle = theme.body;
+      ctx.fillStyle = pinTheme.body;
       ctx.fill();
       ctx.restore();
       // pin hole
       ctx.beginPath();
       ctx.arc(p.sx, topY + pw * 0.52, 3.4 * s, 0, Math.PI * 2);
-      ctx.fillStyle = "#f5f2ec";
+      ctx.fillStyle = pal.pinHole;
       ctx.fill();
 
       // label fades in and drifts up as the pin comes into frame
-      if (label) drawLabel(label, p.sx, topY - 8 * s + (1 - a) * 10 * s, s, theme.accent);
+      if (label) drawLabel(label, p.sx, topY - 8 * s + (1 - a) * 10 * s, s, pinTheme.accent, pal);
 
       ctx.restore();
     };
@@ -257,6 +294,9 @@ export function TwoDotsGlobe({
 
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
+      const pal = document.documentElement.classList.contains("dark")
+        ? DARK_PALETTE
+        : LIGHT_PALETTE;
       const R = Math.min(w, h) / 2;
       const dotR = Math.max(1, R / 300);
 
@@ -269,9 +309,9 @@ export function TwoDotsGlobe({
         h / 2,
         R
       );
-      g.addColorStop(0, "#ffffff");
-      g.addColorStop(0.68, "#f6f4ee");
-      g.addColorStop(1, "#e2ddd0");
+      g.addColorStop(0, pal.sphere[0]);
+      g.addColorStop(0.68, pal.sphere[1]);
+      g.addColorStop(1, pal.sphere[2]);
       ctx.beginPath();
       ctx.arc(w / 2, h / 2, R * 0.995, 0, Math.PI * 2);
       ctx.fillStyle = g;
@@ -287,7 +327,7 @@ export function TwoDotsGlobe({
         const r = dotR * (0.55 + 0.6 * zn);
         ctx.beginPath();
         ctx.arc(p.sx, p.sy, r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(32, 29, 25, ${alpha.toFixed(3)})`;
+        ctx.fillStyle = `rgba(${pal.dots}, ${alpha.toFixed(3)})`;
         ctx.fill();
       }
 
@@ -300,17 +340,17 @@ export function TwoDotsGlobe({
         h / 2,
         R * 0.995
       );
-      rim.addColorStop(0, "rgba(70,63,50,0)");
-      rim.addColorStop(1, "rgba(70,63,50,0.18)");
+      rim.addColorStop(0, `rgba(${pal.rim},0)`);
+      rim.addColorStop(1, `rgba(${pal.rim},0.18)`);
       ctx.beginPath();
       ctx.arc(w / 2, h / 2, R * 0.995, 0, Math.PI * 2);
       ctx.fillStyle = rim;
       ctx.fill();
 
       // pins
-      drawPin(bishkek, t, "bishkek", 0, BISHKEK_THEME);
+      drawPin(bishkek, t, "bishkek", 0, pal.bishkek, pal);
       const v = visitorRef.current;
-      if (v) drawPin(pinVec(v), t, visitorCityRef.current, 2.4, VISITOR_THEME);
+      if (v) drawPin(pinVec(v), t, visitorCityRef.current, 2.4, pal.visitor, pal);
 
       raf = requestAnimationFrame(frame);
     };

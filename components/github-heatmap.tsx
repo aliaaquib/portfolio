@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import data from "@/lib/contributions.json";
 
-const COLORS = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
+const LIGHT_COLORS = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
+const DARK_COLORS = ["#242a26", "#0e4429", "#006d32", "#26a641", "#39d353"];
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -31,6 +32,18 @@ function ordinal(d: number) {
 export function GitHubHeatmap() {
   const weeks = data.weeks as Day[][];
   const [selected, setSelected] = useState<Day | null>(null);
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    const el = document.documentElement;
+    const sync = () => setDark(el.classList.contains("dark"));
+    sync();
+    const mo = new MutationObserver(sync);
+    mo.observe(el, { attributes: true, attributeFilter: ["class"] });
+    return () => mo.disconnect();
+  }, []);
+
+  const COLORS = dark ? DARK_COLORS : LIGHT_COLORS;
 
   // Month label appears above the first week column where a new month starts.
   const labels: { index: number; label: string }[] = [];

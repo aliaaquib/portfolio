@@ -13,18 +13,18 @@ type PillProps = {
 
 const TONES: Record<PillTone, string> = {
   dark: "border-strong/60 text-strong",
-  coral: "border-[#e0632f]/70 text-[#c14e22]",
-  blue: "border-[#2f6fd0]/60 text-[#2f6fd0]",
-  green: "border-[#2e7d46]/60 text-[#2e7d46]",
+  coral: "border-[#e0632f]/70 text-[#c14e22] dark:border-[#e8935a]/60 dark:text-[#e8935a]",
+  blue: "border-[#2f6fd0]/60 text-[#2f6fd0] dark:border-[#7aa5e8]/60 dark:text-[#7aa5e8]",
+  green: "border-[#2e7d46]/60 text-[#2e7d46] dark:border-[#7bc98a]/60 dark:text-[#7bc98a]",
 };
 
 export function Pill({ children, href, title, tone = "dark", tooltip, dotted = false }: PillProps) {
   const className = dotted
     ? "group/pill relative inline align-baseline underline decoration-dotted decoration-strong/40 underline-offset-4 transition hover:decoration-strong/80"
-    : `group/pill relative mx-0.5 inline-flex -translate-y-px items-center rounded-full border bg-white px-2.5 py-px align-baseline text-[0.8em] font-medium transition hover:shadow-[0_1px_6px_rgba(17,17,17,0.12)] ${TONES[tone]}`;
+    : `group/pill relative mx-0.5 inline-flex -translate-y-px items-center rounded-full border bg-surface px-2.5 py-px align-baseline text-[0.8em] font-medium transition hover:shadow-[0_1px_6px_rgba(17,17,17,0.12)] ${TONES[tone]}`;
 
   const tip = tooltip ? (
-    <span className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-2.5 w-60 -translate-x-1/2 rounded-xl border border-strong/10 bg-white px-4 py-3 text-left font-sans text-[13px] font-normal normal-case leading-6 text-text opacity-0 shadow-[0_12px_32px_rgba(17,17,17,0.16)] transition-all duration-200 group-hover/pill:-translate-y-0.5 group-hover/pill:opacity-100">
+    <span className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-2.5 w-60 -translate-x-1/2 rounded-xl border border-strong/10 bg-surface px-4 py-3 text-left font-sans text-[13px] font-normal normal-case leading-6 text-text opacity-0 shadow-[0_12px_32px_rgba(17,17,17,0.16)] transition-all duration-200 group-hover/pill:-translate-y-0.5 group-hover/pill:opacity-100">
       {tooltip}
     </span>
   ) : null;

@@ -93,7 +93,7 @@ function ContactModal({ onClose }: { onClose: () => void }) {
         onClick={onClose}
         className="absolute inset-0 cursor-default bg-strong/30 backdrop-blur-[2px]"
       />
-      <div className="relative grid w-full max-w-2xl animate-contact-pop overflow-hidden rounded-3xl bg-white shadow-[0_30px_80px_rgba(63,58,52,0.3)] sm:grid-cols-[220px_1fr]">
+      <div className="relative grid w-full max-w-2xl animate-contact-pop overflow-hidden rounded-3xl bg-surface shadow-[0_30px_80px_rgba(63,58,52,0.3)] sm:grid-cols-[220px_1fr]">
         <div className="relative hidden min-h-full sm:block">
           <img
             src="/portrait.jpg"

@@ -76,7 +76,7 @@ export function FindMeGrid() {
                   src={card.src}
                   alt={card.alt}
                   loading="lazy"
-                  className={`${card.aspect} w-full bg-[#f6f4ef] object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]`}
+                  className={`${card.aspect} w-full bg-[#f6f4ef] dark:bg-[#2b241e] object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]`}
                 />
               </div>
             ))}

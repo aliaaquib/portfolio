@@ -54,15 +54,15 @@ export function ProjectPreviewZone({ children }: { children: React.ReactNode }) 
             top: flipY ? pos.y - 300 : pos.y + 24,
           }}
         >
-          <div className="overflow-hidden rounded-xl border border-strong/15 bg-white shadow-[0_24px_60px_rgba(17,17,17,0.25)]">
+          <div className="overflow-hidden rounded-xl border border-strong/15 bg-surface shadow-[0_24px_60px_rgba(17,17,17,0.25)]">
             {/* browser chrome */}
-            <div className="flex items-center gap-2 border-b border-strong/10 bg-[#f4f1ea] px-3 py-2">
+            <div className="flex items-center gap-2 border-b border-strong/10 bg-[#f4f1ea] dark:bg-[#2b241e] px-3 py-2">
               <span className="flex gap-1.5">
                 <i className="block h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
                 <i className="block h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
                 <i className="block h-2.5 w-2.5 rounded-full bg-[#28c840]" />
               </span>
-              <span className="truncate rounded-full bg-white px-3 py-1 text-[11px] text-muted">
+              <span className="truncate rounded-full bg-surface px-3 py-1 text-[11px] text-muted">
                 {preview.url.replace(/^https?:\/\//, "")}
               </span>
             </div>

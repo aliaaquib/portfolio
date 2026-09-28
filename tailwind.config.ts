@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,12 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#ffffff",
-        text: "#3f3a34",
-        strong: "#111111",
-        accent: "#111111",
-        muted: "#6f675f",
-        brandred: "#8f1d1d",
+        bg: "rgb(var(--c-bg) / <alpha-value>)",
+        text: "rgb(var(--c-text) / <alpha-value>)",
+        strong: "rgb(var(--c-strong) / <alpha-value>)",
+        accent: "rgb(var(--c-accent) / <alpha-value>)",
+        muted: "rgb(var(--c-muted) / <alpha-value>)",
+        brandred: "rgb(var(--c-brandred) / <alpha-value>)",
+        surface: "rgb(var(--c-surface) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["\"DM Sans\"", "system-ui", "-apple-system", "\"Segoe UI\"", "sans-serif"],

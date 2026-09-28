@@ -21,7 +21,7 @@ const POSTS: Post[] = [
 
 function PostCard({ post }: { post: Post }) {
   return (
-    <article className="flex w-[86%] shrink-0 snap-start flex-col rounded-xl border border-strong/10 bg-white p-4 sm:w-[330px]">
+    <article className="flex w-[86%] shrink-0 snap-start flex-col rounded-xl border border-strong/10 bg-surface p-4 sm:w-[330px]">
       <header className="flex items-start gap-2.5">
         <img
           src="/portrait.jpg"
@@ -74,7 +74,7 @@ export function LinkedInCarousel() {
 
   return (
     <div>
-      <div className="rounded-2xl bg-[#efefec] p-4 sm:p-5">
+      <div className="rounded-2xl bg-[#efefec] dark:bg-[#2b241e] p-4 sm:p-5">
         <div
           ref={trackRef}
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1"
