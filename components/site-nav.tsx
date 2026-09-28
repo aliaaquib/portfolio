@@ -122,14 +122,20 @@ export function SiteNav() {
           className="shrink-0 transition-colors hover:text-strong"
           aria-label="Aaquib Ali — home"
         >
-          <BishkekClock />
-        </Link>
-        <div className="flex min-w-0 items-center gap-3 text-sm text-strong sm:gap-4 sm:text-[15px]">
-          <span className="inline-flex items-center gap-1.5 text-sm text-muted">
+          <span className="hidden sm:inline-flex">
+            <BishkekClock />
+          </span>
+          <span className="inline-flex items-center gap-1.5 text-xs text-muted sm:hidden">
             <GlobeIcon className="h-4 w-4" />
             Bishkek, Kyrgyzstan
           </span>
-          <span aria-hidden="true" className="h-5 w-px shrink-0 bg-strong/15" />
+        </Link>
+        <div className="flex min-w-0 items-center gap-3 text-sm text-strong sm:gap-4 sm:text-[15px]">
+          <span className="hidden items-center gap-1.5 text-sm text-muted sm:inline-flex">
+            <GlobeIcon className="h-4 w-4" />
+            Bishkek, Kyrgyzstan
+          </span>
+          <span aria-hidden="true" className="hidden h-5 w-px shrink-0 bg-strong/15 sm:block" />
           <ThemeToggle />
           <button
             type="button"

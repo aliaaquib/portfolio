@@ -12,6 +12,8 @@ type Project = {
   image: string;
   imageAlt: string;
   tags: string[];
+  /** Gradient backdrop for the framed preview — each card gets its own hue. */
+  frame: string;
 };
 
 // The single source of truth for "our work": Thread Academy + Clario.
@@ -25,6 +27,8 @@ const PROJECTS: Project[] = [
     image: "/images/work/thread-academy.png",
     imageAlt: "Thread Academy homepage",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "MDX"],
+    frame:
+      "from-[#d3e2f4] via-[#bccfe9] to-[#e2ebf7] dark:from-[#1a2540] dark:via-[#121b31] dark:to-[#0d1425]",
   },
   {
     id: "work-clario",
@@ -35,6 +39,8 @@ const PROJECTS: Project[] = [
     image: "/images/work/clario-homepage.png",
     imageAlt: "Clario homepage",
     tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    frame:
+      "from-[#f7e6c9] via-[#f0d3a4] to-[#fbefdc] dark:from-[#3a2a16] dark:via-[#2b1f10] dark:to-[#21180c]",
   },
 ];
 
@@ -52,6 +58,8 @@ type Lab = {
   description: string;
   tags: string[];
   visual: React.ReactNode;
+  /** Gradient backdrop for the framed visual — each card gets its own hue. */
+  frame: string;
   actionLabel: string;
   href?: string;
   onSelect?: () => void;
@@ -65,6 +73,8 @@ const LABS: Lab[] = [
       "A resident expert on everything I do. Every page carries a small assistant that answers from this site's context — no account, no chat history, just answers.",
     tags: ["Next.js", "React"],
     visual: <SparkleIcon className="h-16 w-16 text-strong" />,
+    frame:
+      "from-[#ded7f8] via-[#c6b9f1] to-[#eae6fb] dark:from-[#2b2148] dark:via-[#1f1838] dark:to-[#181229]",
     actionLabel: "Try it",
     onSelect: () => window.dispatchEvent(new CustomEvent("open-ask-ai")),
   },
@@ -82,13 +92,15 @@ const LABS: Lab[] = [
         label="Mini Aaquib, following your cursor"
       />
     ),
+    frame:
+      "from-[#cfeeda] via-[#b1e2c5] to-[#e3f6ea] dark:from-[#14362a] dark:via-[#0f2921] dark:to-[#0b2019]",
     actionLabel: "See it",
     href: "/labs",
   },
 ];
 
-const FRAME =
-  "rounded-2xl border border-strong/10 bg-gradient-to-br from-[#d3e2f4] via-[#bccfe9] to-[#e2ebf7] shadow-[0_2px_18px_rgba(17,17,17,0.08)] dark:from-[#1a2540] dark:via-[#121b31] dark:to-[#0d1425]";
+const FRAME_BASE =
+  "rounded-2xl border border-strong/10 bg-gradient-to-br shadow-[0_2px_18px_rgba(17,17,17,0.08)]";
 
 function TagPill({ label }: { label: string }) {
   return (
@@ -120,7 +132,7 @@ function ProjectCard({ project, eager }: { project: Project; eager?: boolean }) 
         rel="noreferrer"
         className="group block"
       >
-        <div className={`${FRAME} p-6 sm:p-10`}>
+        <div className={`${FRAME_BASE} ${project.frame} p-6 sm:p-10`}>
           <img
             src={project.image}
             alt={project.imageAlt}
@@ -154,7 +166,7 @@ function LabCard({ lab }: { lab: Lab }) {
     "inline-flex shrink-0 items-center gap-1 text-[15px] font-medium text-strong transition hover:text-brandred";
   return (
     <Reveal as="article" id={lab.id} className="scroll-mt-24">
-      <div className={`${FRAME} p-6 sm:p-10`}>
+      <div className={`${FRAME_BASE} ${lab.frame} p-6 sm:p-10`}>
         <div className="flex aspect-[16/10] items-center justify-center">
           {lab.visual}
         </div>

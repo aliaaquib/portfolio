@@ -21,11 +21,11 @@ function LayersIcon({ className }: { className?: string }) {
   );
 }
 
-function FlaskIcon({ className }: { className?: string }) {
+function PenIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <path d="M9.5 3h5" />
-      <path d="M10.5 3v5.2L5.7 17a2.6 2.6 0 0 0 2.3 3.9h8a2.6 2.6 0 0 0 2.3-3.9L13.5 8.2V3" />
+      <path d="M12 20h9" />
+      <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
     </svg>
   );
 }
@@ -63,8 +63,10 @@ export function MobileTabBar() {
 
   // Active tab follows the route: home stays home, work is its own page.
   const active =
-    pathname === "/labs" || pathname.startsWith("/labs/")
-      ? "labs"
+    pathname === "/writing" ||
+    pathname.startsWith("/writing/") ||
+    pathname.startsWith("/research/")
+      ? "writing"
       : pathname === "/about" || pathname.startsWith("/about/")
         ? "about"
         : pathname === "/work" || pathname.startsWith("/work/")
@@ -94,7 +96,7 @@ export function MobileTabBar() {
   const tabs = [
     { id: "home", label: "Home", Icon: HomeIcon, onClick: onHome },
     { id: "work", label: "Work", Icon: LayersIcon, onClick: () => go("/work") },
-    { id: "labs", label: "Labs", Icon: FlaskIcon, onClick: () => go("/labs") },
+    { id: "writing", label: "Writing", Icon: PenIcon, onClick: () => go("/writing") },
     { id: "about", label: "About", Icon: UserIcon, onClick: () => go("/about") },
     {
       id: "contact",
