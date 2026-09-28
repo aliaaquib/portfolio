@@ -5,7 +5,7 @@ import { Reveal } from "@/components/reveal";
 import { TwoDotsGlobe, type GlobePin } from "@/components/two-dots-globe";
 import { WhiteboardNote } from "@/components/whiteboard-note";
 
-const BISHKEK = { lat: 42.8746, lon: 74.5698 };
+const MANAS = { lat: 40.945, lon: 72.9931 };
 
 type Visitor = { city: string; pin: GlobePin; temp: number | null };
 
@@ -77,12 +77,12 @@ function LoadingDots() {
 export function RightNow() {
   const [visitor, setVisitor] = useState<Visitor | null>(null);
   const [visitorDone, setVisitorDone] = useState(false);
-  const [bishkekTemp, setBishkekTemp] = useState<number | null>(null);
+  const [manasTemp, setManasTemp] = useState<number | null>(null);
 
   useEffect(() => {
     let alive = true;
-    fetchTemp(BISHKEK.lat, BISHKEK.lon).then((t) => {
-      if (alive) setBishkekTemp(t);
+    fetchTemp(MANAS.lat, MANAS.lon).then((t) => {
+      if (alive) setManasTemp(t);
     });
     locateVisitor().then((v) => {
       if (!alive) return;
@@ -131,9 +131,9 @@ export function RightNow() {
               ) : null}
             </p>
             <p>
-              I am in <Strong>bishkek</Strong>, where it is{" "}
-              {bishkekTemp != null ? (
-                <Strong>{bishkekTemp}°C</Strong>
+              I am in <Strong>manas</Strong>, where it is{" "}
+              {manasTemp != null ? (
+                <Strong>{manasTemp}°C</Strong>
               ) : (
                 <LoadingDots />
               )}

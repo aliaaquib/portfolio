@@ -9,7 +9,7 @@ import { BentoAbout } from "@/components/bento-about";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Aaquib Ali — computer science teacher and builder in Bishkek, Kyrgyzstan. Teaching, building, and writing.",
+    "Aaquib Ali — computer science teacher and builder in Manas, Kyrgyzstan. Teaching, building, and writing.",
   alternates: { canonical: "/about" },
 };
 

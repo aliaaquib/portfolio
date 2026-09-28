@@ -64,7 +64,7 @@ export default async function Home() {
           </WhiteboardNote>
           <div className="mt-6 max-w-xl space-y-4 text-[15px] leading-8 text-text/90 sm:text-base">
             <p>
-              I&apos;m Aaquib Ali, a computer science teacher and builder in Bishkek,
+              I&apos;m Aaquib Ali, a computer science teacher and builder in Manas,
               Kyrgyzstan. I spend my days turning{" "}
               <Pill dotted tooltip="My go-to first lesson.">
                 Recursion

@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Reveal } from "@/components/reveal";
+import { TwoDotsGlobe } from "@/components/two-dots-globe";
 
 /* ── hand-drawn icons, same 1.5-stroke language as the tab bar ─────── */
 function MenuIcon({ className = "" }: { className?: string }) {
@@ -85,62 +86,7 @@ function BoardIcon({ className = "" }: { className?: string }) {
   );
 }
 
-/* ── dotted globe: fibonacci sphere, slow rAF rotation ─────────────── */
-function DottedGlobe() {
-  const groupRef = useRef<SVGGElement | null>(null);
-  const points = useMemo(() => {
-    const pts: { x: number; y: number; z: number }[] = [];
-    const N = 240;
-    const golden = Math.PI * (3 - Math.sqrt(5));
-    for (let i = 0; i < N; i++) {
-      const y = 1 - (i / (N - 1)) * 2;
-      const r = Math.sqrt(1 - y * y);
-      const theta = golden * i;
-      pts.push({ x: Math.cos(theta) * r, y, z: Math.sin(theta) * r });
-    }
-    return pts;
-  }, []);
-
-  useEffect(() => {
-    const g = groupRef.current;
-    if (!g) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const circles = Array.from(g.querySelectorAll("circle"));
-    const CX = 100, CY = 100, R = 78;
-    let angle = 0.6;
-    let raf = 0;
-    const tick = () => {
-      angle += 0.0035;
-      const c = Math.cos(angle), s = Math.sin(angle);
-      for (let i = 0; i < points.length; i++) {
-        const p = points[i];
-        const xr = p.x * c + p.z * s;
-        const zr = -p.x * s + p.z * c;
-        const el = circles[i];
-        el.setAttribute("cx", (CX + xr * R).toFixed(1));
-        el.setAttribute("cy", (CY + p.y * R).toFixed(1));
-        el.setAttribute("opacity", (0.18 + 0.82 * ((zr + 1) / 2)).toFixed(2));
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [points]);
-
-  return (
-    <svg viewBox="0 0 200 200" className="h-[72px] w-[72px] text-strong/50" role="img" aria-label="Globe">
-      <g ref={groupRef} fill="currentColor">
-        {points.map((p, i) => (
-          <circle key={i} r={1.7}
-            cx={100 + p.x * 78} cy={100 + p.y * 78}
-            opacity={0.18 + 0.82 * ((p.z + 1) / 2)} />
-        ))}
-      </g>
-    </svg>
-  );
-}
-
-/* ── live Bishkek weather (Open-Meteo, no key) ─────────────────────── */
+/* ── live Manas weather (Open-Meteo, no key) ───────────────────────── */
 const WEATHER_LABEL: Record<number, string> = {
   0: "clear", 1: "mostly clear", 2: "partly cloudy", 3: "overcast",
   45: "foggy", 48: "foggy", 51: "drizzle", 53: "drizzle", 55: "drizzle",
@@ -148,12 +94,12 @@ const WEATHER_LABEL: Record<number, string> = {
   80: "showers", 81: "showers", 82: "showers", 95: "storm",
 };
 
-function useBishkekWeather() {
+function useManasWeather() {
   const [weather, setWeather] = useState<string | null>(null);
   useEffect(() => {
     let cancelled = false;
     fetch(
-      "https://api.open-meteo.com/v1/forecast?latitude=42.8746&longitude=74.5698&current=temperature_2m,weather_code&timezone=auto"
+      "https://api.open-meteo.com/v1/forecast?latitude=40.945&longitude=72.9931&current=temperature_2m,weather_code&timezone=auto"
     )
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
@@ -260,7 +206,7 @@ function BioTile({ delay, className = "" }: { delay: number; className?: string 
           />
         </div>
         <p className="mt-auto pt-8 text-[14px] leading-6 text-strong/90">
-          aaquib ali — computer science teacher and builder based in bishkek,
+          aaquib ali — computer science teacher and builder based in manas,
           kyrgyzstan.
         </p>
       </div>
@@ -314,18 +260,19 @@ function HelloTile({ delay, className = "" }: { delay: number; className?: strin
   );
 }
 
-/* ── location tile (reference: globe, city + weather bottom-left) ──── */
+/* ── location tile (reference: big globe cropped at bottom, ──────────
+   plane top-left, flag top-right, city + weather bottom-left) ───────── */
 function LocationTile({ delay, className = "" }: { delay: number; className?: string }) {
-  const weather = useBishkekWeather();
+  const weather = useManasWeather();
   return (
     <Card delay={delay} className={className}>
-      <div className="flex h-full flex-col">
-        <div className="flex items-start justify-between">
+      <div className="relative h-full">
+        <div className="relative z-10 flex items-start justify-between">
           <a
-            href="https://www.google.com/maps/search/?api=1&query=Bishkek%2C+Kyrgyzstan"
+            href="https://www.google.com/maps/search/?api=1&query=Manas%2C+Kyrgyzstan"
             target="_blank"
             rel="noreferrer"
-            aria-label="Open Bishkek in Google Maps"
+            aria-label="Open Manas in Google Maps"
             className="rounded-full p-1.5 text-muted transition hover:bg-strong/5 hover:text-strong active:scale-95"
           >
             <PlaneIcon className="h-5 w-5" />
@@ -333,20 +280,20 @@ function LocationTile({ delay, className = "" }: { delay: number; className?: st
           <img
             src="https://flagcdn.com/w80/kg.png"
             alt="Kyrgyzstan flag"
-            width={40}
-            height={27}
-            className="h-[18px] w-auto rounded-[3px]"
+            width={44}
+            height={30}
+            className="h-[22px] w-auto rounded-[4px]"
           />
         </div>
-        <div className="flex flex-1 items-center justify-center py-1">
-          <DottedGlobe />
+        <div className="absolute left-1/2 top-[25%] w-[220px] max-w-none -translate-x-1/2 sm:w-[260px]">
+          <TwoDotsGlobe visitor={null} visitorCity={null} pinLabel={false} />
         </div>
-        <div className="mt-auto">
-          <p className="font-display text-[20px] italic leading-none text-strong">
-            bishkek, kyrgyzstan
+        <div className="absolute bottom-0 left-0 z-10">
+          <p className="whitespace-nowrap text-[16px] font-medium leading-tight text-strong">
+            manas, kyrgyzstan
           </p>
           <p
-            className={`mt-1.5 font-mono text-[12px] uppercase tracking-[0.22em] text-muted transition-opacity duration-700 ${
+            className={`mt-0.5 text-[13px] text-muted transition-opacity duration-700 ${
               weather ? "opacity-100" : "opacity-0"
             }`}
           >

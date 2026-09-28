@@ -30,7 +30,7 @@ const RULES: AnswerRule[] = [
   {
     match: /\bteach|teacher|student|classroom|lesson|recursion|big-?o\b/i,
     answer:
-      "He's a computer science teacher in Bishkek, Kyrgyzstan. His thing is making hard ideas feel obvious — recursion via Russian dolls, AI without the hype. Most lesson ideas start as answers to real student questions.",
+      "He's a computer science teacher in Manas, Kyrgyzstan. His thing is making hard ideas feel obvious — recursion via Russian dolls, AI without the hype. Most lesson ideas start as answers to real student questions.",
   },
   {
     match: /\bbook|pata hai|poem|poetry|writ/i,
@@ -45,7 +45,7 @@ const RULES: AnswerRule[] = [
   {
     match: /\bwho are you|about|aaquib\b/i,
     answer:
-      "Aaquib Ali — computer science teacher in Bishkek, builder the rest of the time. He turns confusing ideas into obvious ones, builds small AI tools, and writes the occasional poem.",
+      "Aaquib Ali — computer science teacher in Manas, builder the rest of the time. He turns confusing ideas into obvious ones, builds small AI tools, and writes the occasional poem.",
   },
   {
     match: /\bwork|project|build|shipped|making\b/i,

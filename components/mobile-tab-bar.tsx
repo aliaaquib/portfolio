@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
+import { Mascot } from "@/components/mascot";
 
 function HomeIcon({ className }: { className?: string }) {
   return (
@@ -110,18 +111,13 @@ export function MobileTabBar() {
     <div className="fixed inset-x-0 bottom-0 z-50 pb-[env(safe-area-inset-bottom)]">
       <nav aria-label="Primary" className="mx-auto w-fit px-4 pb-3">
         <div className="flex items-center gap-1 rounded-full border border-strong/10 bg-white/60 py-2 pl-2 pr-2 shadow-[0_8px_30px_rgba(17,17,17,0.14)] backdrop-blur-xl dark:bg-black/60">
-          <button
-            type="button"
-            onClick={onHome}
-            aria-label="Aaquib Ali — back to top"
-            className="shrink-0 rounded-full transition-transform active:scale-95"
-          >
-            <img
-              src="/portrait.jpg"
-              alt=""
-              className="h-10 w-10 rounded-full border border-strong/10 object-cover"
-            />
-          </button>
+          <Mascot
+            directions="/mascots/aaquib-directions.webp"
+            reactions="/mascots/aaquib-reactions.webp"
+            size={48}
+            label="Mini Aaquib, following your cursor"
+            className="overflow-hidden rounded-full border border-strong/10"
+          />
           <span aria-hidden="true" className="mx-1 h-6 w-px shrink-0 bg-strong/15" />
           {tabs.map(({ id, label, Icon, onClick }) => (
             <button

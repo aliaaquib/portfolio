@@ -5,7 +5,7 @@ import { LAND_W, LAND_H, LAND_GRID } from "@/lib/globe-land";
 
 export type GlobePin = { lat: number; lon: number };
 
-const BISHKEK: GlobePin = { lat: 42.8746, lon: 74.5698 };
+const MANAS: GlobePin = { lat: 40.945, lon: 72.9931 };
 
 type GlobePinTheme = { body: string; accent: string };
 type GlobePalette = {
@@ -16,31 +16,31 @@ type GlobePalette = {
   labelBorder: string;
   labelText: string;
   pinHole: string;
-  bishkek: GlobePinTheme;
+  manas: GlobePinTheme;
   visitor: GlobePinTheme;
 };
 
 const LIGHT_PALETTE: GlobePalette = {
-  sphere: ["#ffffff", "#f6f4ee", "#e2ddd0"],
-  dots: "32, 29, 25",
-  rim: "70, 63, 50",
+  sphere: ["#ffffff", "#fbfbfa", "#f0f0ee"],
+  dots: "10, 10, 10",
+  rim: "15, 15, 15",
   labelBg: "rgba(255,255,255,0.94)",
   labelBorder: "rgba(60,55,45,0.14)",
   labelText: "#2b2721",
   pinHole: "#f5f2ec",
-  bishkek: { body: "#211d18", accent: "#b45414" },
+  manas: { body: "#211d18", accent: "#b45414" },
   visitor: { body: "#8f1d1d", accent: "#c2502e" },
 };
 
 const DARK_PALETTE: GlobePalette = {
-  sphere: ["#3a322a", "#2b241e", "#1d1814"],
-  dots: "222, 212, 196",
+  sphere: ["#141414", "#0a0a0a", "#000000"],
+  dots: "115, 115, 112",
   rim: "0, 0, 0",
-  labelBg: "rgba(42,35,28,0.94)",
-  labelBorder: "rgba(244,239,230,0.16)",
-  labelText: "#f4efe6",
-  pinHole: "#1d1814",
-  bishkek: { body: "#f4efe6", accent: "#e08a4e" },
+  labelBg: "rgba(18,18,18,0.94)",
+  labelBorder: "rgba(255,255,255,0.16)",
+  labelText: "#f4f4f4",
+  pinHole: "#000000",
+  manas: { body: "#f4f4f4", accent: "#e08a4e" },
   visitor: { body: "#e0705c", accent: "#e8935a" },
 };
 
@@ -83,9 +83,11 @@ function pinVec(pin: GlobePin): [number, number, number] {
 export function TwoDotsGlobe({
   visitor,
   visitorCity,
+  pinLabel = true,
 }: {
   visitor: GlobePin | null;
   visitorCity: string | null;
+  pinLabel?: boolean;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const visitorRef = useRef<GlobePin | null>(visitor);
@@ -100,13 +102,13 @@ export function TwoDotsGlobe({
     if (!ctx) return;
 
     const points = getLandPoints();
-    const bishkek = pinVec(BISHKEK);
+    const manas = pinVec(MANAS);
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
     let raf = 0;
-    let rotY = 6.0; // start with Bishkek facing front
+    let rotY = 6.0; // start with Manas facing front
     let tilt = 0.42;
     let velY = 0;
     let dragging = false;
@@ -348,9 +350,10 @@ export function TwoDotsGlobe({
       ctx.fill();
 
       // pins
-      drawPin(bishkek, t, "bishkek", 0, pal.bishkek, pal);
+      drawPin(manas, t, pinLabel ? "manas" : null, 0, pal.manas, pal);
       const v = visitorRef.current;
-      if (v) drawPin(pinVec(v), t, visitorCityRef.current, 2.4, pal.visitor, pal);
+      if (v)
+        drawPin(pinVec(v), t, pinLabel ? visitorCityRef.current : null, 2.4, pal.visitor, pal);
 
       raf = requestAnimationFrame(frame);
     };
@@ -371,7 +374,7 @@ export function TwoDotsGlobe({
       <canvas
         ref={canvasRef}
         className="h-full w-full [filter:drop-shadow(0_24px_48px_rgba(60,55,45,0.14))]"
-        aria-label="Spinning dotted globe showing Bishkek and your location"
+        aria-label="Spinning dotted globe showing Manas and your location"
         role="img"
       />
     </div>

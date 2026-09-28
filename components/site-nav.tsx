@@ -25,7 +25,7 @@ function ClockIcon({ className }: { className?: string }) {
   );
 }
 
-function BishkekClock() {
+function ManasClock() {
   const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -123,17 +123,17 @@ export function SiteNav() {
           aria-label="Aaquib Ali — home"
         >
           <span className="hidden sm:inline-flex">
-            <BishkekClock />
+            <ManasClock />
           </span>
           <span className="inline-flex items-center gap-1.5 text-xs text-muted sm:hidden">
             <GlobeIcon className="h-4 w-4" />
-            Bishkek, Kyrgyzstan
+            Manas, Kyrgyzstan
           </span>
         </Link>
         <div className="flex min-w-0 items-center gap-3 text-sm text-strong sm:gap-4 sm:text-[15px]">
           <span className="hidden items-center gap-1.5 text-sm text-muted sm:inline-flex">
             <GlobeIcon className="h-4 w-4" />
-            Bishkek, Kyrgyzstan
+            Manas, Kyrgyzstan
           </span>
           <span aria-hidden="true" className="hidden h-5 w-px shrink-0 bg-strong/15 sm:block" />
           <ThemeToggle />

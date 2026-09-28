@@ -123,7 +123,15 @@ function LivePreviewLink() {
   );
 }
 
-function ProjectCard({ project, eager }: { project: Project; eager?: boolean }) {
+function ProjectCard({
+  project,
+  eager,
+  compact,
+}: {
+  project: Project;
+  eager?: boolean;
+  compact?: boolean;
+}) {
   return (
     <Reveal as="article" id={project.id} className="scroll-mt-24">
       <a
@@ -132,7 +140,11 @@ function ProjectCard({ project, eager }: { project: Project; eager?: boolean }) 
         rel="noreferrer"
         className="group block"
       >
-        <div className={`${FRAME_BASE} ${project.frame} p-6 sm:p-10`}>
+        <div
+          className={`${FRAME_BASE} ${project.frame} ${
+            compact ? "p-3 sm:p-5" : "p-6 sm:p-10"
+          }`}
+        >
           <img
             src={project.image}
             alt={project.imageAlt}
@@ -140,11 +152,19 @@ function ProjectCard({ project, eager }: { project: Project; eager?: boolean }) 
             className="aspect-[16/10] w-full rounded-xl object-cover object-top shadow-[0_24px_60px_-12px_rgba(8,18,38,0.45)] ring-1 ring-black/10 transition-transform duration-500 ease-out group-hover:scale-[1.02]"
           />
         </div>
-        <div className="mt-6 px-1">
-          <h3 className="font-display text-[28px] leading-tight text-strong">
+        <div className={`${compact ? "mt-4" : "mt-6"} px-1`}>
+          <h3
+            className={`font-display leading-tight text-strong ${
+              compact ? "text-[19px] sm:text-[24px]" : "text-[28px]"
+            }`}
+          >
             {project.title}
           </h3>
-          <p className="mt-2 max-w-3xl text-[16px] leading-7 text-muted">
+          <p
+            className={`mt-2 max-w-3xl text-muted ${
+              compact ? "text-[14px] leading-6" : "text-[16px] leading-7"
+            }`}
+          >
             {project.description}
           </p>
           <div className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
@@ -213,11 +233,18 @@ function ProjectList() {
   );
 }
 
-/** Projects-only list (no toggle) — used by the homepage section. */
+/** Compact two-up grid, homepage "Proof of shipped things" only — /work untouched. */
 export function WorkGrid() {
   return (
-    <div className="mt-8">
-      <ProjectList />
+    <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-6">
+      {PROJECTS.map((project, i) => (
+        <ProjectCard
+          key={project.id}
+          project={project}
+          eager={i === 0}
+          compact
+        />
+      ))}
     </div>
   );
 }
