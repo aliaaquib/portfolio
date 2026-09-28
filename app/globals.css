@@ -293,3 +293,10 @@ a.detour:hover {
     animation: none;
   }
 }
+
+/* Mobile bottom tab bar: keep page content clear of the floating pill. */
+@media (max-width: 639px) {
+  body {
+    padding-bottom: 6rem;
+  }
+}

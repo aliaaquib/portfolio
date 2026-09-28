@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { MobileTabBar } from "@/components/mobile-tab-bar";
 
 function ChatIcon({ className }: { className?: string }) {
   return (
@@ -88,6 +89,7 @@ export function SiteNav() {
   }
 
   return (
+    <>
     <nav
       className={`sticky top-0 z-40 transition-all duration-300 ${
         scrolled
@@ -106,22 +108,22 @@ export function SiteNav() {
         <div className="flex min-w-0 items-center gap-3 overflow-x-auto whitespace-nowrap text-sm text-strong sm:gap-6 sm:text-[15px]">
           <button
             type="button"
-            onClick={() => navigate("/", true)}
-            className="nav-link transition-colors hover:text-brandred"
+            onClick={() => navigate("/work")}
+            className="nav-link hidden transition-colors hover:text-brandred sm:block"
           >
             Work
           </button>
           <button
             type="button"
             onClick={() => navigate("/about")}
-            className="nav-link transition-colors hover:text-brandred"
+            className="nav-link hidden transition-colors hover:text-brandred sm:block"
           >
             About
           </button>
           <button
             type="button"
             onClick={() => navigate("/labs")}
-            className="nav-link transition-colors hover:text-brandred"
+            className="nav-link hidden transition-colors hover:text-brandred sm:block"
           >
             Labs
           </button>
@@ -150,5 +152,7 @@ export function SiteNav() {
         </div>
       </div>
     </nav>
+    <MobileTabBar />
+    </>
   );
 }
