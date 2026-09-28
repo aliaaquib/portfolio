@@ -25,7 +25,7 @@ const RULES: AnswerRule[] = [
   {
     match: /\bthread\s?academy|academy\b/i,
     answer:
-      "Thread Academy is the big one — a free learning platform covering the full school curriculum. 15,422 lesson pages across 28 subjects, every chapter reads like a textbook page. Live at threadlearning.vercel.app, built with Next.js and exported as a fully static site.",
+      "Thread Academy is the big one — a free learning platform covering the full school curriculum. 15,422 lesson pages across 28 subjects, every chapter reads like a textbook page. Live at threadacademy.aaquibali.com, built with Next.js and exported as a fully static site.",
   },
   {
     match: /\bteach|teacher|student|classroom|lesson|recursion|big-?o\b/i,

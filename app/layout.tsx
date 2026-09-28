@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { AskAIModalHost } from "@/components/ask-ai";
-import { AskBar } from "@/components/ask-bar";
 import { ContactModalHost } from "@/components/contact-modal";
 import { SanityLive } from "@/sanity/lib/live";
 import "./globals.css";
@@ -97,7 +96,6 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         {children}
-        <AskBar />
         <AskAIModalHost />
         <ContactModalHost />
         <SanityLive includeDrafts={isDraftMode} />

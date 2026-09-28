@@ -1,16 +1,54 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MobileTabBar } from "@/components/mobile-tab-bar";
 
-function ChatIcon({ className }: { className?: string }) {
+function GlobeIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
-      <path d="M21 12a8 8 0 0 1-8 8H4l2.3-2.9A8 8 0 1 1 21 12Z" strokeLinejoin="round" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className={className} aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18" />
+      <path d="M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3Z" />
     </svg>
+  );
+}
+
+function ClockIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className={className} aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3.5 2" />
+    </svg>
+  );
+}
+
+function BishkekClock() {
+  const [now, setNow] = useState<Date | null>(null);
+
+  useEffect(() => {
+    setNow(new Date());
+    const id = window.setInterval(() => setNow(new Date()), 1000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const label = now
+    ? new Intl.DateTimeFormat("en-US", {
+        timeZone: "Asia/Bishkek",
+        weekday: "short",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      }).format(now)
+    : "";
+
+  return (
+    <span className="inline-flex items-center gap-2 text-xs text-muted">
+      <ClockIcon className="h-4 w-4" />
+      <span className="min-w-[78px] tabular-nums">{label}</span>
+    </span>
   );
 }
 
@@ -28,7 +66,6 @@ function GlassesIcon({ className }: { className?: string }) {
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [wearing, setWearing] = useState(false);
-  const router = useRouter();
   const pathname = usePathname();
 
   function setWhiteboard(on: boolean) {
@@ -70,24 +107,6 @@ export function SiteNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  function navigate(href: string, fullReload = false) {
-    const run = () => {
-      if (fullReload) {
-        window.location.href = href;
-      } else {
-        router.push(href);
-      }
-    };
-    const doc = document as Document & {
-      startViewTransition?: (cb: () => void) => void;
-    };
-    if (typeof doc.startViewTransition === "function") {
-      doc.startViewTransition(run);
-    } else {
-      run();
-    }
-  }
-
   return (
     <>
     <nav
@@ -100,42 +119,17 @@ export function SiteNav() {
       <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-5 px-5 py-2.5 sm:px-6">
         <Link
           href="/"
-          className="shrink-0 font-namelogo text-[34px] leading-none text-strong transition-colors hover:text-brandred"
+          className="shrink-0 transition-colors hover:text-strong"
           aria-label="Aaquib Ali — home"
         >
-          aaquib ali
+          <BishkekClock />
         </Link>
-        <div className="flex min-w-0 items-center gap-3 overflow-x-auto whitespace-nowrap text-sm text-strong sm:gap-6 sm:text-[15px]">
-          <button
-            type="button"
-            onClick={() => navigate("/work")}
-            className="nav-link hidden transition-colors hover:text-brandred sm:block"
-          >
-            Work
-          </button>
-          <button
-            type="button"
-            onClick={() => navigate("/about")}
-            className="nav-link hidden transition-colors hover:text-brandred sm:block"
-          >
-            About
-          </button>
-          <button
-            type="button"
-            onClick={() => navigate("/labs")}
-            className="nav-link hidden transition-colors hover:text-brandred sm:block"
-          >
-            Labs
-          </button>
-          <button
-            type="button"
-            onClick={() => window.dispatchEvent(new CustomEvent("open-ask-ai"))}
-            className="nav-link hidden items-center gap-1.5 transition-colors hover:text-brandred sm:inline-flex"
-          >
-            <ChatIcon className="h-4 w-4" />
-            Ask me anything
-          </button>
-          <span aria-hidden="true" className="hidden h-5 w-px shrink-0 bg-strong/15 sm:block" />
+        <div className="flex min-w-0 items-center gap-3 text-sm text-strong sm:gap-4 sm:text-[15px]">
+          <span className="inline-flex items-center gap-1.5 text-sm text-muted">
+            <GlobeIcon className="h-4 w-4" />
+            Bishkek, Kyrgyzstan
+          </span>
+          <span aria-hidden="true" className="h-5 w-px shrink-0 bg-strong/15" />
           <ThemeToggle />
           <button
             type="button"

@@ -81,7 +81,7 @@ export function WorkGrid() {
           label="Education platform"
           previewMetric="15,422 pages across 28 subjects"
           description="A free learning platform covering the full school curriculum — every chapter reads like a textbook page."
-          href="https://threadlearning.vercel.app"
+          href="https://threadacademy.aaquibali.com"
           image="/images/work/thread-academy.png"
           imageAlt="Thread Academy homepage"
         />
