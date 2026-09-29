@@ -140,18 +140,23 @@ function ProjectCard({
         rel="noreferrer"
         className="group block"
       >
-        <div
-          className={`${FRAME_BASE} ${project.frame} ${
-            compact ? "p-3 sm:p-5" : "p-6 sm:p-10"
-          }`}
-        >
+        {compact ? (
           <img
             src={project.image}
             alt={project.imageAlt}
             loading={eager ? "eager" : "lazy"}
             className="aspect-[16/10] w-full rounded-xl object-cover object-top shadow-[0_24px_60px_-12px_rgba(8,18,38,0.45)] ring-1 ring-black/10 transition-transform duration-500 ease-out group-hover:scale-[1.02]"
           />
-        </div>
+        ) : (
+          <div className={`${FRAME_BASE} ${project.frame} p-6 sm:p-10`}>
+            <img
+              src={project.image}
+              alt={project.imageAlt}
+              loading={eager ? "eager" : "lazy"}
+              className="aspect-[16/10] w-full rounded-xl object-cover object-top shadow-[0_24px_60px_-12px_rgba(8,18,38,0.45)] ring-1 ring-black/10 transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+            />
+          </div>
+        )}
         <div className={`${compact ? "mt-4" : "mt-6"} px-1`}>
           <h3
             className={`font-display leading-tight text-strong ${
@@ -168,11 +173,13 @@ function ProjectCard({
             {project.description}
           </p>
           <div className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
-            <ul className="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <TagPill key={tag} label={tag} />
-              ))}
-            </ul>
+            {!compact && (
+              <ul className="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <TagPill key={tag} label={tag} />
+                ))}
+              </ul>
+            )}
             <LivePreviewLink />
           </div>
         </div>
@@ -236,7 +243,7 @@ function ProjectList() {
 /** Compact two-up grid, homepage "Proof of shipped things" only — /work untouched. */
 export function WorkGrid() {
   return (
-    <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-6">
+    <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
       {PROJECTS.map((project, i) => (
         <ProjectCard
           key={project.id}
