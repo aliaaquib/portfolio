@@ -91,7 +91,7 @@ function ListView() {
           <img
             src="/sapat-logo.png"
             alt="SAPAT logo"
-            className="h-10 w-12 object-contain"
+            className="h-auto w-[54px] object-contain"
           />
         </span>
         <span className="min-w-0 flex-1">
@@ -169,7 +169,7 @@ function TimelineView() {
               <img
                 src="/sapat-logo.png"
                 alt="SAPAT logo"
-                className="h-8 w-10 object-contain"
+                className="h-auto w-[42px] object-contain"
               />
             </span>
             <span className="min-w-0">
