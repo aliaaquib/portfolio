@@ -2,29 +2,6 @@
 
 import { useState } from "react";
 
-function GradCapIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-      className="h-5 w-5"
-      aria-hidden="true"
-    >
-      <path
-        d="M12 4.2 2.6 8.8 12 13.4 21.4 8.8 12 4.2Z"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M6.8 12.4v3.2c0 1.4 2.3 2.6 5.2 2.6s5.2-1.2 5.2-2.6v-3.2"
-        strokeLinecap="round"
-      />
-      <path d="M21.4 10.6v3.8" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 const BULLETS = [
   "Deliver engaging Cambridge IGCSE Computer Science and ICT lessons using inquiry-based, project-based, and student-centred learning strategies to develop computational thinking, problem-solving, and digital literacy.",
   "Plan and deliver schemes of work, lesson plans, assessments, and learning resources aligned with Cambridge International curriculum standards and learning objectives.",
@@ -110,8 +87,12 @@ function ListView() {
         aria-expanded={open}
         className="flex w-full items-center gap-4 py-4 text-left"
       >
-        <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-strong/10 bg-surface text-strong">
-          <GradCapIcon />
+        <span className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-2xl border border-strong/10 bg-surface">
+          <img
+            src="/sapat-logo.png"
+            alt="SAPAT logo"
+            className="h-10 w-12 object-contain"
+          />
         </span>
         <span className="min-w-0 flex-1">
           <span className="block truncate text-[17px] font-medium text-strong">
@@ -184,8 +165,12 @@ function TimelineView() {
         </div>
         <div className="absolute left-0 top-8 w-full rounded-2xl border border-strong/10 bg-[#f4f2ed] px-4 py-3 dark:bg-white/[0.07]">
           <div className="flex items-center gap-3">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-surface text-strong">
-              <GradCapIcon />
+            <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl bg-surface">
+              <img
+                src="/sapat-logo.png"
+                alt="SAPAT logo"
+                className="h-8 w-10 object-contain"
+              />
             </span>
             <span className="min-w-0">
               <span className="block truncate text-[15px] font-medium text-strong">
