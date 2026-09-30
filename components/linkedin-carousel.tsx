@@ -2,24 +2,11 @@
 
 import { useRef, useState } from "react";
 
-type Post = {
-  date: string;
-  headline: string;
-  excerpt: string;
-  url: string;
-};
+import { LINKEDIN_POSTS, type LinkedInPost } from "@/lib/linkedin-posts";
 
-const POSTS: Post[] = [
-  {
-    date: "23 Sep 2026",
-    headline: "Computer Science Teacher | CS concepts, explained simply",
-    excerpt:
-      "I'm a computer science teacher.\n\nMost of my day goes into turning things students find confusing into things they don't. Recursion, Big-O, pointers, how the internet actually works — the usual suspects. Explaining clearly is basically my whole job, so I figured I'd start doing it here too.\n\nHere's what I'll be posting about: CS concepts explained simply, how AI actually works (no hype, no jargon), and the occasional classroom story.",
-    url: "https://www.linkedin.com/in/aliaaquib",
-  },
-];
+const POSTS: LinkedInPost[] = LINKEDIN_POSTS;
 
-function PostCard({ post }: { post: Post }) {
+function PostCard({ post }: { post: LinkedInPost }) {
   return (
     <article className="flex w-[86%] shrink-0 snap-start flex-col rounded-xl border border-strong/10 bg-surface p-4 sm:w-[330px]">
       <header className="flex items-start gap-2.5">
@@ -80,7 +67,7 @@ export function LinkedInCarousel() {
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1"
         >
           {POSTS.map((post) => (
-            <PostCard key={post.date} post={post} />
+            <PostCard key={post.url} post={post} />
           ))}
         </div>
       </div>
