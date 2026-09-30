@@ -149,6 +149,31 @@ export function SiteNav() {
           >
             <GlassesIcon className="h-[19px] w-[19px]" />
           </button>
+          <span className="hidden items-center gap-1 lg:inline-flex" aria-hidden="true">
+            <svg width="52" height="26" viewBox="0 0 56 28" fill="none" className="-mr-1 mb-2">
+              <path
+                d="M52 5 C 38 5, 22 9, 10 20"
+                className="stroke-[#a3611c] dark:stroke-[#d09a52]"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+              <path
+                d="M10 20 L19 17"
+                className="stroke-[#a3611c] dark:stroke-[#d09a52]"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+              <path
+                d="M10 20 L14 27"
+                className="stroke-[#a3611c] dark:stroke-[#d09a52]"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+            </svg>
+            <span className="font-signature text-[24px] leading-none text-[#a3611c] dark:text-[#d09a52]">
+              {wearing ? "erase the board" : "wear the glasses"}
+            </span>
+          </span>
         </div>
       </div>
     </nav>

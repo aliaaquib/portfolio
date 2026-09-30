@@ -3,14 +3,17 @@
 import { useState } from "react";
 import { Reveal } from "@/components/reveal";
 import { Mascot } from "@/components/mascot";
+import { AcademyPipelineDiagram } from "@/components/academy-pipeline-diagram";
 
 type Project = {
   id: string;
   title: string;
   description: string;
   href: string;
-  image: string;
-  imageAlt: string;
+  image?: string;
+  imageAlt?: string;
+  /** Custom visual (e.g. a diagram component) rendered instead of an image. */
+  visual?: React.ReactNode;
   tags: string[];
   /** Gradient backdrop for the framed preview — each card gets its own hue. */
   frame: string;
@@ -123,6 +126,18 @@ function LivePreviewLink() {
   );
 }
 
+/** Homepage-only: the Academy pipeline research note as a proof card. */
+const ACADEMY_PIPELINE: Project = {
+  id: "home-academy-pipeline",
+  title: "Academy pipeline",
+  description:
+    "How a curriculum becomes thousands of static pages. One content tree per curriculum — Cambridge, American, IB — chapters written as MDX, everything pre-rendered at build time. No database, no server, nothing to break.",
+  href: "/research/academy-pipeline",
+  visual: <AcademyPipelineDiagram />,
+  tags: [],
+  frame: "",
+};
+
 function ProjectCard({
   project,
   eager,
@@ -132,29 +147,31 @@ function ProjectCard({
   eager?: boolean;
   compact?: boolean;
 }) {
+  const external = project.href.startsWith("http");
+  const media = project.visual ? (
+    <div className="aspect-[16/10] w-full overflow-hidden rounded-xl bg-white shadow-[0_24px_60px_-12px_rgba(8,18,38,0.45)] ring-1 ring-black/10 transition-transform duration-500 ease-out group-hover:scale-[1.02] [&_svg]:h-full [&_svg]:w-full">
+      {project.visual}
+    </div>
+  ) : (
+    <img
+      src={project.image}
+      alt={project.imageAlt ?? project.title}
+      loading={eager ? "eager" : "lazy"}
+      className="aspect-[16/10] w-full rounded-xl object-cover object-top shadow-[0_24px_60px_-12px_rgba(8,18,38,0.45)] ring-1 ring-black/10 transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+    />
+  );
   return (
     <Reveal as="article" id={project.id} className="scroll-mt-24">
       <a
         href={project.href}
-        target="_blank"
-        rel="noreferrer"
+        {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
         className="group block"
       >
         {compact ? (
-          <img
-            src={project.image}
-            alt={project.imageAlt}
-            loading={eager ? "eager" : "lazy"}
-            className="aspect-[16/10] w-full rounded-xl object-cover object-top shadow-[0_24px_60px_-12px_rgba(8,18,38,0.45)] ring-1 ring-black/10 transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-          />
+          media
         ) : (
           <div className={`${FRAME_BASE} ${project.frame} p-6 sm:p-10`}>
-            <img
-              src={project.image}
-              alt={project.imageAlt}
-              loading={eager ? "eager" : "lazy"}
-              className="aspect-[16/10] w-full rounded-xl object-cover object-top shadow-[0_24px_60px_-12px_rgba(8,18,38,0.45)] ring-1 ring-black/10 transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-            />
+            {media}
           </div>
         )}
         <div className={`${compact ? "mt-4" : "mt-6"} px-1`}>
@@ -240,11 +257,12 @@ function ProjectList() {
   );
 }
 
-/** Compact two-up grid, homepage "Proof of shipped things" only — /work untouched. */
+/** Compact single-column grid, homepage "Proof of shipped things" only — /work untouched. */
 export function WorkGrid() {
+  const homeProjects = [PROJECTS[0], ACADEMY_PIPELINE];
   return (
-    <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
-      {PROJECTS.map((project, i) => (
+    <div className="mt-8 grid grid-cols-1 gap-6">
+      {homeProjects.map((project, i) => (
         <ProjectCard
           key={project.id}
           project={project}

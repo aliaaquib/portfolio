@@ -7,12 +7,12 @@ import { WritingList } from "@/components/writing-list";
 import { FindMeGrid } from "@/components/find-me-grid";
 import { RightNow } from "@/components/right-now";
 import { WhiteboardNote } from "@/components/whiteboard-note";
-import { GlassesAnnotation } from "@/components/glasses-annotation";
 import { ExperienceSection } from "@/components/experience";
 import { getSortedPosts } from "@/lib/posts";
 import { Reveal } from "@/components/reveal";
 import { ContactButton } from "@/components/contact-modal";
 import { WorkGrid } from "@/components/work-grid";
+import { Ventures } from "@/components/ventures";
 
 export const metadata: Metadata = {
   alternates: {
@@ -44,7 +44,6 @@ export default async function Home() {
       <div className="mx-auto w-full max-w-2xl px-5 sm:px-6">
         {/* ── hero ─────────────────────────────────────────── */}
         <header className="animate-fade-in pb-16 pt-10 sm:pt-14 lg:pt-5">
-          <GlassesAnnotation />
           <div className="flex items-center gap-5 sm:gap-8">
             <img
               src="/portrait.jpg"
@@ -119,6 +118,16 @@ export default async function Home() {
           </div>
         </header>
 
+        {/* ── career / experience ──────────────────────────────── */}
+        <section id="career" className="scroll-mt-20 pb-20">
+          <Reveal>
+            <ExperienceSection />
+            <WhiteboardNote className="mt-2 text-[24px] text-[#2e7d46]">
+              this is the day job
+            </WhiteboardNote>
+          </Reveal>
+        </section>
+
         {/* ── work ───────────────────────────────────────────── */}
         <section id="work" className="scroll-mt-20 pb-20">
           <Reveal>
@@ -135,14 +144,9 @@ export default async function Home() {
           <WorkGrid />
         </section>
 
-        {/* ── career / experience ──────────────────────────────── */}
-        <section id="career" className="scroll-mt-20 pb-20">
-          <Reveal>
-            <ExperienceSection />
-            <WhiteboardNote className="mt-2 text-[24px] text-[#2e7d46]">
-              this is the day job
-            </WhiteboardNote>
-          </Reveal>
+        {/* ── ventures ───────────────────────────────────────── */}
+        <section className="scroll-mt-20 pb-20 md:w-[calc(100%+3rem)]">
+          <Ventures />
         </section>
 
         {/* ── on linkedin ──────────────────────────────────── */}

@@ -101,7 +101,7 @@ function TryThisArrowDown({ className = "" }: { className?: string }) {
 }
 
 function ListView() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   return (
     <div className="mt-6">
       <button
