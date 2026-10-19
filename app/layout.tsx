@@ -4,6 +4,7 @@ import { VisualEditing } from "next-sanity/visual-editing";
 import { AskAIModalHost } from "@/components/ask-ai";
 import { ContactModalHost } from "@/components/contact-modal";
 import { SanityLive } from "@/sanity/lib/live";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const siteUrl = "https://aaquibali.com";
@@ -100,6 +101,7 @@ export default async function RootLayout({
         <ContactModalHost />
         <SanityLive includeDrafts={isDraftMode} />
         {isDraftMode ? <VisualEditing /> : null}
+        <Analytics />
       </body>
     </html>
   );
