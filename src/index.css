@@ -1,0 +1,233 @@
+@font-face {
+  font-family: Yellowtail;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/yellowtail.woff2) format("woff2");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #3a3a3a;
+    background-color: #fffefd;
+    width: 100vw;
+    min-height: 100vh;
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+      linear-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    color: #181818;
+    background-color: #f3b9c8;
+  }
+}
+
+.bg-radial-blush {
+  background: radial-gradient(circle at 80% 20%, rgba(247, 232, 236, 0.6) 0%, transparent 60%);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.dashed-border-anim {
+  background: 0 0;
+  border: 2px dashed rgba(0, 0, 0, 0.16);
+  transition: border-color 0.3s;
+}
+
+.dashed-border-anim:hover {
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+.dark .dashed-border-anim {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.dark .dashed-border-anim:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.glare-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.glare-button::after {
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  width: 50%;
+  height: 100%;
+  transition: left 0.65s;
+  position: absolute;
+  top: 0;
+  left: -75%;
+  transform: skew(-20deg);
+}
+
+.glare-button:hover::after {
+  left: 125%;
+}
+
+.prose-blog h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-family: Instrument Serif, serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.prose-blog h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.prose-blog p {
+  margin-bottom: 1.1rem;
+}
+
+.prose-blog ul,
+.prose-blog ol {
+  margin-bottom: 1.1rem;
+  padding-left: 1.4rem;
+}
+
+.prose-blog li {
+  margin-bottom: 0.4rem;
+}
+
+.prose-blog ul {
+  list-style: outside;
+}
+
+.prose-blog ol {
+  list-style: decimal;
+}
+
+.prose-blog a {
+  text-underline-offset: 2px;
+  text-decoration: underline;
+}
+
+.prose-blog strong {
+  font-weight: 600;
+}
+
+.prose-blog code {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  font-size: 0.85em;
+}
+
+.dark .prose-blog code {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sparkle-text {
+  background: linear-gradient(110deg, #8a5a6a 0%, #d6457a 25%, #f5b5c8 50%, #d6457a 75%, #8a5a6a 100%) 0 0 / 250% 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: 3s linear infinite sparkleShimmer;
+}
+
+.dark .sparkle-text {
+  background-image: linear-gradient(110deg, #f3b9c8 0%, #fff 25%, #f9d3dd 50%, #fff 75%, #f3b9c8 100%);
+}
+
+.sparkle-star {
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  opacity: 0;
+  pointer-events: none;
+  background: #f3b9c8;
+  width: 8px;
+  height: 8px;
+  animation: 2.4s ease-in-out infinite sparkleTwinkle;
+  position: absolute;
+}
+
+@keyframes sparkleShimmer {
+  to {
+    background-position: -250% 0;
+  }
+}
+
+@keyframes sparkleTwinkle {
+  0%,
+  to {
+    opacity: 0;
+    transform: scale(0.3) rotate(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(45deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sparkle-text,
+  .sparkle-star {
+    animation: none;
+  }
+  .sparkle-star {
+    opacity: 0.8;
+  }
+}
+
+/* Read Now arrow: a gentle nudge to the right, on a loop. */
+.arrow-nudge {
+  animation: arrowNudge 1.4s ease-in-out infinite;
+}
+
+@keyframes arrowNudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+}
+
+/* Globe pins drop onto the map when they first appear. */
+.pin-drop {
+  animation: pinDrop 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pinDrop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-100% - 14px));
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow-nudge,
+  .pin-drop {
+    animation: none;
+  }
+}

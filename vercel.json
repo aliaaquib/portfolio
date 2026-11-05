@@ -1,0 +1,14 @@
+{
+  "framework": "vite",
+  "functions": {
+    "api/ask.ts": {
+      "includeFiles": "src/content/blog/**"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

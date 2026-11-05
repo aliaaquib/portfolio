@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>.ink{stroke:#0F0F10}.dot{fill:#c2185b}@media (prefers-color-scheme: dark){.ink{stroke:#EDEDED}.dot{fill:#e879a3}}</style>
+  <!-- "a." — say the one thing that matters, then stop. -->
+  <circle class="ink" cx="26.5" cy="34" r="10.5" fill="none" stroke-width="5"/>
+  <line class="ink" x1="37" y1="20" x2="37" y2="44.5" stroke-width="5" stroke-linecap="round"/>
+  <circle class="dot" cx="47" cy="42" r="3.5"/>
+</svg>
