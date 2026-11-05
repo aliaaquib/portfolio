@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight, BadgeCheck, ChevronDown } from "lucide-react"
 import { useEffect, useState, type ReactNode } from "react";
 import Marquee from "react-fast-marquee";
 import {
+  aboutMore,
   aboutParagraphs,
   experience,
   freelanceText,
@@ -58,6 +59,41 @@ function Typewriter() {
       {text}
       <span className="ml-1 w-[2px] h-[1em] bg-[#c2185b] animate-pulse" />
     </span>
+  );
+}
+
+function KnowMore() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            id="about-more"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="space-y-4 pt-4 font-instrument-sans text-base md:text-[17px] text-gray-700 dark:text-white/60 leading-relaxed">
+              {aboutMore.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        aria-controls="about-more"
+        className="group mt-5 flex items-center gap-1.5 text-sm font-medium text-[#c2185b] dark:text-[#e879a3]"
+      >
+        {open ? "Show less" : "Know more"}
+        <ChevronDown size={16} className={`transition-transform duration-200 ${open ? "rotate-180" : "group-hover:translate-y-0.5"}`} />
+      </button>
+    </>
   );
 }
 
@@ -368,6 +404,7 @@ export default function Home({
                 paragraphs={aboutParagraphs}
                 className="space-y-4 font-instrument-sans text-base md:text-[17px] text-gray-700 dark:text-white/60 leading-relaxed"
               />
+              <KnowMore />
             </motion.div>
 
             <motion.div className="w-full mb-16" {...sectionMotion}>

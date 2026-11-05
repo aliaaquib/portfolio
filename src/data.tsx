@@ -69,16 +69,19 @@ const B = ({ children }: { children: ReactNode }) => (
 
 export const aboutParagraphs: ReactNode[] = [
   <>
-    I'm Aaquib Ali, a <B>computer science teacher</B> and builder in Manas, Kyrgyzstan. I spend
-    my days turning <B>Recursion</B>, <B>Big-O</B> and <B>how AI actually works</B> into things my
-    students find obvious.
+    Aaquib Ali is an <B>educator</B>, <B>technology enthusiast</B>, and <B>aspiring entrepreneur</B> who
+    believes that education should evolve alongside technology. With a background in{" "}
+    <B>Computer Science and Mathematics education</B>, he combines his experience in teaching with an
+    interest in software development, artificial intelligence, and digital product design.
   </>,
-  <>
-    I take ideas all the way to <B>working products</B> — lately <B>Thread Academy</B>, a free
-    learning platform for the whole school curriculum, and <B>The Weekly Roundup</B>, an AI
-    newsletter. I'm also writing a book of raw thoughts, <B>pata hai aaj kya hua</B>. Away from the
-    classroom, I write the occasional poem.
-  </>,
+];
+
+/** Shown under "Who is Aaquib?" when the visitor clicks "Know more". */
+export const aboutMore: ReactNode[] = [
+  "His work extends beyond traditional classroom teaching. He is interested in identifying real challenges faced by teachers and students and developing practical, technology-driven solutions to address them. His approach brings together educational knowledge, creative problem-solving, and an entrepreneurial mindset.",
+  "With a growing interest in AI-powered applications, EdTech platforms, web development, and user experience design, he aims to transform educational ideas into useful digital products. He is particularly interested in making learning more accessible, structured, engaging, and effective through technology.",
+  "Rather than seeing himself solely as a teacher or developer, Aaquib is building an identity at the intersection of education, technology, innovation, and entrepreneurship.",
+  "His broader vision is to move beyond simply using technology in education and start building the technology that shapes its future.",
 ];
 
 export const techStack: { name: string; Icon: IconType; color: string }[] = [
