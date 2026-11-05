@@ -1,7 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
-import { instructions, profile } from "./profile";
+import { instructions, profile } from "./profile.js";
 
 const MODEL = "claude-opus-5-5";
 const MAX_TURNS = 12; // messages of history we accept from the browser
