@@ -160,8 +160,8 @@ function Timeline() {
 
   return (
     <div className="dashed-border-anim rounded-2xl w-full h-full">
-      <div className="h-full bg-white dark:bg-dark-surface rounded-2xl px-5 md:px-6 overflow-x-auto transition-colors duration-150">
-        <div className="relative h-full min-w-[560px] py-6">
+      <div className="h-full bg-white dark:bg-dark-surface rounded-2xl px-4 md:px-6 transition-colors duration-150">
+        <div className="relative h-full py-6">
           {ticks.map((year) => (
             <div key={year} className="absolute top-0 bottom-0 border-l border-black/10 dark:border-white/10" style={{ left: x(year) }}>
               <span className="absolute bottom-1 left-1 text-[11px] text-cherry-textSecondary dark:text-white/40" style={mono}>
@@ -191,8 +191,8 @@ function Timeline() {
                   </span>
                 )}
                 <div className="min-w-0 flex-1">
-                  <h4 className="font-sans font-medium text-sm md:text-base text-gray-900 dark:text-white truncate">{job.company}</h4>
-                  <p className="text-xs md:text-sm text-cherry-textSecondary dark:text-white/50 truncate">{job.role}</p>
+                  <h4 className="font-sans font-medium text-[11px] leading-snug text-balance line-clamp-2 sm:text-sm sm:line-clamp-1 md:text-base text-gray-900 dark:text-white">{job.company}</h4>
+                  <p className="text-[10px] sm:text-xs md:text-sm text-cherry-textSecondary dark:text-white/50 truncate">{job.role}</p>
                 </div>
                 <span className="hidden sm:block shrink-0 text-xs text-cherry-textSecondary dark:text-white/50" style={mono}>
                   {job.period.replace(/\s*—\s*/, " to ").toLowerCase()}
@@ -223,10 +223,10 @@ function Experience() {
       </div>
       {/* Both views share one grid cell, so the card keeps the list card's height when switching. */}
       <div className="grid">
-        <div className={`[grid-area:1/1] ${mode === "timeline" ? "" : "invisible"}`} aria-hidden={mode !== "timeline"}>
+        <div className={`[grid-area:1/1] min-w-0 ${mode === "timeline" ? "" : "invisible"}`} aria-hidden={mode !== "timeline"}>
           <Timeline key={mode} />
         </div>
-        <div className={`[grid-area:1/1] dashed-border-anim rounded-2xl w-full ${mode === "list" ? "" : "invisible"}`} aria-hidden={mode !== "list"}>
+        <div className={`[grid-area:1/1] min-w-0 dashed-border-anim rounded-2xl w-full ${mode === "list" ? "" : "invisible"}`} aria-hidden={mode !== "list"}>
           <div className="bg-white dark:bg-dark-surface rounded-2xl divide-y divide-black/5 dark:divide-white/10 transition-colors duration-150">
             {experience.map((job) => {
               const isOpen = open === job.id;
@@ -243,7 +243,7 @@ function Experience() {
                         </span>
                       )}
                       <div>
-                        <h4 className="font-sans font-semibold text-base md:text-lg text-gray-800 dark:text-white">{job.company}</h4>
+                        <h4 className="font-sans font-semibold text-sm leading-snug text-balance md:text-lg text-gray-800 dark:text-white">{job.company}</h4>
                         <p className="text-xs md:text-sm text-cherry-textSecondary dark:text-white/40">
                           {job.role} · {job.location}
                         </p>
